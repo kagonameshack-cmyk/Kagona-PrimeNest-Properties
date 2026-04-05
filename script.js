@@ -185,4 +185,26 @@ document.getElementById("result").innerText =
 
 }
 
+// PROPERTY CATEGORY CLICK NAVIGATION
 
+const categories = document.querySelectorAll(".category");
+
+categories[0].addEventListener("click", () => {
+window.location.href = "houses.html";
+});
+
+categories[1].addEventListener("click", () => {
+window.location.href = "apartments.html";
+});
+
+categories[2].addEventListener("click", () => {
+window.location.href = "beachhomes.html";
+});
+
+categories[3].addEventListener("click", () => {
+window.location.href = "penthouses.html";
+});
+
+categories[4].addEventListener("click", () => {
+window.location.href = "villas.html";
+});
