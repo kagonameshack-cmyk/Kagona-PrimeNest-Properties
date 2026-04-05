@@ -30,16 +30,27 @@ if(searchButton){
 
 searchButton.addEventListener("click", () => {
 
-const location = document.querySelectorAll(".search-box input")[0].value
 const type = document.querySelector(".search-box select").value
-const budget = document.querySelectorAll(".search-box input")[1].value
 
-alert(
-"Searching Properties\n\nLocation: " + location +
-"\nType: " + type +
-"\nBudget: " + budget +
-"\n\nPrimeNest will show the best matches."
-)
+if(type === "House"){
+window.location.href = "houses.html"
+}
+
+else if(type === "Apartment"){
+window.location.href = "apartments.html"
+}
+
+else if(type === "Villa"){
+window.location.href = "villas.html"
+}
+
+else if(type === "Penthouse"){
+window.location.href = "penthouses.html"
+}
+
+else{
+alert("Please select a property type")
+}
 
 })
 
