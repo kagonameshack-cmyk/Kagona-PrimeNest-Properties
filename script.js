@@ -166,3 +166,23 @@ heroIndex = 0
 hero.style.backgroundImage = "url(" + heroImages[heroIndex] + ")"
 
 }, 5000)
+
+function calculateMortgage(){
+
+let price = document.getElementById("price").value;
+let down = document.getElementById("downpayment").value;
+let interest = document.getElementById("interest").value / 100 / 12;
+let years = document.getElementById("years").value * 12;
+
+let loan = price - down;
+
+let payment = loan * interest * Math.pow(1 + interest, years) / (Math.pow(1 + interest, years) - 1);
+
+payment = payment.toFixed(2);
+
+document.getElementById("result").innerText =
+"Estimated Monthly Payment: $" + payment;
+
+}
+
+
