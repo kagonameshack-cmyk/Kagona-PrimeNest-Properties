@@ -538,134 +538,187 @@ color:#222;
 
 }
 
-/* PROPERTY PAGE */
+/* ============================= */
+/* GLOBAL PAGE STYLE */
+/* ============================= */
 
-.property-page{
-
-max-width:1200px;
-margin:auto;
-padding:60px 20px;
-font-family:Arial, Helvetica, sans-serif;
-
+body{
+    margin:0;
+    font-family: Arial, Helvetica, sans-serif;
+    background:#0f0f0f;
+    color:white;
 }
 
-/* PROPERTY TITLE */
+/* ============================= */
+/* PROPERTY HERO */
+/* ============================= */
 
-.property-page h1{
-
-font-size:38px;
-margin-bottom:10px;
-color:#222;
-
+.property-hero{
+    text-align:center;
+    padding:60px 20px;
+    background:linear-gradient(135deg,#111,#1c1c1c);
 }
 
-/* LOCATION */
-
-.location{
-
-font-size:18px;
-color:#777;
-margin-bottom:10px;
-
+.property-hero h1{
+    font-size:40px;
+    margin-bottom:10px;
 }
 
-/* PRICE */
-
-.price{
-
-color:#c8a96a;
-font-size:32px;
-margin-bottom:30px;
-
+.property-location{
+    color:#c9a227;
+    font-size:18px;
+    margin-bottom:15px;
 }
 
+.property-price{
+    font-size:28px;
+    font-weight:bold;
+}
+
+/* ============================= */
+/* MAIN PROPERTY IMAGE */
+/* ============================= */
+
+.property-main-image{
+    width:90%;
+    max-width:900px;
+    display:block;
+    margin:40px auto;
+    border-radius:10px;
+}
+
+/* ============================= */
 /* IMAGE GALLERY */
+/* ============================= */
 
-.property-gallery{
-
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:15px;
-margin-bottom:40px;
-
+.gallery{
+    display:flex;
+    justify-content:center;
+    gap:15px;
+    flex-wrap:wrap;
+    margin-bottom:40px;
 }
 
-.property-gallery img{
-
-width:100%;
-height:250px;
-object-fit:cover;
-border-radius:8px;
-transition:0.4s;
-
+.gallery img{
+    width:180px;
+    height:120px;
+    object-fit:cover;
+    border-radius:8px;
+    transition:0.3s;
 }
 
-.property-gallery img:hover{
-
-transform:scale(1.05);
-
+.gallery img:hover{
+    transform:scale(1.05);
 }
 
-/* PROPERTY DETAILS */
+/* ============================= */
+/* PROPERTY FEATURES */
+/* ============================= */
 
-.property-details{
-
-background:#f8f8f8;
-padding:25px;
-border-radius:10px;
-margin-bottom:30px;
-
+.property-features{
+    display:flex;
+    justify-content:center;
+    gap:25px;
+    flex-wrap:wrap;
+    padding:40px 20px;
 }
 
-.property-details ul{
-
-list-style:none;
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-gap:10px;
-
+.feature-box{
+    background:#1b1b1b;
+    padding:20px;
+    width:160px;
+    text-align:center;
+    border-radius:10px;
 }
 
-.property-details li{
-
-font-size:16px;
-padding:10px;
-background:white;
-border-radius:6px;
-box-shadow:0 2px 8px rgba(0,0,0,0.08);
-
+.feature-box h3{
+    color:#c9a227;
+    margin-bottom:8px;
 }
 
+/* ============================= */
 /* DESCRIPTION */
+/* ============================= */
 
 .property-description{
-
-font-size:17px;
-line-height:1.7;
-color:#555;
-margin-bottom:30px;
-
+    max-width:900px;
+    margin:auto;
+    padding:40px 20px;
+    text-align:center;
 }
 
-/* CONTACT BUTTON */
-
-.contact-btn{
-
-padding:14px 30px;
-font-size:16px;
-border:none;
-background:#c8a96a;
-color:white;
-border-radius:6px;
-cursor:pointer;
-transition:0.3s;
-
+.property-description h2{
+    margin-bottom:15px;
 }
 
-.contact-btn:hover{
-
-background:#a88950;
-
+.property-description p{
+    line-height:1.6;
+    color:#ccc;
 }
-  
+
+/* ============================= */
+/* CONTACT BUTTONS */
+/* ============================= */
+
+.property-actions{
+    text-align:center;
+    margin:40px 0;
+}
+
+.property-actions button{
+    padding:12px 25px;
+    margin:10px;
+    border:none;
+    border-radius:5px;
+    background:#c9a227;
+    color:black;
+    font-weight:bold;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.property-actions button:hover{
+    background:white;
+}
+
+/* ============================= */
+/* AGENT CARD */
+/* ============================= */
+
+.agent-card{
+    background:#1b1b1b;
+    max-width:350px;
+    margin:50px auto;
+    text-align:center;
+    padding:30px;
+    border-radius:10px;
+}
+
+.agent-card img{
+    width:90px;
+    height:90px;
+    border-radius:50%;
+    margin-bottom:15px;
+}
+
+.agent-card h3{
+    margin-bottom:5px;
+}
+
+.agent-card p{
+    color:#ccc;
+}
+
+/* ============================= */
+/* FOOTER */
+/* ============================= */
+
+.property-footer{
+    text-align:center;
+    padding:25px;
+    background:#0b0b0b;
+    margin-top:60px;
+    color:#aaa;
+}  
+
 }
