@@ -1,108 +1,141 @@
+/* GENERAL */
+
 body{
-background:#000;
+font-family: 'Segoe UI', sans-serif;
+background:#0f0f0f;
 color:white;
-font-family:Arial, Helvetica, sans-serif;
 margin:0;
 padding:0;
+line-height:1.6;
 }
+
+/* CONTAINER */
 
 .property-container{
-max-width:1000px;
+width:90%;
+max-width:1200px;
 margin:auto;
-padding:40px 20px;
+padding:40px 0;
 }
 
-h1{
-text-align:center;
-font-size:40px;
-}
+/* HERO SLIDER */
 
-.location{
-text-align:center;
-color:#bbb;
-margin-bottom:30px;
-}
-
-
-/* HERO IMAGE */
-
-.hero-image img{
+.hero-slider{
 width:100%;
-border-radius:12px;
-margin-bottom:30px;
-}
-
-
-/* GALLERY */
-
-.gallery{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:20px;
-margin-bottom:40px;
-}
-
-.gallery img{
-width:100%;
+overflow:hidden;
 border-radius:10px;
-cursor:pointer;
+}
+
+.hero-slider img{
+width:100%;
+height:500px;
+object-fit:cover;
+}
+
+/* MOBILE HERO FIX */
+
+@media(max-width:768px){
+
+.hero-slider img{
+height:250px;
+}
+
+}
+
+/* PROPERTY TITLE */
+
+.property-title{
+font-size:32px;
+margin-top:30px;
+font-weight:600;
+}
+
+@media(max-width:768px){
+
+.property-title{
+font-size:24px;
+}
+
+}
+
+/* PRICE */
+
+.property-price{
+font-size:28px;
+color:#d4af37;
+font-weight:bold;
+margin-top:10px;
+}
+
+/* GOLD HEADINGS */
+
+.section-title{
+font-size:22px;
+margin-top:40px;
+margin-bottom:15px;
+color:#d4af37;
+border-bottom:1px solid #333;
+padding-bottom:8px;
+}
+
+/* PROPERTY DETAILS */
+
+.property-details{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+gap:20px;
+margin-top:20px;
+}
+
+.detail-box{
+background:#1b1b1b;
+padding:20px;
+border-radius:6px;
+text-align:center;
+}
+
+/* DESCRIPTION */
+
+.property-description{
+margin-top:20px;
+color:#ccc;
+}
+
+/* GALLERY GRID */
+
+.gallery-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+gap:15px;
+margin-top:20px;
+}
+
+.gallery-grid img{
+width:100%;
+height:180px;
+object-fit:cover;
+border-radius:6px;
 transition:0.3s;
 }
 
-.gallery img:hover{
+.gallery-grid img:hover{
 transform:scale(1.05);
 }
 
-
-/* DETAILS */
-
-.details h2{
-color:#d4af37;
-margin-bottom:15px;
-}
-
-.details p{
-line-height:1.7;
-color:#ddd;
-}
-
-.details ul{
-margin-top:20px;
-}
-
-.details li{
-margin-bottom:10px;
-}
-
-.price{
-margin-top:20px;
-font-size:22px;
-font-weight:bold;
-}
-
-
-/* CONTACT */
-
-.contact-section{
-text-align:center;
-margin-top:60px;
-}
-
-.contact-section h2{
-color:#d4af37;
-margin-bottom:20px;
-}
+/* WHATSAPP BUTTON */
 
 .whatsapp-btn{
+display:inline-block;
+margin-top:30px;
+padding:14px 28px;
 background:#25D366;
 color:white;
-border:none;
-padding:15px 40px;
-font-size:18px;
-border-radius:30px;
-cursor:pointer;
+font-weight:bold;
+text-decoration:none;
+border-radius:5px;
+transition:0.3s;
 }
 
 .whatsapp-btn:hover{
-transform:scale(1.05);
+background:#1ebe5d;
 }
