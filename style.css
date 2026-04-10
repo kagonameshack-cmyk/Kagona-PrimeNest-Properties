@@ -538,4 +538,17 @@ color:#222;
 
 }
 
+a {
+color: inherit;
+text-decoration: none;
+}
+
+a:visited {
+color: inherit;
+}
+
+a:hover {
+color: inherit;
+  }  
+  
 }
