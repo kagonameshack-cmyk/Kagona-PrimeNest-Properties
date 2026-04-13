@@ -141,10 +141,12 @@ background:#1ebe5d;
 }
 
 .property-grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-gap:30px;
-}
+display:flex;
+flex-direction:column;
+gap:35px;
+max-width:650px;
+margin:0 auto;
+  }
 
 .property-card{
 background:#1b1b1b;
