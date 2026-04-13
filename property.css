@@ -188,5 +188,7 @@ border-radius:5px;
 }
 
 .property-card:hover{
-transform:scale(1.03);
+transform:translateY(-5px);
 }
+
+box-shadow:0 15px 35px rgba(0,0,0,0.6);
