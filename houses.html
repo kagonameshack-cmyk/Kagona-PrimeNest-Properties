@@ -15,29 +15,28 @@
 
 <div class="property-filter">
 
-<select>
-<option>All Properties</option>
-<option>Luxury Houses</option>
-<option>Apartments</option>
-<option>Villas</option>
+<input id="searchLocation" type="text" placeholder="Search Location">
+
+<select id="propertyType">
+
+<option value="">Property Type</option>
+<option value="house">House</option>
+<option value="apartment">Apartment</option>
+<option value="villa">Villa</option>
+<option value="penthouse">Penthouse</option>
+
 </select>
 
-<select>
-<option>Any Location</option>
-<option>Nairobi</option>
-<option>Westlands</option>
-<option>Karen</option>
-<option>Runda</option>
+<select id="priceRange">
+
+<option value="">Price Range</option>
+<option value="2000000">Below $2M</option>
+<option value="5000000">Below $5M</option>
+<option value="10000000">Below $10M</option>
+
 </select>
 
-<select>
-<option>Any Price</option>
-<option>$100k - $300k</option>
-<option>$300k - $600k</option>
-<option>$600k+</option>
-</select>
-
-<button>Search</button>
+<button onclick="filterProperties()">Search</button>
 
 </div>
   
