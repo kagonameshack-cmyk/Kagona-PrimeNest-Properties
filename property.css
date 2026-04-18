@@ -262,3 +262,45 @@ border-radius: 6px;
 cursor: pointer;
 font-weight: bold;
   }
+
+.gallery-slider{
+position:relative;
+overflow:hidden;
+margin-top:20px;
+}
+
+.gallery-track{
+display:flex;
+gap:15px;
+overflow-x:auto;
+scroll-behavior:smooth;
+}
+
+.gallery-track img{
+width:320px;
+height:220px;
+object-fit:cover;
+border-radius:10px;
+flex-shrink:0;
+}
+
+.slide-btn{
+position:absolute;
+top:50%;
+transform:translateY(-50%);
+background:black;
+color:white;
+border:none;
+font-size:30px;
+padding:10px 16px;
+cursor:pointer;
+opacity:0.7;
+}
+
+.slide-btn.left{
+left:0;
+}
+
+.slide-btn.right{
+right:0;
+  }
