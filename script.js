@@ -9,17 +9,21 @@ document.querySelectorAll('nav a').forEach(link => {
 
 link.addEventListener('click', function(e){
 
-e.preventDefault()
-
 const target = document.querySelector(this.getAttribute('href'))
+
+if(target){
+e.preventDefault()
 
 target.scrollIntoView({
 behavior: 'smooth'
 })
 
+}
+
 })
 
 })
+
 
 
 /* Property Search Interaction */
@@ -57,12 +61,14 @@ alert("Please select a property type")
 }
 
 
+
 /* Gallery Lightbox */
 
 const galleryImages = document.querySelectorAll(".gallery-grid img")
 
-const lightbox = document.createElement("div")
+if(galleryImages.length > 0){
 
+const lightbox = document.createElement("div")
 lightbox.id = "lightbox"
 
 document.body.appendChild(lightbox)
@@ -87,7 +93,6 @@ lightbox.appendChild(image)
 
 })
 
-
 lightbox.addEventListener("click", e => {
 
 if(e.target !== e.currentTarget) return
@@ -96,12 +101,15 @@ lightbox.classList.remove("active")
 
 })
 
+}
+
+
 
 /* Floating WhatsApp Button */
 
 const whatsapp = document.createElement("a")
 
-whatsapp.href = "https://wa.me/254700000000"
+whatsapp.href = "https://wa.me/25470138060"
 
 whatsapp.innerHTML = "💬"
 
@@ -115,7 +123,7 @@ document.body.appendChild(whatsapp)
 
 const call = document.createElement("a")
 
-call.href = "tel:+254700000000"
+call.href = "tel:+25470138060"
 
 call.innerHTML = "📞"
 
@@ -150,9 +158,12 @@ el.classList.add("active")
 })
 
 
+
 /* Hero Image Rotator */
 
 const hero = document.querySelector(".hero")
+
+if(hero){
 
 const heroImages = [
 
@@ -178,44 +189,60 @@ hero.style.backgroundImage = "url(" + heroImages[heroIndex] + ")"
 
 }, 5000)
 
+}
+
+
+
+/* Mortgage Calculator */
+
 function calculateMortgage(){
 
-let price = document.getElementById("price").value;
-let down = document.getElementById("downpayment").value;
-let interest = document.getElementById("interest").value / 100 / 12;
-let years = document.getElementById("years").value * 12;
+let price = document.getElementById("price").value
+let down = document.getElementById("downpayment").value
+let interest = document.getElementById("interest").value / 100 / 12
+let years = document.getElementById("years").value * 12
 
-let loan = price - down;
+let loan = price - down
 
-let payment = loan * interest * Math.pow(1 + interest, years) / (Math.pow(1 + interest, years) - 1);
+let payment = loan * interest * Math.pow(1 + interest, years) / (Math.pow(1 + interest, years) - 1)
 
-payment = payment.toFixed(2);
+payment = payment.toFixed(2)
 
 document.getElementById("result").innerText =
-"Estimated Monthly Payment: $" + payment;
+"Estimated Monthly Payment: $" + payment
 
 }
 
-// PROPERTY CATEGORY CLICK NAVIGATION
 
-const categories = document.querySelectorAll(".category");
 
-categories[0].addEventListener("click", () => {
-window.location.href = "houses.html";
-});
+/* PROPERTY CATEGORY CLICK NAVIGATION */
 
-categories[1].addEventListener("click", () => {
-window.location.href = "apartments.html";
-});
+document.querySelectorAll(".category").forEach(category => {
 
-categories[2].addEventListener("click", () => {
-window.location.href = "beachhomes.html";
-});
+category.addEventListener("click", () => {
 
-categories[3].addEventListener("click", () => {
-window.location.href = "penthouses.html";
-});
+const type = category.dataset.type
 
-categories[4].addEventListener("click", () => {
-window.location.href = "villas.html";
-});
+if(type === "houses"){
+window.location.href = "houses.html"
+}
+
+if(type === "apartments"){
+window.location.href = "apartments.html"
+}
+
+if(type === "beach"){
+window.location.href = "beachhomes.html"
+}
+
+if(type === "penthouses"){
+window.location.href = "penthouses.html"
+}
+
+if(type === "villas"){
+window.location.href = "villas.html"
+}
+
+})
+
+})
