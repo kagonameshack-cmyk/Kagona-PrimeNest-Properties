@@ -12,6 +12,29 @@
 <section class="properties">
 
 <h2 class="section-title">Luxury Villas</h2>
+
+<div class="property-filters">
+
+<input type="text" id="searchInput" placeholder="Search location...">
+
+<select id="priceFilter">
+<option value="">Price</option>
+<option value="100000">$100K+</option>
+<option value="300000">$300K+</option>
+<option value="500000">$500K+</option>
+<option value="1000000">$1M+</option>
+</select>
+
+<select id="typeFilter">
+<option value="">Property Type</option>
+<option value="house">House</option>
+<option value="apartment">Apartment</option>
+<option value="villa">Villa</option>
+</select>
+
+<button onclick="searchProperties()">Search</button>
+
+</div>
   
 <div class="property-grid">
 
