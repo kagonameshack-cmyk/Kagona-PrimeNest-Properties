@@ -219,5 +219,3 @@ window.location.href = "penthouses.html";
 categories[4].addEventListener("click", () => {
 window.location.href = "villas.html";
 });
-
-
