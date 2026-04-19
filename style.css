@@ -651,25 +651,21 @@ font-weight:500;
 
 .menu-toggle{
 display:none;
-font-size:28px;
-color:white;
+font-size:30px;
 cursor:pointer;
+color:white;
 }
 
 /* MOBILE */
 
-@media (max-width:768px){
-
 .nav-menu{
 display:none;
 flex-direction:column;
+background:black;
 position:absolute;
 top:70px;
 left:0;
 width:100%;
-background:#000;
-text-align:center;
-padding:20px 0;
 }
 
 .nav-menu.active{
@@ -680,4 +676,4 @@ display:flex;
 display:block;
 }
 
-  }
+}
