@@ -213,9 +213,13 @@ window.location.href = "villas.html";
 
 /* HAMBURGER MENU */
 
+document.addEventListener("DOMContentLoaded", function(){
+
 const menuToggle = document.querySelector(".menu-toggle");
 const navMenu = document.querySelector(".nav-menu");
 
-menuToggle.addEventListener("click", () => {
+menuToggle.addEventListener("click", function(){
 navMenu.classList.toggle("active");
+});
+
 });
