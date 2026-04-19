@@ -620,3 +620,64 @@ backdrop-filter: blur(8px);
 .filters-bar button:hover {
   background: #333;
   }
+
+/* HEADER */
+
+header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:20px;
+background:#000;
+position:sticky;
+top:0;
+z-index:1000;
+}
+
+/* NAVIGATION */
+
+.nav-menu{
+display:flex;
+gap:25px;
+}
+
+.nav-menu a{
+color:white;
+text-decoration:none;
+font-weight:500;
+}
+
+/* HAMBURGER */
+
+.menu-toggle{
+display:none;
+font-size:28px;
+color:white;
+cursor:pointer;
+}
+
+/* MOBILE */
+
+@media (max-width:768px){
+
+.nav-menu{
+display:none;
+flex-direction:column;
+position:absolute;
+top:70px;
+left:0;
+width:100%;
+background:#000;
+text-align:center;
+padding:20px 0;
+}
+
+.nav-menu.active{
+display:flex;
+}
+
+.menu-toggle{
+display:block;
+}
+
+  }
