@@ -209,3 +209,13 @@ window.location.href = "penthouses.html";
 categories[4].addEventListener("click", () => {
 window.location.href = "villas.html";
 });
+
+
+/* HAMBURGER MENU */
+
+const menuToggle = document.querySelector(".menu-toggle");
+const navMenu = document.querySelector(".nav-menu");
+
+menuToggle.addEventListener("click", () => {
+navMenu.classList.toggle("active");
+});
