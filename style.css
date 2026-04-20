@@ -203,19 +203,66 @@ border-radius:5px;
 transform:scale(1.03);
 }
 
-/* WHY US */
+/* WHY CHOOSE US */
+
+.why-us{
+padding:100px 20px;
+background:#000;
+text-align:center;
+}
+
+.why-us h2{
+font-size:36px;
+color:#d4af37;
+margin-bottom:60px;
+}
+
+/* GRID */
 
 .reasons{
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:25px;
+gap:30px;
+max-width:1200px;
+margin:auto;
 }
 
-.reasons div{
-background:#1b1b1b;
-padding:30px;
-border-radius:8px;
+/* CARD */
+
+.reason-card{
+background:#111;
+padding:35px;
+border-radius:12px;
+transition:all 0.4s ease;
+box-shadow:0 5px 20px rgba(0,0,0,0.5);
 }
+
+/* ICON */
+
+.reason-card .icon{
+font-size:32px;
+margin-bottom:15px;
+}
+
+/* TEXT */
+
+.reason-card h3{
+color:white;
+margin-bottom:10px;
+}
+
+.reason-card p{
+color:#ccc;
+font-size:15px;
+}
+
+/* HOVER EFFECT */
+
+.reason-card:hover{
+transform:translateY(-8px);
+box-shadow:0 10px 35px rgba(0,0,0,0.8);
+border:1px solid #d4af37;
+  }
 
 /* AGENTS */
 
