@@ -186,9 +186,11 @@ document.getElementById("result").innerText =
 
 }
 
-// PROPERTY CATEGORY CLICK NAVIGATION
+/* PROPERTY CATEGORY CLICK NAVIGATION */
 
 const categories = document.querySelectorAll(".category");
+
+if(categories.length >= 5){
 
 categories[0].addEventListener("click", () => {
 window.location.href = "houses.html";
@@ -210,15 +212,25 @@ categories[4].addEventListener("click", () => {
 window.location.href = "villas.html";
 });
 
+}
+
 
 /* HAMBURGER MENU */
 
 const menuToggle = document.querySelector(".menu-toggle");
 const mobileMenu = document.querySelector(".mobile-menu");
 
+if(menuToggle && mobileMenu){
+
 menuToggle.addEventListener("click", () => {
+
+menuToggle.classList.toggle("active");
+
 mobileMenu.classList.toggle("active");
+
 });
+
+  }
 
 
 /* CLOSE MENU WHEN CLICKING A LINK */
@@ -261,15 +273,3 @@ link.classList.add("active");
 
 
 
-/* HAMBURGER MENU */
-
-const menuToggle = document.querySelector(".menu-toggle");
-const mobileMenu = document.querySelector(".mobile-menu");
-
-menuToggle.addEventListener("click", () => {
-
-menuToggle.classList.toggle("active");
-
-mobileMenu.classList.toggle("active");
-
-});
