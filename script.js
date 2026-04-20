@@ -213,27 +213,48 @@ window.location.href = "villas.html";
 
 /* HAMBURGER MENU */
 
-document.addEventListener("DOMContentLoaded", function(){
-
 const menuToggle = document.querySelector(".menu-toggle");
-const navMenu = document.querySelector(".nav-menu");
+const mobileMenu = document.querySelector(".mobile-menu");
 
-menuToggle.addEventListener("click", function(){
-navMenu.classList.toggle("active");
+menuToggle.addEventListener("click", () => {
+mobileMenu.classList.toggle("active");
 });
 
+
+/* CLOSE MENU WHEN CLICKING A LINK */
+
+const menuLinks = document.querySelectorAll(".mobile-menu a");
+
+menuLinks.forEach(link => {
+link.addEventListener("click", () => {
+mobileMenu.classList.remove("active");
+});
 });
 
 
-window.addEventListener("scroll", function(){
+/* HEADER COLOR CHANGE ON SCROLL */
 
 const header = document.querySelector("header");
 
+window.addEventListener("scroll", () => {
+
 if(window.scrollY > 50){
 header.classList.add("scrolled");
-}
-else{
+}else{
 header.classList.remove("scrolled");
+}
+
+});
+
+
+/* ACTIVE PAGE HIGHLIGHT */
+
+const currentPage = location.pathname.split("/").pop();
+
+document.querySelectorAll(".nav-menu a, .mobile-menu a").forEach(link => {
+
+if(link.getAttribute("href") === currentPage){
+link.classList.add("active");
 }
 
 });
