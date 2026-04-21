@@ -125,31 +125,95 @@ font-size:32px;
 color:#d4af37;
 }
 
-/* CATEGORY GRID */
+/* CATEGORY SECTION */
+
+.categories{
+padding:80px 20px;
+background:#0a0a0a;
+text-align:center;
+}
+
+.section-title{
+font-size:38px;
+color:#d4af37;
+margin-bottom:50px;
+font-weight:600;
+}
+
+/* GRID */
 
 .category-grid{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-gap:25px;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:30px;
+max-width:1100px;
+margin:auto;
 }
+
+/* CARD */
 
 .category{
 background:#1b1b1b;
-padding:40px;
+padding:45px 30px;
+border-radius:12px;
 text-align:center;
-border-radius:8px;
+text-decoration:none;
+color:white;
+transition:0.35s ease;
+position:relative;
+overflow:hidden;
+}
+
+/* ICON */
+
+.category i{
+font-size:42px;
+color:#d4af37;
+margin-bottom:18px;
 transition:0.3s;
 }
 
-.category i{
-font-size:40px;
-color:#d4af37;
-margin-bottom:15px;
+/* TITLE */
+
+.category h3{
+font-size:20px;
+margin-bottom:8px;
 }
 
+/* DESCRIPTION */
+
+.category p{
+font-size:14px;
+color:#aaa;
+}
+
+/* HOVER */
+
 .category:hover{
-transform:translateY(-5px);
+transform:translateY(-8px);
 background:#222;
+box-shadow:0 15px 40px rgba(0,0,0,0.6);
+}
+
+.category:hover i{
+transform:scale(1.15);
+}
+
+/* GOLD BORDER EFFECT */
+
+.category::after{
+content:"";
+position:absolute;
+bottom:0;
+left:0;
+width:0;
+height:3px;
+background:#d4af37;
+transition:0.4s;
+}
+
+.category:hover::after{
+width:100%;
 }
 
 /* PROPERTY GRID */
