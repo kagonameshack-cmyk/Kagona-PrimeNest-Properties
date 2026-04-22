@@ -1,8 +1,13 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
 
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Penthouses | Kagona PrimeNest</title>
+
 <link rel="stylesheet" href="property.css">
 
 </head>
@@ -13,77 +18,273 @@
 
 <h2 class="section-title">Luxury Penthouses</h2>
 
+<!-- PROPERTY FILTERS -->
+
 <div class="property-filters">
 
 <input type="text" id="searchInput" placeholder="Search location...">
 
 <select id="priceFilter">
 <option value="">Price</option>
-<option value="100000">$100K+</option>
-<option value="300000">$300K+</option>
 <option value="500000">$500K+</option>
 <option value="1000000">$1M+</option>
+<option value="1500000">$1.5M+</option>
+<option value="2000000">$2M+</option>
 </select>
 
 <select id="typeFilter">
 <option value="">Property Type</option>
-<option value="house">House</option>
-<option value="apartment">Apartment</option>
-<option value="villa">Villa</option>
+<option value="penthouse">Penthouse</option>
+<option value="duplex">Duplex Penthouse</option>
+<option value="skyline">Skyline Penthouse</option>
 </select>
 
 <button onclick="searchProperties()">Search</button>
 
 </div>
-  
+
 <div class="property-grid">
 
+
+<!-- PROPERTY 1 -->
+
 <div class="property-card">
+
+<div class="property-image">
+
 <img src="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688">
+
+<span class="property-badge">Skyline View</span>
+
+<button class="favorite-btn">❤</button>
+
+</div>
+
+<div class="property-info">
+
 <h3>Skyline Penthouse</h3>
-<p>Westlands</p>
-<span>$1,300,000</span>
-<button onclick="location.href='skyline-penthouse.html'">View Details</button>
+
+<p class="property-location">📍 Westlands, Nairobi</p>
+
+<div class="property-features">
+<span>🛏 4 Beds</span>
+<span>🛁 4 Baths</span>
+<span>📐 480 sqm</span>
 </div>
 
+<div class="property-bottom">
+
+<span class="property-price">$1,300,000</span>
+
+<button onclick="location.href='skyline-penthouse.html'">
+View Details
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- PROPERTY 2 -->
+
 <div class="property-card">
+
+<div class="property-image">
+
 <img src="https://images.unsplash.com/photo-1493809842364-78817add7ffb">
+
+<button class="favorite-btn">❤</button>
+
+</div>
+
+<div class="property-info">
+
 <h3>Luxury City Penthouse</h3>
-<p>Kilimani</p>
-<span>$1,450,000</span>
-<button onclick="location.href='luxury-city-penthouse.html'">View Details</button>
+
+<p class="property-location">📍 Kilimani, Nairobi</p>
+
+<div class="property-features">
+<span>🛏 4 Beds</span>
+<span>🛁 3 Baths</span>
+<span>📐 460 sqm</span>
 </div>
 
+<div class="property-bottom">
+
+<span class="property-price">$1,450,000</span>
+
+<button onclick="location.href='luxury-city-penthouse.html'">
+View Details
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- PROPERTY 3 -->
+
 <div class="property-card">
+
+<div class="property-image">
+
 <img src="https://images.unsplash.com/photo-1505691938895-1758d7feb511">
+
+<span class="property-badge">Modern Glass</span>
+
+<button class="favorite-btn">❤</button>
+
+</div>
+
+<div class="property-info">
+
 <h3>Modern Glass Penthouse</h3>
-<p>Upper Hill</p>
-<span>$1,520,000</span>
-<button onclick="location.href='glass-penthouse.html'">View Details</button>
+
+<p class="property-location">📍 Upper Hill, Nairobi</p>
+
+<div class="property-features">
+<span>🛏 4 Beds</span>
+<span>🛁 4 Baths</span>
+<span>📐 500 sqm</span>
 </div>
 
+<div class="property-bottom">
+
+<span class="property-price">$1,520,000</span>
+
+<button onclick="location.href='glass-penthouse.html'">
+View Details
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- PROPERTY 4 -->
+
 <div class="property-card">
+
+<div class="property-image">
+
 <img src="https://images.unsplash.com/photo-1484154218962-a197022b5858">
+
+<span class="property-badge">Duplex</span>
+
+<button class="favorite-btn">❤</button>
+
+</div>
+
+<div class="property-info">
+
 <h3>Luxury Duplex Penthouse</h3>
-<p>Lavington</p>
-<span>$1,670,000</span>
-<button onclick="location.href='duplex-penthouse.html'">View Details</button>
+
+<p class="property-location">📍 Lavington, Nairobi</p>
+
+<div class="property-features">
+<span>🛏 5 Beds</span>
+<span>🛁 4 Baths</span>
+<span>📐 560 sqm</span>
 </div>
 
+<div class="property-bottom">
+
+<span class="property-price">$1,670,000</span>
+
+<button onclick="location.href='duplex-penthouse.html'">
+View Details
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- PROPERTY 5 -->
+
 <div class="property-card">
+
+<div class="property-image">
+
 <img src="https://images.unsplash.com/photo-1507089947368-19c1da9775ae">
-<h3>Executive Penthouse</h3>
-<p>Kileleshwa</p>
-<span>$1,720,000</span>
-<button onclick="location.href='executive-penthouse.html'">View Details</button>
+
+<button class="favorite-btn">❤</button>
+
 </div>
 
+<div class="property-info">
+
+<h3>Executive Penthouse</h3>
+
+<p class="property-location">📍 Kileleshwa, Nairobi</p>
+
+<div class="property-features">
+<span>🛏 4 Beds</span>
+<span>🛁 4 Baths</span>
+<span>📐 520 sqm</span>
+</div>
+
+<div class="property-bottom">
+
+<span class="property-price">$1,720,000</span>
+
+<button onclick="location.href='executive-penthouse.html'">
+View Details
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- PROPERTY 6 -->
+
 <div class="property-card">
+
+<div class="property-image">
+
 <img src="https://images.unsplash.com/photo-1502005097973-6a7082348e28">
+
+<span class="property-badge">Ultra Luxury</span>
+
+<button class="favorite-btn">❤</button>
+
+</div>
+
+<div class="property-info">
+
 <h3>Ultra Luxury Penthouse</h3>
-<p>Parklands</p>
-<span>$1,900,000</span>
-<button onclick="location.href='ultra-penthouse.html'">View Details</button>
+
+<p class="property-location">📍 Parklands, Nairobi</p>
+
+<div class="property-features">
+<span>🛏 5 Beds</span>
+<span>🛁 5 Baths</span>
+<span>📐 600 sqm</span>
+</div>
+
+<div class="property-bottom">
+
+<span class="property-price">$1,900,000</span>
+
+<button onclick="location.href='ultra-penthouse.html'">
+View Details
+</button>
+
+</div>
+
+</div>
+
 </div>
 
 </div>
@@ -91,4 +292,4 @@
 </section>
 
 </body>
-</html>
+  </html>
