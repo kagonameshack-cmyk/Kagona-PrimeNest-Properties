@@ -1,1 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
 
+<title>Land & Plots | Kagona PrimeNest</title>
+<link rel="stylesheet" href="property.css">
+
+</head>
+
+<body>
+
+<section class="properties">
+
+<h2 class="section-title">Premium Land & Plots</h2>
+
+<div class="property-filters">
+
+<input type="text" id="searchInput" placeholder="Search location...">
+
+<select id="priceFilter">
+<option value="">Price</option>
+<option value="50000">$50K+</option>
+<option value="100000">$100K+</option>
+<option value="300000">$300K+</option>
+<option value="500000">$500K+</option>
+</select>
+
+<select id="typeFilter">
+<option value="">Land Type</option>
+<option value="residential">Residential</option>
+<option value="commercial">Commercial</option>
+<option value="agricultural">Agricultural</option>
+<option value="beach">Beachfront</option>
+</select>
+
+<button onclick="searchProperties()">Search</button>
+
+</div>
+  
+<div class="property-grid">
+
+<div class="property-card">
+<img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef">
+<h3>Prime Residential Plot</h3>
+<p>Kitengela</p>
+<span>$85,000</span>
+<button onclick="location.href='prime-kitengela-plot.html'">View Details</button>
+</div>
+
+<div class="property-card">
+<img src="https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7">
+<h3>Commercial Development Land</h3>
+<p>Westlands</p>
+<span>$450,000</span>
+<button onclick="location.href='westlands-commercial-land.html'">View Details</button>
+</div>
+
+<div class="property-card">
+<img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef">
+<h3>Luxury Beachfront Plot</h3>
+<p>Diani Beach</p>
+<span>$520,000</span>
+<button onclick="location.href='diani-beach-plot.html'">View Details</button>
+</div>
+
+<div class="property-card">
+<img src="https://images.unsplash.com/photo-1470770841072-f978cf4d019e">
+<h3>Private Hilltop Land</h3>
+<p>Limuru</p>
+<span>$220,000</span>
+<button onclick="location.href='limuru-hilltop-land.html'">View Details</button>
+</div>
+
+<div class="property-card">
+<img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef">
+<h3>Large Agricultural Land</h3>
+<p>Naivasha</p>
+<span>$180,000</span>
+<button onclick="location.href='naivasha-farm-land.html'">View Details</button>
+</div>
+
+<div class="property-card">
+<img src="https://images.unsplash.com/photo-1470770841072-f978cf4d019e">
+<h3>Executive Investment Plot</h3>
+<p>Ruiru</p>
+<span>$120,000</span>
+<button onclick="location.href='ruiru-investment-plot.html'">View Details</button>
+</div>
+
+</div>
+
+</section>
+
+</body>
+  </html>
