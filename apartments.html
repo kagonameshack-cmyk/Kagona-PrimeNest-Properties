@@ -1,18 +1,24 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
 
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Apartments | Kagona PrimeNest</title>
+
 <link rel="stylesheet" href="property.css">
 
 </head>
 
 <body>
 
-
 <section class="properties">
 
 <h2 class="section-title">Luxury Apartments</h2>
+
+<!-- PROPERTY FILTERS -->
 
 <div class="property-filters">
 
@@ -28,30 +34,58 @@
 
 <select id="typeFilter">
 <option value="">Property Type</option>
-<option value="house">House</option>
 <option value="apartment">Apartment</option>
-<option value="villa">Villa</option>
+<option value="duplex">Duplex</option>
+<option value="penthouse">Penthouse</option>
+<option value="studio">Studio</option>
 </select>
 
 <button onclick="searchProperties()">Search</button>
 
 </div>
-  
+
+<!-- PROPERTY GRID -->
+
 <div class="property-grid">
+
 
 <!-- PROPERTY 1 -->
 
 <div class="property-card">
 
+<div class="property-image">
+
 <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00">
+
+<span class="property-badge">Featured</span>
+
+<button class="favorite-btn">❤</button>
+
+</div>
+
+<div class="property-info">
 
 <h3>Modern City Apartment</h3>
 
-<p>Westlands, Nairobi</p>
+<p class="property-location">📍 Westlands, Nairobi</p>
 
-<span>$320,000</span>
+<div class="property-features">
+<span>🛏 3 Beds</span>
+<span>🛁 2 Baths</span>
+<span>📐 210 sqm</span>
+</div>
 
-<button onclick="location.href='modern-city-apartment.html'">View Details</button>
+<div class="property-bottom">
+
+<span class="property-price">$320,000</span>
+
+<button onclick="location.href='modern-city-apartment.html'">
+View Details
+</button>
+
+</div>
+
+</div>
 
 </div>
 
@@ -60,15 +94,39 @@
 
 <div class="property-card">
 
+<div class="property-image">
+
 <img src="https://images.unsplash.com/photo-1501183638710-841dd1904471">
+
+<span class="property-badge">Luxury</span>
+
+<button class="favorite-btn">❤</button>
+
+</div>
+
+<div class="property-info">
 
 <h3>Luxury Skyline Apartment</h3>
 
-<p>Kilimani, Nairobi</p>
+<p class="property-location">📍 Kilimani, Nairobi</p>
 
-<span>$410,000</span>
+<div class="property-features">
+<span>🛏 4 Beds</span>
+<span>🛁 3 Baths</span>
+<span>📐 260 sqm</span>
+</div>
 
-<button onclick="location.href='luxury-skyline-apartment.html'">View Details</button>
+<div class="property-bottom">
+
+<span class="property-price">$410,000</span>
+
+<button onclick="location.href='luxury-skyline-apartment.html'">
+View Details
+</button>
+
+</div>
+
+</div>
 
 </div>
 
@@ -77,15 +135,37 @@
 
 <div class="property-card">
 
+<div class="property-image">
+
 <img src="https://images.unsplash.com/photo-1493809842364-78817add7ffb">
+
+<button class="favorite-btn">❤</button>
+
+</div>
+
+<div class="property-info">
 
 <h3>Executive Apartment</h3>
 
-<p>Lavington</p>
+<p class="property-location">📍 Lavington, Nairobi</p>
 
-<span>$360,000</span>
+<div class="property-features">
+<span>🛏 3 Beds</span>
+<span>🛁 2 Baths</span>
+<span>📐 200 sqm</span>
+</div>
 
-<button onclick="location.href='executive-apartment.html'">View Details</button>
+<div class="property-bottom">
+
+<span class="property-price">$360,000</span>
+
+<button onclick="location.href='executive-apartment.html'">
+View Details
+</button>
+
+</div>
+
+</div>
 
 </div>
 
@@ -94,15 +174,39 @@
 
 <div class="property-card">
 
+<div class="property-image">
+
 <img src="https://images.unsplash.com/photo-1484154218962-a197022b5858">
+
+<span class="property-badge">Duplex</span>
+
+<button class="favorite-btn">❤</button>
+
+</div>
+
+<div class="property-info">
 
 <h3>Luxury Duplex Apartment</h3>
 
-<p>Kileleshwa</p>
+<p class="property-location">📍 Kileleshwa, Nairobi</p>
 
-<span>$520,000</span>
+<div class="property-features">
+<span>🛏 4 Beds</span>
+<span>🛁 3 Baths</span>
+<span>📐 300 sqm</span>
+</div>
 
-<button onclick="location.href='luxury-duplex-apartment.html'">View Details</button>
+<div class="property-bottom">
+
+<span class="property-price">$520,000</span>
+
+<button onclick="location.href='luxury-duplex-apartment.html'">
+View Details
+</button>
+
+</div>
+
+</div>
 
 </div>
 
@@ -111,15 +215,37 @@
 
 <div class="property-card">
 
+<div class="property-image">
+
 <img src="https://images.unsplash.com/photo-1507089947368-19c1da9775ae">
+
+<button class="favorite-btn">❤</button>
+
+</div>
+
+<div class="property-info">
 
 <h3>Modern Glass Apartment</h3>
 
-<p>Upper Hill</p>
+<p class="property-location">📍 Upper Hill, Nairobi</p>
 
-<span>$470,000</span>
+<div class="property-features">
+<span>🛏 3 Beds</span>
+<span>🛁 2 Baths</span>
+<span>📐 240 sqm</span>
+</div>
 
-<button onclick="location.href='modern-glass-apartment.html'">View Details</button>
+<div class="property-bottom">
+
+<span class="property-price">$470,000</span>
+
+<button onclick="location.href='modern-glass-apartment.html'">
+View Details
+</button>
+
+</div>
+
+</div>
 
 </div>
 
@@ -128,15 +254,39 @@
 
 <div class="property-card">
 
+<div class="property-image">
+
 <img src="https://images.unsplash.com/photo-1502005097973-6a7082348e28">
+
+<span class="property-badge">Premium</span>
+
+<button class="favorite-btn">❤</button>
+
+</div>
+
+<div class="property-info">
 
 <h3>Premium City Apartment</h3>
 
-<p>Parklands</p>
+<p class="property-location">📍 Parklands, Nairobi</p>
 
-<span>$390,000</span>
+<div class="property-features">
+<span>🛏 3 Beds</span>
+<span>🛁 2 Baths</span>
+<span>📐 220 sqm</span>
+</div>
 
-<button onclick="location.href='premium-city-apartment.html'">View Details</button>
+<div class="property-bottom">
+
+<span class="property-price">$390,000</span>
+
+<button onclick="location.href='premium-city-apartment.html'">
+View Details
+</button>
+
+</div>
+
+</div>
 
 </div>
 
@@ -146,4 +296,4 @@
 </section>
 
 </body>
-</html>
+  </html>
