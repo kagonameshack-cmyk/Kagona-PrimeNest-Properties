@@ -1,0 +1,30 @@
+/* AGENTS */
+
+.agent-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:30px;
+}
+
+.agent{
+background:#1b1b1b;
+padding:20px;
+text-align:center;
+border-radius:8px;
+}
+
+.agent img{
+width:120px;
+height:120px;
+border-radius:50%;
+margin-bottom:15px;
+}
+
+.agent button{
+margin-top:10px;
+padding:10px 20px;
+background:#d4af37;
+border:none;
+cursor:pointer;
+border-radius:5px;
+}
