@@ -1,20 +1,83 @@
-<!-- GALLERY -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<section id="gallery" class="gallery">
+<title>Gallery | Kagona PrimeNest</title>
 
 <link rel="stylesheet" href="gallery.css">
-  
-<h2>Property Gallery</h2>
+
+</head>
+
+<body>
+
+<!-- BACK BUTTON -->
+<a href="index.html" class="back-btn">← Back</a>
+
+<section class="gallery">
+
+<h2 class="section-title">Property Gallery</h2>
 
 <div class="gallery-grid">
 
+<div class="gallery-item">
 <img src="https://images.unsplash.com/photo-1600585154207-8c7cdbb8e6b9">
+</div>
+
+<div class="gallery-item">
 <img src="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688">
+</div>
+
+<div class="gallery-item">
 <img src="https://images.unsplash.com/photo-1600047508788-7861c2b0d1d1">
+</div>
+
+<div class="gallery-item">
 <img src="https://images.unsplash.com/photo-1600585154526-990dced4db0d">
+</div>
+
+<div class="gallery-item">
 <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c">
+</div>
+
+<div class="gallery-item">
 <img src="https://images.unsplash.com/photo-1600585152915-d208bec867a1">
+</div>
 
 </div>
 
 </section>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+<span class="close">&times;</span>
+<img class="lightbox-img" id="lightbox-img">
+</div>
+
+<script>
+const images = document.querySelectorAll(".gallery-item img");
+const lightbox = document.getElementById("lightbox");
+const lightboxImg = document.getElementById("lightbox-img");
+const closeBtn = document.querySelector(".close");
+
+images.forEach(img => {
+    img.addEventListener("click", () => {
+        lightbox.style.display = "flex";
+        lightboxImg.src = img.src;
+    });
+});
+
+closeBtn.onclick = () => {
+    lightbox.style.display = "none";
+};
+
+lightbox.onclick = (e) => {
+    if(e.target !== lightboxImg){
+        lightbox.style.display = "none";
+    }
+};
+</script>
+
+</body>
+  </html>
