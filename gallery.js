@@ -110,3 +110,29 @@ document.getElementById("sendBtn").addEventListener("click", () => {
         input.value = "";
     }
 });
+
+
+const filterBtn = document.querySelector(".filter-btn");
+const filterMenu = document.querySelector(".filter-menu");
+const container = document.querySelector(".reel-container");
+
+filterBtn.addEventListener("click", () => {
+    filterMenu.style.display = filterMenu.style.display === "block" ? "none" : "block";
+});
+
+document.querySelectorAll(".filter-menu div").forEach(option => {
+    option.addEventListener("click", () => {
+
+        const sort = option.dataset.sort;
+        const reels = Array.from(document.querySelectorAll(".reel"));
+
+        if(sort === "new"){
+            reels.reverse();
+        }
+
+        container.innerHTML = "";
+        reels.forEach(r => container.appendChild(r));
+
+        filterMenu.style.display = "none";
+    });
+});
