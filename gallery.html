@@ -8,7 +8,6 @@
 
 <link rel="stylesheet" href="gallery.css">
 
-<!-- Icons -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 </head>
@@ -17,35 +16,31 @@
 
 <!-- TOP BAR -->
 <div class="top-bar">
-
-<button class="back-btn">
-<i class="fa-solid fa-arrow-left"></i>
-</button>
-
+<button class="back-btn"><i class="fa-solid fa-arrow-left"></i></button>
 <h2>Explore</h2>
 
 <div class="top-icons">
 <i class="fa-solid fa-sliders"></i>
 <i class="fa-regular fa-heart"></i>
 </div>
-
 </div>
 
 
-<!-- REEL CONTAINER -->
+<!-- REELS -->
 <div class="reel-container">
 
-<!-- SINGLE REEL -->
-<div class="reel">
+<!-- REEL 1 -->
+<div class="reel" data-id="1">
 
 <img src="https://images.unsplash.com/photo-1600585154207-8c7cdbb8e6b9">
 
-<!-- RIGHT ACTIONS -->
+<div class="heart-anim">❤️</div>
+
 <div class="reel-actions">
 
-<div class="action">
+<div class="action like-btn">
 <i class="fa-regular fa-heart"></i>
-<span>590</span>
+<span class="like-count">590</span>
 </div>
 
 <div class="action">
@@ -60,29 +55,63 @@
 
 </div>
 
-
-<!-- BOTTOM INFO -->
 <div class="reel-info">
-
 <div class="profile">
+<img src="logo.png">
 
-<img src="logo.png" alt="logo">
-
-<div>
 <span class="username">
 Kagona PrimeNest 
 <i class="fa-solid fa-circle-check verified"></i>
 </span>
-</div>
 
 <button class="contact-btn">Contact</button>
+</div>
+
+<p class="caption">Luxury living redefined ✨🏡 Premium property in Nairobi</p>
+</div>
 
 </div>
 
-<p class="caption">
-Luxury living redefined ✨🏡 Premium property in Nairobi
-</p>
 
+<!-- REEL 2 -->
+<div class="reel" data-id="2">
+
+<img src="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688">
+
+<div class="heart-anim">❤️</div>
+
+<div class="reel-actions">
+
+<div class="action like-btn">
+<i class="fa-regular fa-heart"></i>
+<span class="like-count">320</span>
+</div>
+
+<div class="action">
+<i class="fa-regular fa-comment"></i>
+<span>9</span>
+</div>
+
+<div class="action">
+<i class="fa-solid fa-share"></i>
+<span>2</span>
+</div>
+
+</div>
+
+<div class="reel-info">
+<div class="profile">
+<img src="logo.png">
+
+<span class="username">
+Kagona PrimeNest 
+<i class="fa-solid fa-circle-check verified"></i>
+</span>
+
+<button class="contact-btn">Contact</button>
+</div>
+
+<p class="caption">Modern apartment in Westlands 🌆</p>
 </div>
 
 </div>
@@ -94,6 +123,9 @@ Luxury living redefined ✨🏡 Premium property in Nairobi
 <div class="comment-bar">
 <input type="text" placeholder="Add comment...">
 </div>
+
+
+<script src="gallery.js"></script>
 
 </body>
    </html>
