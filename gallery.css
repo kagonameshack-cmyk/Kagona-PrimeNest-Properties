@@ -144,21 +144,34 @@ color:#ddd;
 .comment-bar{
 position:fixed;
 bottom:0;
-left:0;
 width:100%;
-background:black;
+background:#0f0f0f;
 padding:10px;
+display:flex;
+gap:10px;
+align-items:center;
 border-top:1px solid #222;
 }
 
 .comment-bar input{
-width:100%;
-padding:10px;
+flex:1;
+padding:10px 14px;
 border-radius:20px;
 border:none;
-background:#111;
-color:white;
-}
+background:#1a1a1a;
+color:#fff;
+font-size:14px;
+  }
+
+.comment-bar button{
+background:#d4af37;
+border:none;
+padding:10px 14px;
+border-radius:50%;
+cursor:pointer;
+color:black;
+font-size:16px;
+  }
 
 /* SNAP SCROLL */
 .reel-container{
