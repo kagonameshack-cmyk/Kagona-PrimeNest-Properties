@@ -12,18 +12,19 @@
 
 <body>
 
-<!-- BACK BUTTON -->
 <a href="index.html" class="back-btn">← Back</a>
 
 <section class="gallery">
 
 <h2 class="section-title">Property Gallery</h2>
 
-<div class="gallery-grid">
-
-<div class="gallery-item">
+<!-- HERO IMAGE -->
+<div class="gallery-hero">
 <img src="https://images.unsplash.com/photo-1600585154207-8c7cdbb8e6b9">
 </div>
+
+<!-- GRID -->
+<div class="gallery-grid">
 
 <div class="gallery-item">
 <img src="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688">
@@ -56,7 +57,7 @@
 </div>
 
 <script>
-const images = document.querySelectorAll(".gallery-item img");
+const images = document.querySelectorAll(".gallery img");
 const lightbox = document.getElementById("lightbox");
 const lightboxImg = document.getElementById("lightbox-img");
 const closeBtn = document.querySelector(".close");
@@ -68,9 +69,7 @@ images.forEach(img => {
     });
 });
 
-closeBtn.onclick = () => {
-    lightbox.style.display = "none";
-};
+closeBtn.onclick = () => lightbox.style.display = "none";
 
 lightbox.onclick = (e) => {
     if(e.target !== lightboxImg){
@@ -80,4 +79,4 @@ lightbox.onclick = (e) => {
 </script>
 
 </body>
-  </html>
+</html>
