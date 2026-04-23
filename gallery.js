@@ -100,3 +100,13 @@ document.querySelector(".back-btn").addEventListener("click", () => {
         window.location.href = "index.html"; // fallback homepage
     }
 });
+
+
+document.getElementById("sendBtn").addEventListener("click", () => {
+    const input = document.getElementById("commentInput");
+
+    if(input.value.trim() !== ""){
+        console.log("Comment:", input.value);
+        input.value = "";
+    }
+});
