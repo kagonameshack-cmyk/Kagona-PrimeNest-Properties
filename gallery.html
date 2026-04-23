@@ -12,71 +12,71 @@
 
 <body>
 
+<!-- BACK BUTTON -->
 <a href="index.html" class="back-btn">← Back</a>
 
-<section class="gallery">
+<section class="reel-gallery">
 
-<h2 class="section-title">Property Gallery</h2>
-
-<!-- HERO IMAGE -->
-<div class="gallery-hero">
+<!-- CARD 1 -->
+<div class="reel-card">
 <img src="https://images.unsplash.com/photo-1600585154207-8c7cdbb8e6b9">
+
+<div class="overlay">
+
+<div class="top">
+<span class="badge">Featured</span>
+<button class="fav-btn">❤</button>
 </div>
 
-<!-- GRID -->
-<div class="gallery-grid">
+<div class="bottom">
+<h3>Modern Living Space</h3>
+<p>📍 Nairobi</p>
+<span>$650,000</span>
+</div>
 
-<div class="gallery-item">
+</div>
+</div>
+
+<!-- CARD 2 -->
+<div class="reel-card">
 <img src="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688">
+
+<div class="overlay">
+
+<div class="top">
+<button class="fav-btn">❤</button>
 </div>
 
-<div class="gallery-item">
-<img src="https://images.unsplash.com/photo-1600047508788-7861c2b0d1d1">
+<div class="bottom">
+<h3>Luxury Interior</h3>
+<p>📍 Westlands</p>
+<span>$720,000</span>
 </div>
 
-<div class="gallery-item">
-<img src="https://images.unsplash.com/photo-1600585154526-990dced4db0d">
+</div>
 </div>
 
-<div class="gallery-item">
+<!-- CARD 3 -->
+<div class="reel-card">
 <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c">
+
+<div class="overlay">
+
+<div class="top">
+<span class="badge">New</span>
+<button class="fav-btn">❤</button>
 </div>
 
-<div class="gallery-item">
-<img src="https://images.unsplash.com/photo-1600585152915-d208bec867a1">
+<div class="bottom">
+<h3>Modern Apartment</h3>
+<p>📍 Kilimani</p>
+<span>$410,000</span>
 </div>
 
+</div>
 </div>
 
 </section>
-
-<!-- LIGHTBOX -->
-<div class="lightbox" id="lightbox">
-<span class="close">&times;</span>
-<img class="lightbox-img" id="lightbox-img">
-</div>
-
-<script>
-const images = document.querySelectorAll(".gallery img");
-const lightbox = document.getElementById("lightbox");
-const lightboxImg = document.getElementById("lightbox-img");
-const closeBtn = document.querySelector(".close");
-
-images.forEach(img => {
-    img.addEventListener("click", () => {
-        lightbox.style.display = "flex";
-        lightboxImg.src = img.src;
-    });
-});
-
-closeBtn.onclick = () => lightbox.style.display = "none";
-
-lightbox.onclick = (e) => {
-    if(e.target !== lightboxImg){
-        lightbox.style.display = "none";
-    }
-};
-</script>
 
 </body>
 </html>
