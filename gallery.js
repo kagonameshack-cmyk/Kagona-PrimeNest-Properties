@@ -112,3 +112,32 @@ document.getElementById("sendBtn").addEventListener("click", () => {
 });
 
 
+const commentsModal = document.getElementById("commentsModal");
+const commentsList = document.getElementById("commentsList");
+const commentInput = document.getElementById("commentText");
+
+// Open modal
+document.querySelectorAll(".fa-comment").forEach(btn => {
+    btn.addEventListener("click", () => {
+        commentsModal.classList.add("active");
+    });
+});
+
+// Close modal
+document.querySelector(".close-comments").addEventListener("click", () => {
+    commentsModal.classList.remove("active");
+});
+
+// Add comment
+document.getElementById("postComment").addEventListener("click", () => {
+    if(commentInput.value.trim() !== ""){
+        const newComment = document.createElement("div");
+        newComment.classList.add("comment-item");
+        newComment.innerText = "You: " + commentInput.value;
+
+        commentsList.appendChild(newComment);
+        commentInput.value = "";
+
+        commentsList.scrollTop = commentsList.scrollHeight;
+    }
+});
