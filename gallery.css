@@ -1,4 +1,4 @@
-/* GLOBAL */
+/* BODY */
 
 body{
 margin:0;
@@ -18,8 +18,6 @@ color:white;
 padding:10px 16px;
 border-radius:6px;
 text-decoration:none;
-font-size:14px;
-transition:0.3s;
 z-index:1000;
 }
 
@@ -32,7 +30,7 @@ color:black;
 
 .gallery{
 padding:80px 20px;
-max-width:1200px;
+max-width:1100px;
 margin:auto;
 }
 
@@ -40,25 +38,39 @@ margin:auto;
 
 .section-title{
 text-align:center;
-font-size:40px;
+font-size:34px;
 color:#d4af37;
-margin-bottom:50px;
+margin-bottom:40px;
+}
+
+/* HERO IMAGE */
+
+.gallery-hero{
+margin-bottom:25px;
+border-radius:14px;
+overflow:hidden;
+}
+
+.gallery-hero img{
+width:100%;
+height:280px;
+object-fit:cover;
+border-radius:14px;
 }
 
 /* GRID */
 
 .gallery-grid{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-gap:20px;
+grid-template-columns:repeat(2, 1fr);
+gap:15px;
 }
 
 /* ITEM */
 
 .gallery-item{
-position:relative;
 overflow:hidden;
-border-radius:14px;
+border-radius:12px;
 cursor:pointer;
 }
 
@@ -66,54 +78,15 @@ cursor:pointer;
 
 .gallery-item img{
 width:100%;
-height:260px;
+height:180px;
 object-fit:cover;
-transition:0.5s;
+transition:0.4s;
 }
 
-/* HOVER EFFECT */
+/* HOVER */
 
 .gallery-item:hover img{
-transform:scale(1.1);
-}
-
-/* OVERLAY */
-
-.gallery-item::after{
-content:"";
-position:absolute;
-bottom:0;
-left:0;
-width:100%;
-height:40%;
-background:linear-gradient(to top, rgba(0,0,0,0.7), transparent);
-opacity:0;
-transition:0.3s;
-}
-
-.gallery-item:hover::after{
-opacity:1;
-}
-
-/* ICON */
-
-.gallery-item::before{
-content:"🔍";
-position:absolute;
-top:50%;
-left:50%;
-transform:translate(-50%,-50%) scale(0.8);
-font-size:22px;
-background:rgba(0,0,0,0.6);
-padding:10px;
-border-radius:50%;
-opacity:0;
-transition:0.3s;
-}
-
-.gallery-item:hover::before{
-opacity:1;
-transform:translate(-50%,-50%) scale(1);
+transform:scale(1.08);
 }
 
 /* LIGHTBOX */
@@ -131,23 +104,17 @@ align-items:center;
 z-index:2000;
 }
 
-/* IMAGE */
-
 .lightbox-img{
 max-width:90%;
 max-height:85%;
 border-radius:10px;
-box-shadow:0 20px 60px rgba(0,0,0,0.8);
 }
-
-/* CLOSE BUTTON */
 
 .close{
 position:absolute;
 top:30px;
-right:40px;
-font-size:40px;
-color:white;
+right:30px;
+font-size:35px;
 cursor:pointer;
 }
 
@@ -155,8 +122,12 @@ cursor:pointer;
 
 @media(max-width:768px){
 
-.section-title{
-font-size:28px;
+.gallery-hero img{
+height:220px;
+}
+
+.gallery-grid{
+grid-template-columns:1fr;
 }
 
 .gallery-item img{
