@@ -212,3 +212,42 @@ animation:pop 0.6s ease;
 color:red;
 }
 
+.top-icons{
+display:flex;
+align-items:center;
+gap:15px;
+position:relative;
+}
+
+/* FILTER */
+.filter-wrapper{
+position:relative;
+}
+
+.filter-btn{
+cursor:pointer;
+}
+
+.filter-menu{
+position:absolute;
+top:30px;
+right:0;
+background:#1a1a1a;
+border-radius:8px;
+padding:8px 0;
+display:none;
+min-width:120px;
+box-shadow:0 10px 25px rgba(0,0,0,0.6);
+z-index:999;
+}
+
+.filter-menu div{
+padding:10px 15px;
+cursor:pointer;
+color:#fff;
+font-size:14px;
+}
+
+.filter-menu div:hover{
+background:#333;
+  }
