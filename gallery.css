@@ -99,19 +99,20 @@ right:10px;
 display:flex;
 align-items:center;
 gap:10px;
-flex-wrap:nowrap;
 }
 
 .profile img{
 width:35px;
 height:35px;
 border-radius:50%;
-}
+  }
 
 /* USERNAME */
 .username{
 font-size:14px;
-white-space:nowrap;
+display:flex;
+align-items:center;
+gap:5px;
 }
 
 .verified{
@@ -122,15 +123,14 @@ margin-left:5px;
 
 /* CONTACT BUTTON */
 .contact-btn{
-margin-left:auto;
 background:transparent;
 border:1px solid #fff;
 color:#fff;
-padding:6px 14px;
+padding:5px 12px;
 border-radius:20px;
-font-size:13px;
+font-size:12px;
 cursor:pointer;
-white-space:nowrap;
+margin-left:8px; /* keeps it close to username */
 }
 
 /* CAPTION */
