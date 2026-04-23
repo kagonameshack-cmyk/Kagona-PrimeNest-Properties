@@ -116,10 +116,13 @@ const filterBtn = document.querySelector(".filter-btn");
 const filterMenu = document.querySelector(".filter-menu");
 const container = document.querySelector(".reel-container");
 
+// Toggle menu
 filterBtn.addEventListener("click", () => {
-    filterMenu.style.display = filterMenu.style.display === "block" ? "none" : "block";
+    filterMenu.style.display =
+        filterMenu.style.display === "block" ? "none" : "block";
 });
 
+// Sorting
 document.querySelectorAll(".filter-menu div").forEach(option => {
     option.addEventListener("click", () => {
 
