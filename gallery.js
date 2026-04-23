@@ -141,3 +141,19 @@ document.getElementById("postComment").addEventListener("click", () => {
         commentsList.scrollTop = commentsList.scrollHeight;
     }
 });
+
+
+document.querySelectorAll(".contact-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+
+        const phone = btn.dataset.phone;
+
+        const message = encodeURIComponent(
+            "Hello, I'm interested in this property from Kagona PrimeNest."
+        );
+
+        const url = `https://wa.me/${phone}?text=${message}`;
+
+        window.open(url, "_blank");
+    });
+});
