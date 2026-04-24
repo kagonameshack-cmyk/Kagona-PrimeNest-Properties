@@ -16,8 +16,8 @@
 
 <section class="properties">
 
-<!-- STICKY HEADER -->
-<div class="property-header">
+<!-- ✅ STICKY HEADER -->
+<div class="sticky-header">
 
 <h2 class="section-title">Luxury Apartments</h2>
 
@@ -41,35 +41,25 @@
 <option value="studio">Studio</option>
 </select>
 
-<button onclick="searchProperties()">Search</button>
+<!-- ❌ Removed search button (live filtering now) -->
 
 </div>
 
 </div>
 
 <!-- PROPERTY GRID -->
-
 <div class="property-grid">
 
-
 <!-- PROPERTY 1 -->
-
 <div class="property-card">
-
 <div class="property-image">
-
 <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00">
-
 <span class="property-badge">Featured</span>
-
 <button class="favorite-btn">❤</button>
-
 </div>
 
 <div class="property-info">
-
 <h3>Modern City Apartment</h3>
-
 <p class="property-location">📍 Westlands, Nairobi</p>
 
 <div class="property-features">
@@ -79,38 +69,22 @@
 </div>
 
 <div class="property-bottom">
-
 <span class="property-price">$320,000</span>
-
-<button onclick="location.href='modern-city-apartment.html'">
-View Details
-</button>
-
+<button onclick="location.href='modern-city-apartment.html'">View Details</button>
 </div>
-
 </div>
-
 </div>
-
 
 <!-- PROPERTY 2 -->
-
 <div class="property-card">
-
 <div class="property-image">
-
 <img src="https://images.unsplash.com/photo-1501183638710-841dd1904471">
-
 <span class="property-badge">Luxury</span>
-
 <button class="favorite-btn">❤</button>
-
 </div>
 
 <div class="property-info">
-
 <h3>Luxury Skyline Apartment</h3>
-
 <p class="property-location">📍 Kilimani, Nairobi</p>
 
 <div class="property-features">
@@ -120,36 +94,21 @@ View Details
 </div>
 
 <div class="property-bottom">
-
 <span class="property-price">$410,000</span>
-
-<button onclick="location.href='luxury-skyline-apartment.html'">
-View Details
-</button>
-
+<button onclick="location.href='luxury-skyline-apartment.html'">View Details</button>
 </div>
-
 </div>
-
 </div>
-
 
 <!-- PROPERTY 3 -->
-
 <div class="property-card">
-
 <div class="property-image">
-
 <img src="https://images.unsplash.com/photo-1493809842364-78817add7ffb">
-
 <button class="favorite-btn">❤</button>
-
 </div>
 
 <div class="property-info">
-
 <h3>Executive Apartment</h3>
-
 <p class="property-location">📍 Lavington, Nairobi</p>
 
 <div class="property-features">
@@ -159,38 +118,22 @@ View Details
 </div>
 
 <div class="property-bottom">
-
 <span class="property-price">$360,000</span>
-
-<button onclick="location.href='executive-apartment.html'">
-View Details
-</button>
-
+<button onclick="location.href='executive-apartment.html'">View Details</button>
 </div>
-
 </div>
-
 </div>
-
 
 <!-- PROPERTY 4 -->
-
 <div class="property-card">
-
 <div class="property-image">
-
 <img src="https://images.unsplash.com/photo-1484154218962-a197022b5858">
-
 <span class="property-badge">Duplex</span>
-
 <button class="favorite-btn">❤</button>
-
 </div>
 
 <div class="property-info">
-
 <h3>Luxury Duplex Apartment</h3>
-
 <p class="property-location">📍 Kileleshwa, Nairobi</p>
 
 <div class="property-features">
@@ -200,36 +143,21 @@ View Details
 </div>
 
 <div class="property-bottom">
-
 <span class="property-price">$520,000</span>
-
-<button onclick="location.href='luxury-duplex-apartment.html'">
-View Details
-</button>
-
+<button onclick="location.href='luxury-duplex-apartment.html'">View Details</button>
 </div>
-
 </div>
-
 </div>
-
 
 <!-- PROPERTY 5 -->
-
 <div class="property-card">
-
 <div class="property-image">
-
 <img src="https://images.unsplash.com/photo-1507089947368-19c1da9775ae">
-
 <button class="favorite-btn">❤</button>
-
 </div>
 
 <div class="property-info">
-
 <h3>Modern Glass Apartment</h3>
-
 <p class="property-location">📍 Upper Hill, Nairobi</p>
 
 <div class="property-features">
@@ -239,38 +167,22 @@ View Details
 </div>
 
 <div class="property-bottom">
-
 <span class="property-price">$470,000</span>
-
-<button onclick="location.href='modern-glass-apartment.html'">
-View Details
-</button>
-
+<button onclick="location.href='modern-glass-apartment.html'">View Details</button>
 </div>
-
 </div>
-
 </div>
-
 
 <!-- PROPERTY 6 -->
-
 <div class="property-card">
-
 <div class="property-image">
-
 <img src="https://images.unsplash.com/photo-1502005097973-6a7082348e28">
-
 <span class="property-badge">Premium</span>
-
 <button class="favorite-btn">❤</button>
-
 </div>
 
 <div class="property-info">
-
 <h3>Premium City Apartment</h3>
-
 <p class="property-location">📍 Parklands, Nairobi</p>
 
 <div class="property-features">
@@ -280,23 +192,53 @@ View Details
 </div>
 
 <div class="property-bottom">
-
 <span class="property-price">$390,000</span>
-
-<button onclick="location.href='premium-city-apartment.html'">
-View Details
-</button>
-
+<button onclick="location.href='premium-city-apartment.html'">View Details</button>
 </div>
-
 </div>
-
 </div>
-
 
 </div>
 
 </section>
+
+<!-- ✅ LIVE FILTER SCRIPT -->
+<script>
+
+const searchInput = document.getElementById("searchInput");
+const priceFilter = document.getElementById("priceFilter");
+const typeFilter = document.getElementById("typeFilter");
+
+const cards = document.querySelectorAll(".property-card");
+
+function filterProperties(){
+
+const search = searchInput.value.toLowerCase();
+const price = priceFilter.value;
+const type = typeFilter.value;
+
+cards.forEach(card => {
+
+const location = card.querySelector(".property-location").innerText.toLowerCase();
+const cardPrice = card.querySelector(".property-price").innerText.replace(/[^0-9]/g,"");
+
+let show = true;
+
+if(search && !location.includes(search)) show = false;
+if(price && parseInt(cardPrice) < parseInt(price)) show = false;
+if(type && !card.innerText.toLowerCase().includes(type)) show = false;
+
+card.style.display = show ? "block" : "none";
+
+});
+
+}
+
+searchInput.addEventListener("input", filterProperties);
+priceFilter.addEventListener("change", filterProperties);
+typeFilter.addEventListener("change", filterProperties);
+
+</script>
 
 </body>
   </html>
