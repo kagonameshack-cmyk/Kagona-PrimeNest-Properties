@@ -16,8 +16,8 @@
 
 <section class="properties">
 
-<!-- STICKY HEADER -->
-<div class="property-header">
+<!-- ✅ STICKY HEADER -->
+<div class="sticky-header">
 
 <h2 class="section-title">Luxury Villas</h2>
 
@@ -41,31 +41,25 @@
 <option value="studio">Studio</option>
 </select>
 
-<button onclick="searchProperties()">Search</button>
+<!-- ❌ removed search button -->
 
 </div>
 
 </div>
 
+<!-- PROPERTY GRID -->
+<div class="property-grid">
 
 <!-- PROPERTY 1 -->
-
 <div class="property-card">
-
 <div class="property-image">
-
 <img src="https://images.unsplash.com/photo-1613977257363-707ba9348227">
-
 <span class="property-badge">Luxury</span>
-
 <button class="favorite-btn">❤</button>
-
 </div>
 
 <div class="property-info">
-
 <h3>Modern Luxury Villa</h3>
-
 <p class="property-location">📍 Karen, Nairobi</p>
 
 <div class="property-features">
@@ -75,36 +69,21 @@
 </div>
 
 <div class="property-bottom">
-
 <span class="property-price">$1,200,000</span>
-
-<button onclick="location.href='modern-luxury-villa.html'">
-View Details
-</button>
-
+<button onclick="location.href='modern-luxury-villa.html'">View Details</button>
 </div>
-
 </div>
-
 </div>
-
 
 <!-- PROPERTY 2 -->
-
 <div class="property-card">
-
 <div class="property-image">
-
 <img src="https://images.unsplash.com/photo-1600607688969-a5bfcd646154">
-
 <button class="favorite-btn">❤</button>
-
 </div>
 
 <div class="property-info">
-
 <h3>Private Garden Villa</h3>
-
 <p class="property-location">📍 Runda, Nairobi</p>
 
 <div class="property-features">
@@ -114,38 +93,22 @@ View Details
 </div>
 
 <div class="property-bottom">
-
 <span class="property-price">$1,350,000</span>
-
-<button onclick="location.href='private-garden-villa.html'">
-View Details
-</button>
-
+<button onclick="location.href='private-garden-villa.html'">View Details</button>
 </div>
-
 </div>
-
 </div>
-
 
 <!-- PROPERTY 3 -->
-
 <div class="property-card">
-
 <div class="property-image">
-
 <img src="https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde">
-
 <span class="property-badge">Pool Villa</span>
-
 <button class="favorite-btn">❤</button>
-
 </div>
 
 <div class="property-info">
-
 <h3>Luxury Pool Villa</h3>
-
 <p class="property-location">📍 Muthaiga, Nairobi</p>
 
 <div class="property-features">
@@ -155,36 +118,21 @@ View Details
 </div>
 
 <div class="property-bottom">
-
 <span class="property-price">$1,480,000</span>
-
-<button onclick="location.href='luxury-pool-villa.html'">
-View Details
-</button>
-
+<button onclick="location.href='luxury-pool-villa.html'">View Details</button>
 </div>
-
 </div>
-
 </div>
-
 
 <!-- PROPERTY 4 -->
-
 <div class="property-card">
-
 <div class="property-image">
-
 <img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811">
-
 <button class="favorite-btn">❤</button>
-
 </div>
 
 <div class="property-info">
-
 <h3>Premium Hillside Villa</h3>
-
 <p class="property-location">📍 Limuru Highlands</p>
 
 <div class="property-features">
@@ -194,38 +142,22 @@ View Details
 </div>
 
 <div class="property-bottom">
-
 <span class="property-price">$1,600,000</span>
-
-<button onclick="location.href='premium-hillside-villa.html'">
-View Details
-</button>
-
+<button onclick="location.href='premium-hillside-villa.html'">View Details</button>
 </div>
-
 </div>
-
 </div>
-
 
 <!-- PROPERTY 5 -->
-
 <div class="property-card">
-
 <div class="property-image">
-
 <img src="https://images.unsplash.com/photo-1613553507747-5f8d62ad5904">
-
 <span class="property-badge">Modern Glass</span>
-
 <button class="favorite-btn">❤</button>
-
 </div>
 
 <div class="property-info">
-
 <h3>Modern Glass Villa</h3>
-
 <p class="property-location">📍 Gigiri, Nairobi</p>
 
 <div class="property-features">
@@ -235,38 +167,22 @@ View Details
 </div>
 
 <div class="property-bottom">
-
 <span class="property-price">$1,750,000</span>
-
-<button onclick="location.href='glass-villa.html'">
-View Details
-</button>
-
+<button onclick="location.href='glass-villa.html'">View Details</button>
 </div>
-
 </div>
-
 </div>
-
 
 <!-- PROPERTY 6 -->
-
 <div class="property-card">
-
 <div class="property-image">
-
 <img src="https://images.unsplash.com/photo-1613977257592-4a9a32f0c0f1">
-
 <span class="property-badge">Ultra Luxury</span>
-
 <button class="favorite-btn">❤</button>
-
 </div>
 
 <div class="property-info">
-
 <h3>Ultra Luxury Villa</h3>
-
 <p class="property-location">📍 Nyari Estate, Nairobi</p>
 
 <div class="property-features">
@@ -276,22 +192,53 @@ View Details
 </div>
 
 <div class="property-bottom">
-
 <span class="property-price">$2,100,000</span>
-
-<button onclick="location.href='ultra-luxury-villa.html'">
-View Details
-</button>
-
+<button onclick="location.href='ultra-luxury-villa.html'">View Details</button>
 </div>
-
 </div>
-
 </div>
 
 </div>
 
 </section>
+
+<!-- ✅ LIVE FILTER SCRIPT -->
+<script>
+
+const searchInput = document.getElementById("searchInput");
+const priceFilter = document.getElementById("priceFilter");
+const typeFilter = document.getElementById("typeFilter");
+
+const cards = document.querySelectorAll(".property-card");
+
+function filterProperties(){
+
+const search = searchInput.value.toLowerCase();
+const price = priceFilter.value;
+const type = typeFilter.value;
+
+cards.forEach(card => {
+
+const location = card.querySelector(".property-location").innerText.toLowerCase();
+const cardPrice = card.querySelector(".property-price").innerText.replace(/[^0-9]/g,"");
+
+let show = true;
+
+if(search && !location.includes(search)) show = false;
+if(price && parseInt(cardPrice) < parseInt(price)) show = false;
+if(type && !card.innerText.toLowerCase().includes(type)) show = false;
+
+card.style.display = show ? "block" : "none";
+
+});
+
+}
+
+searchInput.addEventListener("input", filterProperties);
+priceFilter.addEventListener("change", filterProperties);
+typeFilter.addEventListener("change", filterProperties);
+
+</script>
 
 </body>
   </html>
