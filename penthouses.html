@@ -16,10 +16,12 @@
 
 <section class="properties">
 
+<!-- ✅ STICKY HEADER WRAPPER -->
+<div class="sticky-header">
+
 <h2 class="section-title">Luxury Penthouses</h2>
 
 <!-- PROPERTY FILTERS -->
-
 <div class="property-filters">
 
 <input type="text" id="searchInput" placeholder="Search location...">
@@ -39,9 +41,12 @@
 <option value="skyline">Skyline Penthouse</option>
 </select>
 
-<button onclick="searchProperties()">Search</button>
+<!-- ❌ removed search button (now live filtering) -->
 
 </div>
+
+</div>
+
 
 <div class="property-grid">
 
@@ -290,6 +295,45 @@ View Details
 </div>
 
 </section>
+
+
+<!-- ✅ LIVE FILTER SCRIPT -->
+<script>
+
+const searchInput = document.getElementById("searchInput");
+const priceFilter = document.getElementById("priceFilter");
+const typeFilter = document.getElementById("typeFilter");
+
+const cards = document.querySelectorAll(".property-card");
+
+function filterProperties(){
+
+const search = searchInput.value.toLowerCase();
+const price = priceFilter.value;
+const type = typeFilter.value;
+
+cards.forEach(card => {
+
+const location = card.querySelector(".property-location").innerText.toLowerCase();
+const cardPrice = card.querySelector(".property-price").innerText.replace(/[^0-9]/g,"");
+
+let show = true;
+
+if(search && !location.includes(search)) show = false;
+if(price && parseInt(cardPrice) < parseInt(price)) show = false;
+if(type && !card.innerText.toLowerCase().includes(type)) show = false;
+
+card.style.display = show ? "block" : "none";
+
+});
+
+}
+
+searchInput.addEventListener("input", filterProperties);
+priceFilter.addEventListener("change", filterProperties);
+typeFilter.addEventListener("change", filterProperties);
+
+</script>
 
 </body>
   </html>
