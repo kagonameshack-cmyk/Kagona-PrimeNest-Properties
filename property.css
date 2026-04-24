@@ -202,3 +202,63 @@ font-size:14px;
 }
 
   }
+
+/* STICKY HEADER */
+.property-header{
+position:sticky;
+top:0;
+z-index:100;
+background:rgba(255,255,255,0.95);
+backdrop-filter:blur(10px);
+padding:15px 10px;
+box-shadow:0 2px 10px rgba(0,0,0,0.08);
+}
+
+/* TITLE */
+.section-title{
+margin:0 0 10px;
+font-size:26px;
+font-weight:700;
+color:#111;
+}
+
+/* FILTER BAR */
+.property-filters{
+display:flex;
+gap:8px;
+flex-wrap:wrap;
+}
+
+/* INPUTS + SELECTS */
+.property-filters input,
+.property-filters select{
+padding:8px 10px;
+border-radius:8px;
+border:1px solid #ddd;
+font-size:14px;
+background:white;
+}
+
+/* SEARCH BUTTON */
+.property-filters button{
+background:#d4af37;
+color:black;
+border:none;
+padding:8px 14px;
+border-radius:8px;
+cursor:pointer;
+font-weight:600;
+}
+
+/* SMALL SCREENS IMPROVEMENT */
+@media(max-width:600px){
+.property-filters{
+flex-direction:column;
+}
+
+.property-filters input,
+.property-filters select,
+.property-filters button{
+width:100%;
+}
+  }
