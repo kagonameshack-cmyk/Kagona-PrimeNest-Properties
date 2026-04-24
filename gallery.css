@@ -39,13 +39,6 @@ cursor:pointer;
 }
 
 
-/* REEL CONTAINER */
-.reel-container{
-margin-top:60px;
-height:calc(100vh - 120px);
-overflow:hidden;
-}
-
 /* REEL */
 .reel{
 position:relative;
@@ -175,7 +168,8 @@ font-size:16px;
 
 /* SNAP SCROLL */
 .reel-container{
-height:100vh;
+margin-top:60px;
+height:calc(100vh - 60px);
 overflow-y:scroll;
 scroll-snap-type:y mandatory;
 }
