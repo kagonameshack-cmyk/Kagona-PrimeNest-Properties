@@ -272,4 +272,6 @@ link.classList.add("active");
 });
 
 
-
+document.addEventListener("DOMContentLoaded", () => {
+  document.getElementById("currencySwitcher").value = currentCurrency;
+});
