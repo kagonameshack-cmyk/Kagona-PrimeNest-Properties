@@ -23,6 +23,17 @@
 
 <div class="property-filters">
 
+<div class="currency-switch">
+  🌍
+</div>
+
+<select id="currencySelect" class="currency-dropdown">
+  <option value="USD">USD ($)</option>
+  <option value="KES">KES (KSh)</option>
+  <option value="EUR">EUR (€)</option>
+  <option value="GBP">GBP (£)</option>
+</select>
+  
 <input type="text" id="searchInput" placeholder="Search location...">
 
 <select id="priceFilter">
@@ -202,8 +213,9 @@
 
 </section>
 
-<!-- ✅ LIVE FILTER SCRIPT -->
 <script>
+
+// ================= FILTER SYSTEM =================
 
 const searchInput = document.getElementById("searchInput");
 const priceFilter = document.getElementById("priceFilter");
@@ -220,12 +232,14 @@ const type = typeFilter.value;
 cards.forEach(card => {
 
 const location = card.querySelector(".property-location").innerText.toLowerCase();
-const cardPrice = card.querySelector(".property-price").innerText.replace(/[^0-9]/g,"");
+
+/* 🔥 IMPORTANT FIX: use data-price instead of innerText */
+const cardPrice = parseInt(card.querySelector(".property-price").getAttribute("data-price"));
 
 let show = true;
 
 if(search && !location.includes(search)) show = false;
-if(price && parseInt(cardPrice) < parseInt(price)) show = false;
+if(price && cardPrice < parseInt(price)) show = false;
 if(type && !card.innerText.toLowerCase().includes(type)) show = false;
 
 card.style.display = show ? "block" : "none";
@@ -238,7 +252,71 @@ searchInput.addEventListener("input", filterProperties);
 priceFilter.addEventListener("change", filterProperties);
 typeFilter.addEventListener("change", filterProperties);
 
+
+// ================= CURRENCY SYSTEM =================
+
+const switchBtn = document.querySelector(".currency-switch");
+const dropdown = document.getElementById("currencySelect");
+
+// Toggle dropdown
+switchBtn.onclick = () => {
+  dropdown.classList.toggle("show");
+};
+
+// Load saved currency
+let currentCurrency = localStorage.getItem("currency") || "USD";
+
+// Rates
+let rates = {};
+
+async function getRates() {
+  const res = await fetch("https://api.exchangerate-api.com/v4/latest/USD");
+  const data = await res.json();
+  rates = data.rates;
+  updatePrices();
+}
+
+function updatePrices() {
+
+  document.querySelectorAll(".property-price").forEach(el => {
+
+    const basePrice = parseInt(el.getAttribute("data-price"));
+    let finalPrice = basePrice;
+
+    if(currentCurrency !== "USD") {
+      finalPrice = basePrice * rates[currentCurrency];
+    }
+
+    let symbol = "$";
+
+    if(currentCurrency === "KES") symbol = "KSh ";
+    if(currentCurrency === "EUR") symbol = "€";
+    if(currentCurrency === "GBP") symbol = "£";
+
+    el.innerText = symbol + finalPrice.toLocaleString();
+
+  });
+
+}
+
+// When currency changes
+dropdown.addEventListener("change", () => {
+  currentCurrency = dropdown.value;
+  localStorage.setItem("currency", currentCurrency);
+  updatePrices();
+});
+
+// Init
+getRates();
+
+   </script>
+
+  </section>
+
+<!-- ONE SCRIPT ONLY -->
+<script>
+   // merged code here
 </script>
 
 </body>
-  </html>
+</html>
