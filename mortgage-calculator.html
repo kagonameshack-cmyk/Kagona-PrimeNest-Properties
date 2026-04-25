@@ -1,1 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
 
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Mortgage Calculator | Kagona PrimeNest</title>
+
+<link rel="stylesheet" href="property.css">
+
+<style>
+
+/* PAGE */
+.calculator-container{
+max-width: 500px;
+margin: 100px auto;
+padding: 20px;
+}
+
+/* TITLE */
+.calculator-title{
+font-size: 28px;
+font-weight: bold;
+text-align: center;
+margin-bottom: 20px;
+color: #c9a646;
+}
+
+/* INPUTS */
+.calc-group{
+margin-bottom: 15px;
+}
+
+.calc-group label{
+display: block;
+margin-bottom: 5px;
+font-size: 14px;
+opacity: 0.7;
+}
+
+.calc-group input,
+.calc-group select{
+width: 100%;
+padding: 14px;
+border-radius: 10px;
+border: none;
+background: #f2f2f2;
+font-size: 15px;
+}
+
+/* BUTTON */
+.calculate-btn{
+width: 100%;
+padding: 15px;
+border-radius: 30px;
+border: none;
+background: black;
+color: white;
+font-size: 16px;
+margin-top: 10px;
+cursor: pointer;
+}
+
+/* RESULT BOX */
+.result-box{
+margin-top: 25px;
+padding: 20px;
+border-radius: 15px;
+background: #111;
+color: white;
+display: none;
+}
+
+.result-box h3{
+margin-bottom: 10px;
+color: #c9a646;
+}
+
+.result-item{
+margin: 5px 0;
+font-size: 15px;
+}
+
+.currency-switch{
+margin-top: 10px;
+text-align: right;
+font-size: 13px;
+cursor: pointer;
+opacity: 0.7;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="calculator-container">
+
+<h2 class="calculator-title">Mortgage Calculator</h2>
+
+<!-- INPUTS -->
+
+<div class="calc-group">
+<label>Property Price</label>
+<input type="number" id="price" placeholder="e.g 500000">
+</div>
+
+<div class="calc-group">
+<label>Down Payment</label>
+<input type="number" id="down" placeholder="e.g 100000">
+</div>
+
+<div class="calc-group">
+<label>Interest Rate (%)</label>
+<input type="number" id="rate" placeholder="e.g 7">
+</div>
+
+<div class="calc-group">
+<label>Loan Period (Years)</label>
+<input type="number" id="years" placeholder="e.g 20">
+</div>
+
+<button class="calculate-btn" onclick="calculateMortgage()">
+Calculate
+</button>
+
+<!-- RESULT -->
+
+<div class="result-box" id="resultBox">
+
+<h3>Loan Summary</h3>
+
+<div class="result-item" id="monthly"></div>
+<div class="result-item" id="total"></div>
+
+<div class="currency-switch" onclick="toggleCurrency()">
+Switch to KES
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+let isKES = false;
+const exchangeRate = 130; // USD → KES (approx)
+
+function calculateMortgage(){
+
+let price = parseFloat(document.getElementById("price").value);
+let down = parseFloat(document.getElementById("down").value);
+let rate = parseFloat(document.getElementById("rate").value) / 100 / 12;
+let years = parseFloat(document.getElementById("years").value) * 12;
+
+if(!price || !rate || !years){
+alert("Please fill all fields correctly");
+return;
+}
+
+let loan = price - (down || 0);
+
+let monthly = (loan * rate * Math.pow(1 + rate, years)) / 
+              (Math.pow(1 + rate, years) - 1);
+
+let total = monthly * years;
+
+displayResults(monthly, total);
+
+}
+
+function displayResults(monthly, total){
+
+const box = document.getElementById("resultBox");
+box.style.display = "block";
+
+updateCurrency(monthly, total);
+
+}
+
+function updateCurrency(monthly, total){
+
+let m = monthly;
+let t = total;
+
+if(isKES){
+m *= exchangeRate;
+t *= exchangeRate;
+document.querySelector(".currency-switch").innerText = "Switch to USD";
+}else{
+document.querySelector(".currency-switch").innerText = "Switch to KES";
+}
+
+document.getElementById("monthly").innerText =
+"Monthly Payment: " + formatMoney(m);
+
+document.getElementById("total").innerText =
+"Total Payment: " + formatMoney(t);
+
+}
+
+function toggleCurrency(){
+
+isKES = !isKES;
+
+calculateMortgage();
+
+}
+
+function formatMoney(num){
+
+return (isKES ? "KES " : "$ ") +
+Math.round(num).toLocaleString();
+
+}
+
+</script>
+
+</body>
+  </html>
