@@ -22,6 +22,17 @@
 <!-- FILTERS -->
 <div class="property-filters">
 
+<div class="currency-switch">
+  🌍
+</div>
+
+<select id="currencySelect" class="currency-dropdown">
+  <option value="USD">USD ($)</option>
+  <option value="KES">KES (KSh)</option>
+  <option value="EUR">EUR (€)</option>
+  <option value="GBP">GBP (£)</option>
+</select>
+  
 <input type="text" id="searchInput" placeholder="Search location...">
 
 <select id="priceFilter">
@@ -237,6 +248,62 @@ searchInput.addEventListener("input", filterProperties);
 priceFilter.addEventListener("change", filterProperties);
 typeFilter.addEventListener("change", filterProperties);
 
+
+<script>
+
+const switchBtn = document.querySelector(".currency-switch");
+const dropdown = document.getElementById("currencySelect");
+
+switchBtn.onclick = () => {
+  dropdown.classList.toggle("show");
+};
+
+// Load saved currency or default
+let currentCurrency = localStorage.getItem("currency") || "USD";
+
+// Fetch live rates
+let rates = {};
+
+async function getRates() {
+  const res = await fetch("https://api.exchangerate-api.com/v4/latest/USD");
+  const data = await res.json();
+  rates = data.rates;
+  updatePrices();
+}
+
+function updatePrices() {
+
+  document.querySelectorAll(".property-price").forEach(el => {
+
+    const basePrice = parseInt(el.getAttribute("data-price"));
+    let finalPrice = basePrice;
+
+    if(currentCurrency !== "USD") {
+      finalPrice = basePrice * rates[currentCurrency];
+    }
+
+    let symbol = "$";
+
+    if(currentCurrency === "KES") symbol = "KSh ";
+    if(currentCurrency === "EUR") symbol = "€";
+    if(currentCurrency === "GBP") symbol = "£";
+
+    el.innerText = symbol + finalPrice.toLocaleString();
+
+  });
+}
+
+// When user selects currency
+dropdown.addEventListener("change", () => {
+  currentCurrency = dropdown.value;
+  localStorage.setItem("currency", currentCurrency);
+  updatePrices();
+});
+
+// Init
+getRates();
+
+  
 </script>
 
 </body>
