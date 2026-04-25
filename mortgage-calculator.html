@@ -189,9 +189,9 @@ input, select {
 
 /* SIMPLE STATIC RATES (UPGRADE TO API LATER) */
 const rates = {
-  USD: 1,
-  KES: 130,
-  EUR: 0.92
+  let currency = currentCurrency;
+let convert = rates[currency];
+let symbol = symbols[currency];
 };
 
 const currencySymbols = {
