@@ -316,3 +316,19 @@ background:#d4af37;
 border:none;
 font-weight:bold;
   }
+
+.live-dot {
+  width: 7px;
+  height: 7px;
+  background: red;
+  border-radius: 50%;
+  display: inline-block;
+  margin-left: 6px;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% {opacity: 0.3;}
+  50% {opacity: 1;}
+  100% {opacity: 0.3;}
+  }
