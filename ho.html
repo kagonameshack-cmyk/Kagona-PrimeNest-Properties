@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Apartments | Kagona PrimeNest</title>
+
+<link rel="stylesheet" href="property.css">
+
+</head>
+
+<body>
+
+<section class="properties">
+
+<!-- ✅ STICKY HEADER -->
+<div class="sticky-header">
+
+<h2 class="section-title">Luxury Apartments</h2>
+
+<div class="property-filters">
+
+<div class="currency-switch">
+  🌍
+</div>
+
+<select id="currencySelect" class="currency-dropdown">
+  <option value="USD">USD ($)</option>
+  <option value="KES">KES (KSh)</option>
+  <option value="EUR">EUR (€)</option>
+  <option value="GBP">GBP (£)</option>
+</select>
+  
+<input type="text" id="searchInput" placeholder="Search location...">
+
+<select id="priceFilter">
+<option value="">Price</option>
+<option value="100000">$100K+</option>
+<option value="300000">$300K+</option>
+<option value="500000">$500K+</option>
+<option value="1000000">$1M+</option>
+</select>
+
+<select id="typeFilter">
+<option value="">Property Type</option>
+<option value="apartment">Apartment</option>
+<option value="duplex">Duplex</option>
+<option value="penthouse">Penthouse</option>
+<option value="studio">Studio</option>
+</select>
+
+<!-- ❌ Removed search button (live filtering now) -->
+
+</div>
+
+</div>
+
+<!-- PROPERTY GRID -->
+<div class="property-grid">
+
+
+  
+// ================= FILTER SYSTEM =================
+
+const searchInput = document.getElementById("searchInput");
+const priceFilter = document.getElementById("priceFilter");
+const typeFilter = document.getElementById("typeFilter");
+
+const cards = document.querySelectorAll(".property-card");
+
+function filterProperties(){
+
+const search = searchInput.value.toLowerCase();
+const price = priceFilter.value;
+const type = typeFilter.value;
+
+cards.forEach(card => {
+
+const location = card.querySelector(".property-location").innerText.toLowerCase();
+
+/* 🔥 IMPORTANT FIX: use data-price instead of innerText */
+const cardPrice = parseInt(card.querySelector(".property-price").getAttribute("data-price"));
+
+let show = true;
+
+if(search && !location.includes(search)) show = false;
+if(price && cardPrice < parseInt(price)) show = false;
+if(type && !card.innerText.toLowerCase().includes(type)) show = false;
+
+card.style.display = show ? "block" : "none";
+
+});
+
+}
+
+searchInput.addEventListener("input", filterProperties);
+priceFilter.addEventListener("change", filterProperties);
+typeFilter.addEventListener("change", filterProperties);
+
+
+// ================= CURRENCY SYSTEM =================
+
+const switchBtn = document.querySelector(".currency-switch");
+const dropdown = document.getElementById("currencySelect");
+
+// Toggle dropdown
+switchBtn.onclick = () => {
+  dropdown.classList.toggle("show");
+};
+
+// Load saved currency
+let currentCurrency = localStorage.getItem("currency") || "USD";
+
+// Rates
+let rates = {};
+
+async function getRates() {
+  const res = await fetch("https://api.exchangerate-api.com/v4/latest/USD");
+  const data = await res.json();
+  rates = data.rates;
+  updatePrices();
+}
+
+function updatePrices() {
+
+  document.querySelectorAll(".property-price").forEach(el => {
+
+    const basePrice = parseInt(el.getAttribute("data-price"));
+    let finalPrice = basePrice;
+
+    if(currentCurrency !== "USD") {
+      finalPrice = basePrice * rates[currentCurrency];
+    }
+
+    let symbol = "$";
+
+    if(currentCurrency === "KES") symbol = "KSh ";
+    if(currentCurrency === "EUR") symbol = "€";
+    if(currentCurrency === "GBP") symbol = "£";
+
+    el.innerText = symbol + finalPrice.toLocaleString();
+
+  });
+
+}
+
+// When currency changes
+dropdown.addEventListener("change", () => {
+  currentCurrency = dropdown.value;
+  localStorage.setItem("currency", currentCurrency);
+  updatePrices();
+});
+
+// Init
+getRates();
+
+</script>
+
+</section>
+
+<!-- ONE SCRIPT ONLY -->
+<script>
+   // merged code here
+</script>
+
+</body>
+</html>  
