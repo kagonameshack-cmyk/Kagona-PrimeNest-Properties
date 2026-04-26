@@ -322,14 +322,41 @@ getRates();
 
 </section>
 
-<!-- ONE SCRIPT ONLY -->
-<script>
-   // merged code here
+<!-- 🔥 FIREBASE SETUP -->
+<script type="module">
+
+// Import Firebase
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+// Your config
+const firebaseConfig = {
+  apiKey: "AIzaSyDZvAcMFt1n5RBfWmiCMvcZcAQvDs7rzhk",
+  authDomain: "kagona-primenest.firebaseapp.com",
+  projectId: "kagona-primenest",
+  storageBucket: "kagona-primenest.firebasestorage.app",
+  messagingSenderId: "246677583786",
+  appId: "1:246677583786:web:ceced78ad633539a8c1dd3",
+  measurementId: "G-GRSTNZKJVB"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+// 🔥 TEST: GET DATA FROM FIRESTORE
+async function loadProperties() {
+  const querySnapshot = await getDocs(collection(db, "properties"));
+
+  querySnapshot.forEach((doc) => {
+    console.log(doc.data()); // for now just test
+  });
+}
+
+// Run test
+loadProperties();
+
 </script>
 
-<!-- 🔥 Firebase SDK -->
-<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js"></script>
-  
 </body>
 </html>  
