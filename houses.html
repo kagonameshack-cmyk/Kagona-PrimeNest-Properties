@@ -57,7 +57,7 @@
 
 
 <!-- PROPERTY GRID -->
-<div class="property-grid">
+<div class="property-grid" id="propertyGrid">
 
 <!-- PROPERTY 1 -->
 <div class="property-card">
@@ -346,12 +346,52 @@ const db = getFirestore(app);
 
 // 🔥 TEST: GET DATA FROM FIRESTORE
 async function loadProperties() {
+
+  const grid = document.getElementById("propertyGrid");
+  grid.innerHTML = ""; // clear existing (optional later)
+
   const querySnapshot = await getDocs(collection(db, "properties"));
 
   querySnapshot.forEach((doc) => {
-    console.log(doc.data()); // for now just test
+
+    const p = doc.data();
+
+    const card = `
+      <div class="property-card">
+        <div class="property-image">
+          <img src="${p.image}">
+          <span class="property-badge">${p.badge || ""}</span>
+          <button class="favorite-btn">❤</button>
+        </div>
+
+        <div class="property-info">
+          <h3>${p.title}</h3>
+          <p class="property-location">📍 ${p.location}</p>
+
+          <div class="property-features">
+            <span>🛏 ${p.beds} Beds</span>
+            <span>🛁 ${p.baths} Baths</span>
+            <span>📐 ${p.size} sqm</span>
+          </div>
+
+          <div class="property-bottom">
+            <span class="property-price" data-price="${p.price}">
+              $${p.price.toLocaleString()}
+            </span>
+
+            <button onclick="location.href='${p.link}'">
+              View Details
+            </button>
+          </div>
+        </div>
+      </div>
+    `;
+
+    grid.innerHTML += card;
+
   });
-}
+
+  }
 
 // Run test
 loadProperties();
