@@ -5,7 +5,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Luxury Houses | Kagona PrimeNest</title>
+<title>Firebase Test | Kagona PrimeNest</title>
 <link rel="stylesheet" href="property.css">
 
 </head>
@@ -14,17 +14,14 @@
 
 <section class="properties">
 
-<!-- ✅ STICKY HEADER -->
+<!-- HEADER -->
 <div class="sticky-header">
 
-<h2 class="section-title">Luxury Houses</h2>
+<h2 class="section-title">Firebase Properties (Test)</h2>
 
-<!-- FILTERS -->
 <div class="property-filters">
 
-<div class="currency-switch">
-  🌍
-</div>
+<div class="currency-switch">🌍</div>
 
 <select id="currencySelect" class="currency-dropdown">
   <option value="USD">USD ($)</option>
@@ -32,7 +29,7 @@
   <option value="EUR">EUR (€)</option>
   <option value="GBP">GBP (£)</option>
 </select>
-  
+
 <input type="text" id="searchInput" placeholder="Search location...">
 
 <select id="priceFilter">
@@ -50,169 +47,33 @@
 <option value="smart-home">Smart Home</option>
 </select>
 
-<!-- ❌ removed button (live filter now) -->
-
 </div>
 </div>
 
-
-<!-- PROPERTY GRID -->
+<!-- GRID -->
 <div class="property-grid" id="propertyGrid">
 
-<!-- PROPERTY 1 -->
+<!-- 🔒 STATIC BACKUP (SAFE MODE) -->
 <div class="property-card">
 <div class="property-image">
 <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c">
-<span class="property-badge">Featured</span>
+<span class="property-badge">Static</span>
 <button class="favorite-btn">❤</button>
 </div>
 
 <div class="property-info">
-<h3>Modern Family House</h3>
-<p class="property-location">📍 Runda, Nairobi</p>
+<h3>Static Test House</h3>
+<p class="property-location">📍 Nairobi</p>
 
 <div class="property-features">
 <span>🛏 4 Beds</span>
 <span>🛁 3 Baths</span>
-<span>📐 420 sqm</span>
+<span>📐 400 sqm</span>
 </div>
 
 <div class="property-bottom">
-<span class="property-price" data-price="2450000">
-  $2,450,000
-</span>  
-<button onclick="location.href='modern-family-house.html'">View Details</button>
-</div>
-</div>
-</div>
-
-<!-- PROPERTY 2 -->
-<div class="property-card">
-<div class="property-image">
-<img src="https://images.unsplash.com/photo-1568605114967-8130f3a36994">
-<button class="favorite-btn">❤</button>
-</div>
-
-<div class="property-info">
-<h3>Luxury Garden House</h3>
-<p class="property-location">📍 Karen, Nairobi</p>
-
-<div class="property-features">
-<span>🛏 5 Beds</span>
-<span>🛁 4 Baths</span>
-<span>📐 520 sqm</span>
-</div>
-
-<div class="property-bottom">
-<span class="property-price" data-price="2950000">
-  $2,950,000
-</span>    
-<button onclick="location.href='luxury-garden-house.html'">View Details</button>
-</div>
-</div>
-</div>
-
-<!-- PROPERTY 3 -->
-<div class="property-card">
-<div class="property-image">
-<img src="https://images.unsplash.com/photo-1572120360610-d971b9d7767c">
-<button class="favorite-btn">❤</button>
-</div>
-
-<div class="property-info">
-<h3>Executive House</h3>
-<p class="property-location">📍 Lavington, Nairobi</p>
-
-<div class="property-features">
-<span>🛏 4 Beds</span>
-<span>🛁 3 Baths</span>
-<span>📐 390 sqm</span>
-</div>
-
-<div class="property-bottom">
-<span class="property-price" data-price="2750000">
-  $2,750,000
-</span>    
-<button onclick="location.href='executive-house.html'">View Details</button>
-</div>
-</div>
-</div>
-
-<!-- PROPERTY 4 -->
-<div class="property-card">
-<div class="property-image">
-<img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c">
-<button class="favorite-btn">❤</button>
-</div>
-
-<div class="property-info">
-<h3>Contemporary House</h3>
-<p class="property-location">📍 Kilimani, Nairobi</p>
-
-<div class="property-features">
-<span>🛏 4 Beds</span>
-<span>🛁 3 Baths</span>
-<span>📐 410 sqm</span>
-</div>
-
-<div class="property-bottom">
-<span class="property-price" data-price="2200000">
-  $2,200,000
-</span>    
-<button onclick="location.href='contemporary-house.html'">View Details</button>
-</div>
-</div>
-</div>
-
-<!-- PROPERTY 5 -->
-<div class="property-card">
-<div class="property-image">
-<img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750">
-<span class="property-badge">Smart Home</span>
-<button class="favorite-btn">❤</button>
-</div>
-
-<div class="property-info">
-<h3>Luxury Smart Home</h3>
-<p class="property-location">📍 Rosslyn, Nairobi</p>
-
-<div class="property-features">
-<span>🛏 5 Beds</span>
-<span>🛁 4 Baths</span>
-<span>📐 540 sqm</span>
-</div>
-
-<div class="property-bottom">
-<span class="property-price" data-price="3200000">
-  $3,200,000
-</span>    
-<button onclick="location.href='luxury-smart-house.html'">View Details</button>
-</div>
-</div>
-</div>
-
-<!-- PROPERTY 6 -->
-<div class="property-card">
-<div class="property-image">
-<img src="https://images.unsplash.com/photo-1605276374104-dee2a0ed3cd6">
-<button class="favorite-btn">❤</button>
-</div>
-
-<div class="property-info">
-<h3>Modern Villa House</h3>
-<p class="property-location">📍 Muthaiga, Nairobi</p>
-
-<div class="property-features">
-<span>🛏 6 Beds</span>
-<span>🛁 5 Baths</span>
-<span>📐 600 sqm</span>
-</div>
-
-<div class="property-bottom">
-<span class="property-price" data-price="3850000">
-  $3,850,000
-</span>    
-<button onclick="location.href='modern-villa-house.html'">View Details</button>
+<span class="property-price" data-price="500000">$500,000</span>
+<button>View Details</button>
 </div>
 </div>
 </div>
@@ -221,18 +82,16 @@
 
 </section>
 
-  
+<!-- ================= FILTER SYSTEM ================= -->
 <script>
-
-// ================= FILTER SYSTEM =================
 
 const searchInput = document.getElementById("searchInput");
 const priceFilter = document.getElementById("priceFilter");
 const typeFilter = document.getElementById("typeFilter");
 
-const cards = document.querySelectorAll(".property-card");
-
 function filterProperties(){
+
+const cards = document.querySelectorAll(".property-card");
 
 const search = searchInput.value.toLowerCase();
 const price = priceFilter.value;
@@ -241,8 +100,6 @@ const type = typeFilter.value;
 cards.forEach(card => {
 
 const location = card.querySelector(".property-location").innerText.toLowerCase();
-
-/* 🔥 IMPORTANT FIX: use data-price instead of innerText */
 const cardPrice = parseInt(card.querySelector(".property-price").getAttribute("data-price"));
 
 let show = true;
@@ -261,21 +118,19 @@ searchInput.addEventListener("input", filterProperties);
 priceFilter.addEventListener("change", filterProperties);
 typeFilter.addEventListener("change", filterProperties);
 
+</script>
 
-// ================= CURRENCY SYSTEM =================
+<!-- ================= CURRENCY SYSTEM ================= -->
+<script>
 
 const switchBtn = document.querySelector(".currency-switch");
 const dropdown = document.getElementById("currencySelect");
 
-// Toggle dropdown
 switchBtn.onclick = () => {
   dropdown.classList.toggle("show");
 };
 
-// Load saved currency
 let currentCurrency = localStorage.getItem("currency") || "USD";
-
-// Rates
 let rates = {};
 
 async function getRates() {
@@ -292,7 +147,7 @@ function updatePrices() {
     const basePrice = parseInt(el.getAttribute("data-price"));
     let finalPrice = basePrice;
 
-    if(currentCurrency !== "USD") {
+    if(currentCurrency !== "USD" && rates[currentCurrency]) {
       finalPrice = basePrice * rates[currentCurrency];
     }
 
@@ -302,33 +157,28 @@ function updatePrices() {
     if(currentCurrency === "EUR") symbol = "€";
     if(currentCurrency === "GBP") symbol = "£";
 
-    el.innerText = symbol + finalPrice.toLocaleString();
+    el.innerText = symbol + Math.round(finalPrice).toLocaleString();
 
   });
 
 }
 
-// When currency changes
 dropdown.addEventListener("change", () => {
   currentCurrency = dropdown.value;
   localStorage.setItem("currency", currentCurrency);
   updatePrices();
 });
 
-// Init
 getRates();
 
-                                        </script>
+</script>
 
-
-<!-- 🔥 FIREBASE SETUP -->
+<!-- ================= FIREBASE ================= -->
 <script type="module">
 
-// Import Firebase
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
-// Your config
 const firebaseConfig = {
   apiKey: "AIzaSyDZvAcMFt1n5RBfWmiCMvcZcAQvDs7rzhk",
   authDomain: "kagona-primenest.firebaseapp.com",
@@ -339,15 +189,12 @@ const firebaseConfig = {
   measurementId: "G-GRSTNZKJVB"
 };
 
-// Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-// 🔥 TEST: GET DATA FROM FIRESTORE
 async function loadProperties() {
 
   const grid = document.getElementById("propertyGrid");
-  grid.innerHTML = ""; // clear existing (optional later)
 
   const querySnapshot = await getDocs(collection(db, "properties"));
 
@@ -357,9 +204,10 @@ async function loadProperties() {
 
     const card = `
       <div class="property-card">
+
         <div class="property-image">
           <img src="${p.image}">
-          <span class="property-badge">${p.badge || ""}</span>
+          ${p.badge ? `<span class="property-badge">${p.badge}</span>` : ""}
           <button class="favorite-btn">❤</button>
         </div>
 
@@ -375,7 +223,7 @@ async function loadProperties() {
 
           <div class="property-bottom">
             <span class="property-price" data-price="${p.price}">
-              $${p.price.toLocaleString()}
+              $${Number(p.price).toLocaleString()}
             </span>
 
             <button onclick="location.href='${p.link}'">
@@ -383,6 +231,7 @@ async function loadProperties() {
             </button>
           </div>
         </div>
+
       </div>
     `;
 
@@ -390,12 +239,13 @@ async function loadProperties() {
 
   });
 
-  }
+  updatePrices(); // 🔥 VERY IMPORTANT
 
-// Run test
+}
+
 loadProperties();
 
 </script>
 
 </body>
-</html>  
+</html>
