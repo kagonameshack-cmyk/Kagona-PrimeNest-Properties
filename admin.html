@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Admin Upload | Kagona PrimeNest</title>
+
+<style>
+
+body{
+  font-family: Arial;
+  background:#0f172a;
+  color:white;
+  padding:20px;
+}
+
+h2{
+  text-align:center;
+  margin-bottom:20px;
+}
+
+.form{
+  max-width:500px;
+  margin:auto;
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+
+input, select{
+  padding:12px;
+  border-radius:8px;
+  border:none;
+}
+
+button{
+  padding:14px;
+  border:none;
+  border-radius:8px;
+  background:#10b981;
+  color:white;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+button:hover{
+  background:#059669;
+}
+
+.success{
+  text-align:center;
+  margin-top:15px;
+  color:#22c55e;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h2>Upload Property</h2>
+
+<div class="form">
+
+<input id="title" placeholder="Property Title">
+<input id="location" placeholder="Location">
+<input id="price" type="number" placeholder="Price (USD)">
+<input id="image" placeholder="Image URL">
+
+<input id="beds" type="number" placeholder="Bedrooms">
+<input id="baths" type="number" placeholder="Bathrooms">
+<input id="size" type="number" placeholder="Size (sqm)">
+
+<input id="link" placeholder="Details Page Link (e.g house.html)">
+
+<select id="badge">
+<option value="">No Badge</option>
+<option value="Featured">Featured</option>
+<option value="Luxury">Luxury</option>
+<option value="Premium">Premium</option>
+</select>
+
+<button onclick="uploadProperty()">Upload Property</button>
+
+<div class="success" id="successMsg"></div>
+
+</div>
+
+<!-- FIREBASE -->
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDZvAcMFt1n5RBfWmiCMvcZcAQvDs7rzhk",
+  authDomain: "kagona-primenest.firebaseapp.com",
+  projectId: "kagona-primenest",
+  storageBucket: "kagona-primenest.firebasestorage.app",
+  messagingSenderId: "246677583786",
+  appId: "1:246677583786:web:ceced78ad633539a8c1dd3",
+  measurementId: "G-GRSTNZKJVB"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+// GLOBAL FUNCTION
+window.uploadProperty = async function(){
+
+  const property = {
+    title: document.getElementById("title").value,
+    location: document.getElementById("location").value,
+    price: Number(document.getElementById("price").value),
+    image: document.getElementById("image").value,
+    beds: Number(document.getElementById("beds").value),
+    baths: Number(document.getElementById("baths").value),
+    size: Number(document.getElementById("size").value),
+    link: document.getElementById("link").value,
+    badge: document.getElementById("badge").value
+  };
+
+  try{
+
+    await addDoc(collection(db, "properties"), property);
+
+    document.getElementById("successMsg").innerText = "✅ Property uploaded successfully";
+
+    document.querySelectorAll("input").forEach(i => i.value = "");
+    document.getElementById("badge").value = "";
+
+  }catch(err){
+    alert("Error uploading property");
+    console.error(err);
+  }
+
+};
+
+</script>
+
+</body>
+</html>
