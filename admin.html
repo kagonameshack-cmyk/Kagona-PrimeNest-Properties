@@ -1,143 +1,143 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Admin Upload | Kagona PrimeNest</title>
 
 <style>
-
-body{
+body {
   font-family: Arial;
-  background:#0f172a;
-  color:white;
-  padding:20px;
+  background: #0f0f0f;
+  color: white;
+  padding: 30px;
 }
 
-h2{
-  text-align:center;
-  margin-bottom:20px;
+h2 {
+  margin-bottom: 20px;
 }
 
-.form{
-  max-width:500px;
-  margin:auto;
-  display:flex;
-  flex-direction:column;
-  gap:12px;
+form {
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
-input, select{
-  padding:12px;
-  border-radius:8px;
-  border:none;
+input, select, button {
+  padding: 12px;
+  border-radius: 8px;
+  border: none;
 }
 
-button{
-  padding:14px;
-  border:none;
-  border-radius:8px;
-  background:#10b981;
-  color:white;
-  font-weight:bold;
-  cursor:pointer;
+input, select {
+  background: #1a1a1a;
+  color: white;
 }
 
-button:hover{
-  background:#059669;
+button {
+  background: gold;
+  color: black;
+  font-weight: bold;
+  cursor: pointer;
 }
 
-.success{
-  text-align:center;
-  margin-top:15px;
-  color:#22c55e;
+button:hover {
+  opacity: 0.9;
 }
-
 </style>
-
 </head>
 
 <body>
 
 <h2>Upload Property</h2>
 
-<div class="form">
+<form id="uploadForm">
 
-<input id="title" placeholder="Property Title">
-<input id="location" placeholder="Location">
-<input id="price" type="number" placeholder="Price (USD)">
-<input id="image" placeholder="Image URL">
+<input type="text" id="title" placeholder="Property Title" required>
 
-<input id="beds" type="number" placeholder="Number of Bedrooms">
-<input id="baths" type="number" placeholder="Number of Bathrooms">
-<input id="size" type="number" placeholder="Size (sqm)">
-
-<input id="link" placeholder="Details Page Link (e.g house.html)">
-
-<select id="badge">
-<option value="">No Badge</option>
-<option value="Featured">Featured</option>
-<option value="Luxury">Luxury</option>
-<option value="Premium">Premium</option>
+<select id="category" required>
+  <option value="">Select Category</option>
+  <option value="houses">Houses</option>
+  <option value="apartments">Apartments</option>
+  <option value="villas">Villas</option>
+  <option value="land">Land</option>
 </select>
 
-<button onclick="uploadProperty()">Upload Property</button>
+<input type="text" id="location" placeholder="Location" required>
+<input type="number" id="price" placeholder="Price (USD)" required>
 
-<div class="success" id="successMsg"></div>
+<input type="number" id="beds" placeholder="Beds">
+<input type="number" id="baths" placeholder="Baths">
+<input type="number" id="size" placeholder="Size (sqm)">
 
-</div>
+<input type="text" id="badge" placeholder="Badge (Optional)">
+<input type="text" id="link" placeholder="Details Page Link">
 
-<!-- FIREBASE -->
+<!-- IMAGE FILE -->
+<input type="file" id="imageFile" accept="image/*" required>
+
+<button type="submit">Upload Property</button>
+
+</form>
+
 <script type="module">
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-storage.js";
 
+// CONFIG
 const firebaseConfig = {
-  apiKey: "AIzaSyDZvAcMFt1n5RBfWmiCMvcZcAQvDs7rzhk",
-  authDomain: "kagona-primenest.firebaseapp.com",
-  projectId: "kagona-primenest",
-  storageBucket: "kagona-primenest.firebasestorage.app",
-  messagingSenderId: "246677583786",
-  appId: "1:246677583786:web:ceced78ad633539a8c1dd3",
-  measurementId: "G-GRSTNZKJVB"
+  apiKey: "YOUR_KEY",
+  authDomain: "YOUR_DOMAIN",
+  projectId: "YOUR_PROJECT",
+  storageBucket: "YOUR_BUCKET",
+  messagingSenderId: "YOUR_ID",
+  appId: "YOUR_APP_ID"
 };
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
+const storage = getStorage(app);
 
-// GLOBAL FUNCTION
-window.uploadProperty = async function(){
+const form = document.getElementById("uploadForm");
 
-  const property = {
-    title: document.getElementById("title").value,
-    location: document.getElementById("location").value,
-    price: Number(document.getElementById("price").value),
-    image: document.getElementById("image").value,
-    beds: Number(document.getElementById("beds").value),
-    baths: Number(document.getElementById("baths").value),
-    size: Number(document.getElementById("size").value),
-    link: document.getElementById("link").value,
-    badge: document.getElementById("badge").value
-  };
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
 
-  try{
+  const file = document.getElementById("imageFile").files[0];
 
-    await addDoc(collection(db, "properties"), property);
-
-    document.getElementById("successMsg").innerText = "✅ Property uploaded successfully";
-
-    document.querySelectorAll("input").forEach(i => i.value = "");
-    document.getElementById("badge").value = "";
-
-  }catch(err){
-    alert("Error uploading property");
-    console.error(err);
+  if(!file){
+    alert("Please select an image");
+    return;
   }
 
-};
+  // Upload image to Firebase Storage
+  const storageRef = ref(storage, "properties/" + Date.now() + "_" + file.name);
+
+  await uploadBytes(storageRef, file);
+
+  const imageURL = await getDownloadURL(storageRef);
+
+  // Save property to Firestore
+  await addDoc(collection(db, "properties"), {
+    title: document.getElementById("title").value,
+    category: document.getElementById("category").value,
+    location: document.getElementById("location").value,
+    price: parseInt(document.getElementById("price").value),
+    beds: parseInt(document.getElementById("beds").value) || 0,
+    baths: parseInt(document.getElementById("baths").value) || 0,
+    size: parseInt(document.getElementById("size").value) || 0,
+    badge: document.getElementById("badge").value || "",
+    link: document.getElementById("link").value || "#",
+    image: imageURL
+  });
+
+  alert("✅ Property uploaded successfully!");
+
+  form.reset();
+});
 
 </script>
 
