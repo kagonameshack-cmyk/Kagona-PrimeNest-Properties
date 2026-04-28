@@ -104,12 +104,6 @@ button {
 <input type="file" id="imageFile">
 
 <img id="preview" class="preview">
-
-<!-- PROPERTY DETAILS PAGE LINK -->
-<div style="display:flex; gap:10px;">
-<input id="link" placeholder="Details Page Link">
-<button type="button" id="autoLink">Auto</button>
-</div>
   
 <!-- GALLERY -->
 <h3>Gallery</h3>
@@ -179,13 +173,6 @@ imageFile.addEventListener("change", () => {
     preview.src = URL.createObjectURL(file);
   }
 });
-
-/* ========= AUTO LINK ========= */
-document.getElementById("autoLink").onclick = () => {
-  const title = document.getElementById("title").value;
-  const slug = title.toLowerCase().replace(/ /g,"-");
-  document.getElementById("link").value = `property.html?name=${slug}`;
-};
   
 /* ========= GALLERY ========= */
 const galleryContainer = document.getElementById("galleryInputs");
