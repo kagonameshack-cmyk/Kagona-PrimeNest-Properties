@@ -26,7 +26,7 @@ body {
   border-radius: 12px;
 }
 
-input, select {
+input, select, textarea {
   width: 100%;
   padding: 12px;
   margin: 10px 0;
@@ -36,6 +36,11 @@ input, select {
   color: #fff;
 }
 
+textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
 button {
   width: 100%;
   padding: 14px;
@@ -43,6 +48,11 @@ button {
   border: none;
   border-radius: 8px;
   cursor: pointer;
+}
+
+.small-btn {
+  margin-top: 5px;
+  background: #333;
 }
 
 .preview {
@@ -82,7 +92,6 @@ button {
 
 <input id="location" placeholder="Location" required>
 
-<!-- CURRENCY -->
 <select id="currency">
 <option value="USD">USD ($)</option>
 <option value="KES">KES (KSh)</option>
@@ -92,21 +101,26 @@ button {
 
 <input type="number" id="price" placeholder="Price (number only)" required>
 
-<input type="number" id="beds" placeholder="Beds (number of bedrooms)">
-<input type="number" id="baths" placeholder="Baths (number bathrooms)">
-<input type="number" id="size" placeholder="Size (sqm)">
+<input type="number" id="beds" placeholder="Beds">
+<input type="number" id="baths" placeholder="Baths">
+<input type="number" id="size" placeholder="Size">
 
-<!-- IMAGE OPTIONS -->
+<!-- MAIN IMAGE -->
+<h3>Main Image</h3>
 <input id="imageUrl" placeholder="Paste Image URL">
-<input type="file" id="imageFile">
 
-<img id="preview" class="preview">
+<!-- GALLERY -->
+<h3>Gallery Images</h3>
+<div id="galleryInputs"></div>
+<button type="button" class="small-btn" id="addImage">+ Add Image</button>
 
-<!-- LINK -->
-<div style="display:flex; gap:10px;">
-<input id="link" placeholder="Details Page Link">
-<button type="button" id="autoLink">Auto</button>
-</div>
+<!-- DESCRIPTION -->
+<h3>Description</h3>
+<textarea id="description" placeholder="Write property description..."></textarea>
+
+<!-- VIDEO -->
+<h3>Video Tour (YouTube embed link)</h3>
+<input id="video" placeholder="https://www.youtube.com/embed/...">
 
 <button type="submit">Upload Property</button>
 
@@ -130,7 +144,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-/* ========= BADGE SYSTEM ========= */
+/* ========= BADGE ========= */
 const badgeOptions = {
   houses: ["Featured","Luxury","Smart Home"],
   apartments: ["City View","Modern","Affordable"],
@@ -149,25 +163,16 @@ category.addEventListener("change", () => {
   });
 });
 
-/* ========= IMAGE PREVIEW ========= */
-const fileInput = document.getElementById("imageFile");
-const preview = document.getElementById("preview");
+/* ========= GALLERY ========= */
+const galleryContainer = document.getElementById("galleryInputs");
 
-fileInput.addEventListener("change", () => {
-  const file = fileInput.files[0];
-  if(file){
-    preview.src = URL.createObjectURL(file);
-  }
-});
-
-/* ========= AUTO LINK ========= */
-document.getElementById("autoLink").onclick = () => {
-  const title = document.getElementById("title").value;
-  const slug = title.toLowerCase().replace(/ /g,"-");
-  document.getElementById("link").value = `property.html?name=${slug}`;
+document.getElementById("addImage").onclick = () => {
+  const input = document.createElement("input");
+  input.placeholder = "Paste image URL";
+  galleryContainer.appendChild(input);
 };
 
-/* ========= FORM SUBMIT ========= */
+/* ========= FORM ========= */
 const form = document.getElementById("form");
 const status = document.getElementById("status");
 
@@ -176,7 +181,13 @@ form.addEventListener("submit", async (e)=>{
 
   try{
 
-    const image = document.getElementById("imageUrl").value || preview.src;
+    // Collect gallery images
+    const galleryInputs = galleryContainer.querySelectorAll("input");
+    const images = [];
+
+    galleryInputs.forEach(i => {
+      if(i.value) images.push(i.value);
+    });
 
     await addDoc(collection(db,"properties"),{
 
@@ -186,19 +197,23 @@ form.addEventListener("submit", async (e)=>{
       location: location.value,
 
       price: Number(price.value),
-      currency: document.getElementById("currency").value,
+      currency: currency.value,
 
       beds: Number(beds.value || 0),
       baths: Number(baths.value || 0),
       size: Number(size.value || 0),
 
-      image: image,
-      link: document.getElementById("link").value
+      image: imageUrl.value,
+      images: images,
+
+      description: description.value,
+      video: video.value
 
     });
 
-    status.innerHTML = "✅ Uploaded successfully";
+    status.innerHTML = "✅ Property uploaded successfully!";
     form.reset();
+    galleryContainer.innerHTML = "";
 
   }catch(err){
     status.innerHTML = "❌ Error uploading";
