@@ -40,6 +40,7 @@ body {
   color: #ccc;
   text-decoration: none;
   margin: 15px 0;
+  transition: 0.3s;
 }
 
 .sidebar a:hover {
@@ -60,6 +61,10 @@ body {
   align-items: center;
 }
 
+.header h1 {
+  margin: 0;
+}
+
 /* ===== CARDS ===== */
 .cards {
   display: grid;
@@ -72,6 +77,11 @@ body {
   background: #1a1a1a;
   padding: 20px;
   border-radius: 12px;
+  transition: 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
 }
 
 .card h3 {
@@ -102,12 +112,20 @@ body {
   font-weight: bold;
 }
 
-/* ===== TABLE ===== */
+.actions button:hover {
+  opacity: 0.8;
+}
+
+/* ===== TABLE PREVIEW ===== */
 .table {
   margin-top: 40px;
   background: #1a1a1a;
   border-radius: 10px;
   padding: 20px;
+}
+
+.table h3 {
+  margin-bottom: 20px;
 }
 
 .table-item {
@@ -131,11 +149,14 @@ body {
     <a href="#">Dashboard</a>
     <a href="upload.html">Add Property</a>
     <a href="manage.html">Manage Properties</a>
+    <a href="#">Gallery</a>
+    <a href="#">Settings</a>
   </div>
 
   <!-- MAIN -->
   <div class="main">
 
+    <!-- HEADER -->
     <div class="header">
       <h1>Dashboard</h1>
       <p>Welcome back 👋</p>
@@ -145,22 +166,22 @@ body {
     <div class="cards">
       <div class="card">
         <h3>Total Properties</h3>
-        <p id="totalProps">0</p>
+        <p id="totalProps">--</p>
       </div>
 
       <div class="card">
         <h3>Houses</h3>
-        <p id="housesCount">0</p>
+        <p id="housesCount">--</p>
       </div>
 
       <div class="card">
         <h3>Apartments</h3>
-        <p id="apartmentsCount">0</p>
+        <p id="apartmentsCount">--</p>
       </div>
 
       <div class="card">
         <h3>Villas</h3>
-        <p id="villasCount">0</p>
+        <p id="villasCount">--</p>
       </div>
     </div>
 
@@ -170,17 +191,22 @@ body {
       <button onclick="location.href='manage.html'">Manage Properties</button>
     </div>
 
-    <!-- RECENT -->
+    <!-- RECENT PREVIEW -->
     <div class="table">
       <h3>Recent Properties</h3>
-      <div id="recentList">Loading...</div>
+
+      <div id="recentList">
+        <div class="table-item">
+          <span>Loading...</span>
+        </div>
+      </div>
     </div>
 
   </div>
 
 </div>
 
-<!-- 🔥 FIREBASE (MODULE VERSION ONLY — NO SCRIPT TAGS ABOVE) -->
+<!-- 🔥 FIREBASE -->
 <script type="module">
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
@@ -197,11 +223,9 @@ const firebaseConfig = {
   measurementId: "G-GRSTNZKJVB"
 };
 
-// Initialize
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-// LOAD DATA
 async function loadDashboard() {
 
   const snapshot = await getDocs(collection(db, "properties"));
@@ -211,7 +235,7 @@ async function loadDashboard() {
   let apartments = 0;
   let villas = 0;
 
-  let html = "";
+  let recentHTML = "";
 
   snapshot.forEach(doc => {
     const p = doc.data();
@@ -222,7 +246,7 @@ async function loadDashboard() {
     if(p.category === "apartments") apartments++;
     if(p.category === "villas") villas++;
 
-    html += `
+    recentHTML += `
       <div class="table-item">
         <span>${p.title}</span>
         <span>${p.category}</span>
@@ -235,7 +259,7 @@ async function loadDashboard() {
   document.getElementById("apartmentsCount").innerText = apartments;
   document.getElementById("villasCount").innerText = villas;
 
-  document.getElementById("recentList").innerHTML = html || "No properties yet.";
+  document.getElementById("recentList").innerHTML = recentHTML || "No data";
 
 }
 
@@ -244,4 +268,4 @@ loadDashboard();
 </script>
 
 </body>
-        </html>
+  </html>
