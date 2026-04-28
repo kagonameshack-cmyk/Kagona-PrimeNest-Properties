@@ -203,9 +203,9 @@ form.addEventListener("submit", async (e)=>{
     form.reset();
     galleryContainer.innerHTML = "";
 
-  } catch(err){
-    console.error(err);
-    status.innerHTML = "❌ Upload failed";
+  catch(err){
+  console.error("FULL ERROR:", err);
+  status.innerHTML = "❌ Upload failed: " + err.message;
   }
 
 });
