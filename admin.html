@@ -3,143 +3,245 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Admin Upload | Kagona PrimeNest</title>
+
+<title>Admin Dashboard | Kagona PrimeNest</title>
 
 <style>
+
+/* ===== GLOBAL ===== */
 body {
-  font-family: Arial;
-  background: #0f0f0f;
-  color: white;
-  padding: 30px;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #0b0b0b;
+  color: #fff;
 }
 
-h2 {
-  margin-bottom: 20px;
-}
-
-form {
-  max-width: 500px;
+/* ===== LAYOUT ===== */
+.dashboard {
   display: flex;
-  flex-direction: column;
-  gap: 12px;
 }
 
-input, select, button {
-  padding: 12px;
-  border-radius: 8px;
-  border: none;
+/* ===== SIDEBAR ===== */
+.sidebar {
+  width: 240px;
+  height: 100vh;
+  background: #111;
+  padding: 20px;
+  position: fixed;
 }
 
-input, select {
+.sidebar h2 {
+  color: gold;
+  margin-bottom: 30px;
+}
+
+.sidebar a {
+  display: block;
+  color: #ccc;
+  text-decoration: none;
+  margin: 15px 0;
+}
+
+.sidebar a:hover {
+  color: gold;
+}
+
+/* ===== MAIN ===== */
+.main {
+  margin-left: 260px;
+  padding: 30px;
+  width: 100%;
+}
+
+/* ===== HEADER ===== */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* ===== CARDS ===== */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  margin-top: 30px;
+}
+
+.card {
   background: #1a1a1a;
-  color: white;
+  padding: 20px;
+  border-radius: 12px;
 }
 
-button {
+.card h3 {
+  margin: 0;
+  font-size: 18px;
+  color: #aaa;
+}
+
+.card p {
+  font-size: 28px;
+  margin-top: 10px;
+  color: gold;
+}
+
+/* ===== ACTION BUTTONS ===== */
+.actions {
+  margin-top: 40px;
+}
+
+.actions button {
+  padding: 12px 20px;
+  margin-right: 10px;
+  border: none;
+  border-radius: 8px;
   background: gold;
   color: black;
-  font-weight: bold;
   cursor: pointer;
+  font-weight: bold;
 }
 
-button:hover {
-  opacity: 0.9;
+/* ===== TABLE ===== */
+.table {
+  margin-top: 40px;
+  background: #1a1a1a;
+  border-radius: 10px;
+  padding: 20px;
 }
+
+.table-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid #333;
+}
+
 </style>
 </head>
 
 <body>
 
-<h2>Upload Property</h2>
+<div class="dashboard">
 
-<form id="uploadForm">
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+    <h2>Kagona Admin</h2>
 
-<input type="text" id="title" placeholder="Property Title" required>
+    <a href="#">Dashboard</a>
+    <a href="upload.html">Add Property</a>
+    <a href="manage.html">Manage Properties</a>
+  </div>
 
-<select id="category" required>
-  <option value="">Select Category</option>
-  <option value="houses">Houses</option>
-  <option value="apartments">Apartments</option>
-  <option value="villas">Villas</option>
-  <option value="land">Land</option>
-</select>
+  <!-- MAIN -->
+  <div class="main">
 
-<input type="text" id="location" placeholder="Location" required>
-<input type="number" id="price" placeholder="Price (USD)" required>
+    <div class="header">
+      <h1>Dashboard</h1>
+      <p>Welcome back 👋</p>
+    </div>
 
-<input type="number" id="beds" placeholder="Beds">
-<input type="number" id="baths" placeholder="Baths">
-<input type="number" id="size" placeholder="Size (sqm)">
+    <!-- STATS -->
+    <div class="cards">
+      <div class="card">
+        <h3>Total Properties</h3>
+        <p id="totalProps">0</p>
+      </div>
 
-<input type="text" id="badge" placeholder="Badge (Optional)">
-<input type="text" id="link" placeholder="Details Page Link">
+      <div class="card">
+        <h3>Houses</h3>
+        <p id="housesCount">0</p>
+      </div>
 
-<!-- IMAGE FILE -->
-<input type="file" id="imageFile" accept="image/*" required>
+      <div class="card">
+        <h3>Apartments</h3>
+        <p id="apartmentsCount">0</p>
+      </div>
 
-<button type="submit">Upload Property</button>
+      <div class="card">
+        <h3>Villas</h3>
+        <p id="villasCount">0</p>
+      </div>
+    </div>
 
-</form>
+    <!-- ACTIONS -->
+    <div class="actions">
+      <button onclick="location.href='upload.html'">+ Add Property</button>
+      <button onclick="location.href='manage.html'">Manage Properties</button>
+    </div>
 
+    <!-- RECENT -->
+    <div class="table">
+      <h3>Recent Properties</h3>
+      <div id="recentList">Loading...</div>
+    </div>
+
+  </div>
+
+</div>
+
+<!-- 🔥 FIREBASE (MODULE VERSION ONLY — NO SCRIPT TAGS ABOVE) -->
 <script type="module">
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
-import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-storage.js";
+import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
-// CONFIG
+// ✅ YOUR REAL CONFIG (CONNECTED)
 const firebaseConfig = {
-  apiKey: "YOUR_KEY",
-  authDomain: "YOUR_DOMAIN",
-  projectId: "YOUR_PROJECT",
-  storageBucket: "YOUR_BUCKET",
-  messagingSenderId: "YOUR_ID",
-  appId: "YOUR_APP_ID"
+  apiKey: "AIzaSyDZvAcMFt1n5RBfWmiCMvcZcAQvDs7rzhk",
+  authDomain: "kagona-primenest.firebaseapp.com",
+  projectId: "kagona-primenest",
+  storageBucket: "kagona-primenest.firebasestorage.app",
+  messagingSenderId: "246677583786",
+  appId: "1:246677583786:web:ceced78ad633539a8c1dd3",
+  measurementId: "G-GRSTNZKJVB"
 };
 
+// Initialize
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
-const storage = getStorage(app);
 
-const form = document.getElementById("uploadForm");
+// LOAD DATA
+async function loadDashboard() {
 
-form.addEventListener("submit", async (e) => {
-  e.preventDefault();
+  const snapshot = await getDocs(collection(db, "properties"));
 
-  const file = document.getElementById("imageFile").files[0];
+  let total = 0;
+  let houses = 0;
+  let apartments = 0;
+  let villas = 0;
 
-  if(!file){
-    alert("Please select an image");
-    return;
-  }
+  let html = "";
 
-  // Upload image to Firebase Storage
-  const storageRef = ref(storage, "properties/" + Date.now() + "_" + file.name);
+  snapshot.forEach(doc => {
+    const p = doc.data();
 
-  await uploadBytes(storageRef, file);
+    total++;
 
-  const imageURL = await getDownloadURL(storageRef);
+    if(p.category === "houses") houses++;
+    if(p.category === "apartments") apartments++;
+    if(p.category === "villas") villas++;
 
-  // Save property to Firestore
-  await addDoc(collection(db, "properties"), {
-    title: document.getElementById("title").value,
-    category: document.getElementById("category").value,
-    location: document.getElementById("location").value,
-    price: parseInt(document.getElementById("price").value),
-    beds: parseInt(document.getElementById("beds").value) || 0,
-    baths: parseInt(document.getElementById("baths").value) || 0,
-    size: parseInt(document.getElementById("size").value) || 0,
-    badge: document.getElementById("badge").value || "",
-    link: document.getElementById("link").value || "#",
-    image: imageURL
+    html += `
+      <div class="table-item">
+        <span>${p.title}</span>
+        <span>${p.category}</span>
+      </div>
+    `;
   });
 
-  alert("✅ Property uploaded successfully!");
+  document.getElementById("totalProps").innerText = total;
+  document.getElementById("housesCount").innerText = houses;
+  document.getElementById("apartmentsCount").innerText = apartments;
+  document.getElementById("villasCount").innerText = villas;
 
-  form.reset();
-});
+  document.getElementById("recentList").innerHTML = html || "No properties yet.";
+
+}
+
+loadDashboard();
 
 </script>
 
 </body>
-</html>
+        </html>
