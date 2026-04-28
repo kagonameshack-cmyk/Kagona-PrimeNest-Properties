@@ -7,8 +7,6 @@
 <title>Add Property | Kagona Admin</title>
 
 <style>
-
-/* ===== GLOBAL ===== */
 body {
   margin: 0;
   font-family: 'Segoe UI', sans-serif;
@@ -16,23 +14,16 @@ body {
   color: #fff;
 }
 
-/* ===== LAYOUT ===== */
 .container {
   max-width: 700px;
   margin: 40px auto;
   padding: 20px;
 }
 
-/* ===== FORM ===== */
 .form-box {
   background: rgba(255,255,255,0.05);
   padding: 25px;
   border-radius: 12px;
-  border: 1px solid rgba(255,255,255,0.08);
-}
-
-h1 {
-  margin-bottom: 20px;
 }
 
 input, select {
@@ -41,7 +32,6 @@ input, select {
   margin: 10px 0;
   border-radius: 8px;
   border: none;
-  outline: none;
   background: #111;
   color: #fff;
 }
@@ -49,33 +39,21 @@ input, select {
 button {
   width: 100%;
   padding: 14px;
-  margin-top: 15px;
+  background: gold;
   border: none;
   border-radius: 8px;
-  background: gold;
-  color: black;
-  font-weight: bold;
   cursor: pointer;
 }
 
-button:hover {
-  opacity: 0.8;
+.preview {
+  width: 100%;
+  margin-top: 10px;
+  border-radius: 10px;
 }
 
-/* STATUS */
 .status {
-  margin-top: 15px;
-  font-size: 14px;
+  margin-top: 10px;
 }
-
-.success {
-  color: #00ffae;
-}
-
-.error {
-  color: red;
-}
-
 </style>
 </head>
 
@@ -83,107 +61,148 @@ button:hover {
 
 <div class="container">
 
-  <div class="form-box">
+<h1>Add Property</h1>
 
-    <h1>Add New Property</h1>
+<form id="form">
 
-    <form id="propertyForm">
+<input id="title" placeholder="Title" required>
 
-      <input type="text" id="title" placeholder="Property Title" required>
+<select id="category" required>
+<option value="">Category</option>
+<option value="houses">Houses</option>
+<option value="apartments">Apartments</option>
+<option value="villas">Villas</option>
+<option value="beachhomes">Beachhomes</option>
+<option value="land">Land</option>
+</select>
 
-      <select id="category" required>
-        <option value="">Select Category</option>
-        <option value="houses">Houses</option>
-        <option value="apartments">Apartments</option>
-        <option value="villas">Villas</option>
-        <option value="beachhomes">Beachhomes</option>
-        <option value="land">Land</option>
-      </select>
+<select id="badge">
+<option value="">Select Badge</option>
+</select>
 
-      <input type="text" id="location" placeholder="Location (e.g. Nairobi)" required>
+<input id="location" placeholder="Location" required>
 
-      <input type="number" id="price" placeholder="Price (number only)" required>
+<!-- CURRENCY -->
+<select id="currency">
+<option value="USD">USD ($)</option>
+<option value="KES">KES (KSh)</option>
+<option value="EUR">EUR (€)</option>
+<option value="GBP">GBP (£)</option>
+</select>
 
-      <input type="number" id="beds" placeholder="Bedrooms (number only)">
-      <input type="number" id="baths" placeholder="Bathrooms (number only)">
-      <input type="number" id="size" placeholder="Size (sqm)">
+<input type="number" id="price" placeholder="Price" required>
 
-      <input type="text" id="badge" placeholder="Badge (Optional e.g. Featured)">
+<input type="number" id="beds" placeholder="Beds">
+<input type="number" id="baths" placeholder="Baths">
+<input type="number" id="size" placeholder="Size">
 
-      <input type="text" id="image" placeholder="Image URL (paste link)" required>
+<!-- IMAGE OPTIONS -->
+<input id="imageUrl" placeholder="Paste Image URL">
+<input type="file" id="imageFile">
 
-      <input type="text" id="link" placeholder="Details Page Link (optional)">
+<img id="preview" class="preview">
 
-      <button type="submit">Upload Property</button>
+<!-- LINK -->
+<div style="display:flex; gap:10px;">
+<input id="link" placeholder="Details Page Link">
+<button type="button" id="autoLink">Auto</button>
+</div>
 
-    </form>
+<button type="submit">Upload Property</button>
 
-    <div id="status" class="status"></div>
+</form>
 
-  </div>
+<div id="status"></div>
 
 </div>
 
-<!-- 🔥 FIREBASE -->
 <script type="module">
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDZvAcMFt1n5RBfWmiCMvcZcAQvDs7rzhk",
+  apiKey: "AIza...",
   authDomain: "kagona-primenest.firebaseapp.com",
   projectId: "kagona-primenest",
-  storageBucket: "kagona-primenest.firebasestorage.app",
-  messagingSenderId: "246677583786",
-  appId: "1:246677583786:web:ceced78ad633539a8c1dd3",
-  measurementId: "G-GRSTNZKJVB"
 };
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-const form = document.getElementById("propertyForm");
+/* ========= BADGE SYSTEM ========= */
+const badgeOptions = {
+  houses: ["Featured","Luxury","Smart Home"],
+  apartments: ["City View","Modern","Affordable"],
+  villas: ["Pool Villa","Sea View","Private"],
+  beachhomes: ["Oceanfront","Resort Style"],
+  land: ["Residential","Commercial","Investment"]
+};
+
+const category = document.getElementById("category");
+const badge = document.getElementById("badge");
+
+category.addEventListener("change", () => {
+  badge.innerHTML = "<option>Select Badge</option>";
+  badgeOptions[category.value]?.forEach(b => {
+    badge.innerHTML += `<option value="${b}">${b}</option>`;
+  });
+});
+
+/* ========= IMAGE PREVIEW ========= */
+const fileInput = document.getElementById("imageFile");
+const preview = document.getElementById("preview");
+
+fileInput.addEventListener("change", () => {
+  const file = fileInput.files[0];
+  if(file){
+    preview.src = URL.createObjectURL(file);
+  }
+});
+
+/* ========= AUTO LINK ========= */
+document.getElementById("autoLink").onclick = () => {
+  const title = document.getElementById("title").value;
+  const slug = title.toLowerCase().replace(/ /g,"-");
+  document.getElementById("link").value = `property.html?name=${slug}`;
+};
+
+/* ========= FORM SUBMIT ========= */
+const form = document.getElementById("form");
 const status = document.getElementById("status");
 
-form.addEventListener("submit", async (e) => {
-
+form.addEventListener("submit", async (e)=>{
   e.preventDefault();
 
-  status.innerHTML = "Uploading...";
-  status.className = "status";
+  try{
 
-  try {
+    const image = document.getElementById("imageUrl").value || preview.src;
 
-    await addDoc(collection(db, "properties"), {
+    await addDoc(collection(db,"properties"),{
 
-      title: document.getElementById("title").value,
-      category: document.getElementById("category").value,
-      location: document.getElementById("location").value,
-      price: Number(document.getElementById("price").value),
+      title: title.value,
+      category: category.value,
+      badge: badge.value,
+      location: location.value,
 
-      beds: Number(document.getElementById("beds").value || 0),
-      baths: Number(document.getElementById("baths").value || 0),
-      size: Number(document.getElementById("size").value || 0),
+      price: Number(price.value),
+      currency: document.getElementById("currency").value,
 
-      badge: document.getElementById("badge").value || "",
-      image: document.getElementById("image").value,
-      link: document.getElementById("link").value || ""
+      beds: Number(beds.value || 0),
+      baths: Number(baths.value || 0),
+      size: Number(size.value || 0),
+
+      image: image,
+      link: document.getElementById("link").value
 
     });
 
-    status.innerHTML = "✅ Property uploaded successfully!";
-    status.className = "status success";
-
+    status.innerHTML = "✅ Uploaded successfully";
     form.reset();
 
-  } catch (error) {
-
-    console.error(error);
-
-    status.innerHTML = "❌ Error uploading property.";
-    status.className = "status error";
-
+  }catch(err){
+    status.innerHTML = "❌ Error uploading";
+    console.error(err);
   }
 
 });
@@ -191,4 +210,4 @@ form.addEventListener("submit", async (e) => {
 </script>
 
 </body>
-        </html>
+</html>
