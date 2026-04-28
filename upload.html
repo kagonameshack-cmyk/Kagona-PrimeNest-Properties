@@ -97,7 +97,7 @@ button {
 <input type="number" id="beds" placeholder="Beds">
 <input type="number" id="baths" placeholder="Baths">
 <input type="number" id="size" placeholder="Size">
-
+  
 <!-- MAIN IMAGE -->
 <h3>Main Image</h3>
 <input id="imageUrl" placeholder="Paste Image URL">
@@ -105,6 +105,12 @@ button {
 
 <img id="preview" class="preview">
 
+!-- LINK -->
+<div style="display:flex; gap:10px;">
+<input id="link" placeholder="Details Page Link">
+<button type="button" id="autoLink">Auto</button>
+</div>
+  
 <!-- GALLERY -->
 <h3>Gallery</h3>
 <div id="galleryInputs"></div>
@@ -174,6 +180,13 @@ imageFile.addEventListener("change", () => {
   }
 });
 
+/* ========= AUTO LINK ========= */
+document.getElementById("autoLink").onclick = () => {
+  const title = document.getElementById("title").value;
+  const slug = title.toLowerCase().replace(/ /g,"-");
+  document.getElementById("link").value = `property.html?name=${slug}`;
+};
+  
 /* ========= GALLERY ========= */
 const galleryContainer = document.getElementById("galleryInputs");
 
