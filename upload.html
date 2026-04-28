@@ -20,12 +20,6 @@ body {
   padding: 20px;
 }
 
-.form-box {
-  background: rgba(255,255,255,0.05);
-  padding: 25px;
-  border-radius: 12px;
-}
-
 input, select, textarea {
   width: 100%;
   padding: 12px;
@@ -38,7 +32,6 @@ input, select, textarea {
 
 textarea {
   min-height: 100px;
-  resize: vertical;
 }
 
 button {
@@ -83,7 +76,7 @@ button {
 <option value="apartments">Apartments</option>
 <option value="villas">Villas</option>
 <option value="beachhomes">Beachhomes</option>
-<option value="land">Land</option>
+<option value="lands">Lands</option>
 </select>
 
 <select id="badge">
@@ -92,14 +85,14 @@ button {
 
 <input id="location" placeholder="Location" required>
 
-<select id="currency">
+<select id="currency" id="currency">
 <option value="USD">USD ($)</option>
 <option value="KES">KES (KSh)</option>
 <option value="EUR">EUR (€)</option>
 <option value="GBP">GBP (£)</option>
 </select>
 
-<input type="number" id="price" placeholder="Price (number only)" required>
+<input type="number" id="price" placeholder="Price" required>
 
 <input type="number" id="beds" placeholder="Beds">
 <input type="number" id="baths" placeholder="Baths">
@@ -108,19 +101,23 @@ button {
 <!-- MAIN IMAGE -->
 <h3>Main Image</h3>
 <input id="imageUrl" placeholder="Paste Image URL">
+<input type="file" id="imageFile">
+
+<img id="preview" class="preview">
 
 <!-- GALLERY -->
-<h3>Gallery Images</h3>
+<h3>Gallery</h3>
 <div id="galleryInputs"></div>
 <button type="button" class="small-btn" id="addImage">+ Add Image</button>
 
 <!-- DESCRIPTION -->
 <h3>Description</h3>
-<textarea id="description" placeholder="Write property description..."></textarea>
+<textarea id="description"></textarea>
 
 <!-- VIDEO -->
-<h3>Video Tour (YouTube embed link)</h3>
-<input id="video" placeholder="https://www.youtube.com/embed/...">
+<h3>Video</h3>
+<input id="videoUrl" placeholder="Paste video URL">
+<input type="file" id="videoFile">
 
 <button type="submit">Upload Property</button>
 
@@ -134,15 +131,18 @@ button {
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-storage.js";
 
 const firebaseConfig = {
   apiKey: "AIza...",
   authDomain: "kagona-primenest.firebaseapp.com",
   projectId: "kagona-primenest",
+  storageBucket: "kagona-primenest.firebasestorage.app",
 };
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
+const storage = getStorage(app);
 
 /* ========= BADGE ========= */
 const badgeOptions = {
@@ -150,7 +150,7 @@ const badgeOptions = {
   apartments: ["City View","Modern","Affordable"],
   villas: ["Pool Villa","Sea View","Private"],
   beachhomes: ["Oceanfront","Resort Style"],
-  land: ["Residential","Commercial","Investment"]
+  lands: ["Residential","Commercial","Investment"]
 };
 
 const category = document.getElementById("category");
@@ -163,14 +163,37 @@ category.addEventListener("change", () => {
   });
 });
 
+/* ========= IMAGE PREVIEW ========= */
+const imageFile = document.getElementById("imageFile");
+const preview = document.getElementById("preview");
+
+imageFile.addEventListener("change", () => {
+  const file = imageFile.files[0];
+  if(file){
+    preview.src = URL.createObjectURL(file);
+  }
+});
+
 /* ========= GALLERY ========= */
 const galleryContainer = document.getElementById("galleryInputs");
 
 document.getElementById("addImage").onclick = () => {
-  const input = document.createElement("input");
-  input.placeholder = "Paste image URL";
-  galleryContainer.appendChild(input);
+  const wrapper = document.createElement("div");
+
+  wrapper.innerHTML = `
+    <input placeholder="Image URL">
+    <input type="file">
+  `;
+
+  galleryContainer.appendChild(wrapper);
 };
+
+/* ========= UPLOAD FUNCTION ========= */
+async function uploadFile(file, path){
+  const storageRef = ref(storage, path + Date.now());
+  await uploadBytes(storageRef, file);
+  return await getDownloadURL(storageRef);
+}
 
 /* ========= FORM ========= */
 const form = document.getElementById("form");
@@ -181,14 +204,40 @@ form.addEventListener("submit", async (e)=>{
 
   try{
 
-    // Collect gallery images
-    const galleryInputs = galleryContainer.querySelectorAll("input");
+    status.innerHTML = "Uploading...";
+
+    // MAIN IMAGE
+    let mainImage = document.getElementById("imageUrl").value;
+
+    if(imageFile.files[0]){
+      mainImage = await uploadFile(imageFile.files[0], "images/");
+    }
+
+    // GALLERY
+    const galleryItems = galleryContainer.children;
     const images = [];
 
-    galleryInputs.forEach(i => {
-      if(i.value) images.push(i.value);
-    });
+    for(let item of galleryItems){
+      const urlInput = item.querySelector("input[type=text]");
+      const fileInput = item.querySelector("input[type=file]");
 
+      if(fileInput.files[0]){
+        const uploaded = await uploadFile(fileInput.files[0], "gallery/");
+        images.push(uploaded);
+      } else if(urlInput.value){
+        images.push(urlInput.value);
+      }
+    }
+
+    // VIDEO
+    let video = document.getElementById("videoUrl").value;
+
+    const videoFile = document.getElementById("videoFile");
+    if(videoFile.files[0]){
+      video = await uploadFile(videoFile.files[0], "videos/");
+    }
+
+    // SAVE TO FIRESTORE
     await addDoc(collection(db,"properties"),{
 
       title: title.value,
@@ -203,21 +252,21 @@ form.addEventListener("submit", async (e)=>{
       baths: Number(baths.value || 0),
       size: Number(size.value || 0),
 
-      image: imageUrl.value,
+      image: mainImage,
       images: images,
 
       description: description.value,
-      video: video.value
+      video: video
 
     });
 
-    status.innerHTML = "✅ Property uploaded successfully!";
+    status.innerHTML = "✅ Uploaded successfully!";
     form.reset();
     galleryContainer.innerHTML = "";
 
   }catch(err){
-    status.innerHTML = "❌ Error uploading";
     console.error(err);
+    status.innerHTML = "❌ Upload failed";
   }
 
 });
