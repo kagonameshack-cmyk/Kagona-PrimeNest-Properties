@@ -11,7 +11,7 @@
 /* ===== GLOBAL ===== */
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
+  font-family: 'Segoe UI', sans-serif;
   background: #0b0b0b;
   color: #fff;
 }
@@ -25,9 +25,10 @@ body {
 .sidebar {
   width: 240px;
   height: 100vh;
-  background: #111;
+  background: linear-gradient(180deg, #111, #0a0a0a);
   padding: 20px;
   position: fixed;
+  border-right: 1px solid #222;
 }
 
 .sidebar h2 {
@@ -37,7 +38,7 @@ body {
 
 .sidebar a {
   display: block;
-  color: #ccc;
+  color: #aaa;
   text-decoration: none;
   margin: 15px 0;
   transition: 0.3s;
@@ -61,42 +62,40 @@ body {
   align-items: center;
 }
 
-.header h1 {
-  margin: 0;
-}
-
 /* ===== CARDS ===== */
 .cards {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 20px;
   margin-top: 30px;
 }
 
 .card {
-  background: #1a1a1a;
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(10px);
   padding: 20px;
-  border-radius: 12px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,0.08);
   transition: 0.3s;
 }
 
 .card:hover {
-  transform: translateY(-5px);
+  transform: translateY(-6px);
 }
 
 .card h3 {
   margin: 0;
-  font-size: 18px;
-  color: #aaa;
+  font-size: 14px;
+  color: #bbb;
 }
 
 .card p {
-  font-size: 28px;
+  font-size: 26px;
   margin-top: 10px;
   color: gold;
 }
 
-/* ===== ACTION BUTTONS ===== */
+/* ===== ACTIONS ===== */
 .actions {
   margin-top: 40px;
 }
@@ -110,18 +109,20 @@ body {
   color: black;
   cursor: pointer;
   font-weight: bold;
+  transition: 0.3s;
 }
 
 .actions button:hover {
   opacity: 0.8;
 }
 
-/* ===== TABLE PREVIEW ===== */
+/* ===== TABLE ===== */
 .table {
   margin-top: 40px;
-  background: #1a1a1a;
-  border-radius: 10px;
+  background: rgba(255,255,255,0.04);
+  border-radius: 12px;
   padding: 20px;
+  border: 1px solid rgba(255,255,255,0.08);
 }
 
 .table h3 {
@@ -131,8 +132,19 @@ body {
 .table-item {
   display: flex;
   justify-content: space-between;
-  padding: 10px 0;
-  border-bottom: 1px solid #333;
+  padding: 12px 0;
+  border-bottom: 1px solid #222;
+}
+
+.table-item span:last-child {
+  text-transform: capitalize;
+  color: gold;
+}
+
+/* ===== LOADING ===== */
+.loading {
+  opacity: 0.6;
+  font-style: italic;
 }
 
 </style>
@@ -164,35 +176,12 @@ body {
 
     <!-- STATS -->
     <div class="cards">
-      <div class="card">
-        <h3>Total Properties</h3>
-        <p id="totalProps">--</p>
-      </div>
-
-      <div class="card">
-        <h3>Houses</h3>
-        <p id="housesCount">--</p>
-      </div>
-      
-      <div class="card">
-        <h3>Apartments</h3>
-        <p id="apartmentsCount">--</p>
-      </div>
-
-      <div class="card">
-        <h3>Villas</h3>
-        <p id="villasCount">--</p>
-      </div>
-
-      <div class="card">
-        <h3>Beachhomes</h3>
-        <p id="beachhomesCount">--</p>
-      </div>
-
-<div class="card">
-        <h3>Lands</h3>
-        <p id="landsCount">--</p>
-</div>
+      <div class="card"><h3>Total Properties</h3><p id="totalProps">--</p></div>
+      <div class="card"><h3>Houses</h3><p id="housesCount">--</p></div>
+      <div class="card"><h3>Apartments</h3><p id="apartmentsCount">--</p></div>
+      <div class="card"><h3>Villas</h3><p id="villasCount">--</p></div>
+      <div class="card"><h3>Beachhomes</h3><p id="beachhomesCount">--</p></div>
+      <div class="card"><h3>Land</h3><p id="landsCount">--</p></div>
     </div>
 
     <!-- ACTIONS -->
@@ -201,15 +190,10 @@ body {
       <button onclick="location.href='manage.html'">Manage Properties</button>
     </div>
 
-    <!-- RECENT PREVIEW -->
+    <!-- RECENT -->
     <div class="table">
       <h3>Recent Properties</h3>
-
-      <div id="recentList">
-        <div class="table-item">
-          <span>Loading...</span>
-        </div>
-      </div>
+      <div id="recentList" class="loading">Loading...</div>
     </div>
 
   </div>
@@ -222,7 +206,6 @@ body {
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
-// ✅ YOUR REAL CONFIG (CONNECTED)
 const firebaseConfig = {
   apiKey: "AIzaSyDZvAcMFt1n5RBfWmiCMvcZcAQvDs7rzhk",
   authDomain: "kagona-primenest.firebaseapp.com",
@@ -238,46 +221,51 @@ const db = getFirestore(app);
 
 async function loadDashboard() {
 
-  const snapshot = await getDocs(collection(db, "properties"));
+  try {
 
-  let total = 0;
-  let houses = 0;
-  let apartments = 0;
-  let villas = 0;
-  let beachhomes = 0;
-  let lands = 0;
+    const snapshot = await getDocs(collection(db, "properties"));
 
-  let recentHTML = "";
+    let total = 0, houses = 0, apartments = 0, villas = 0, beachhomes = 0, land = 0;
 
-  snapshot.forEach(doc => {
-    const p = doc.data();
+    let html = "";
+    let count = 0;
 
-    total++;
+    snapshot.forEach(doc => {
 
-    if(p.category === "houses") houses++;
-    if(p.category === "apartments") apartments++;
-    if(p.category === "villas") villas++;
-    if(p.category === "beachhomes") beachhomes++;
-    if(p.category === "lands") lands++;
+      const p = doc.data();
+      total++;
 
-    recentHTML += `
-      <div class="table-item">
-        <span>${p.title}</span>
-        <span>${p.category}</span>
-      </div>
-    `;
-  });
+      if(p.category === "houses") houses++;
+      if(p.category === "apartments") apartments++;
+      if(p.category === "villas") villas++;
+      if(p.category === "beachhomes") beachhomes++;
+      if(p.category === "land") land++;
 
-  document.getElementById("totalProps").innerText = total;
-  document.getElementById("housesCount").innerText = houses;
-  document.getElementById("apartmentsCount").innerText = apartments;
-  document.getElementById("villasCount").innerText = villas;
-  document.getElementById("beachhomesCount").innerText = beachhomes;
-  document.getElementById("landsCount").innerText = lands;
-  
-  
+      if(count < 5) {
+        html += `
+          <div class="table-item">
+            <span>${p.title}</span>
+            <span>${p.category}</span>
+          </div>
+        `;
+        count++;
+      }
 
-  document.getElementById("recentList").innerHTML = recentHTML || "No data";
+    });
+
+    document.getElementById("totalProps").innerText = total;
+    document.getElementById("housesCount").innerText = houses;
+    document.getElementById("apartmentsCount").innerText = apartments;
+    document.getElementById("villasCount").innerText = villas;
+    document.getElementById("beachhomesCount").innerText = beachhomes;
+    document.getElementById("landsCount").innerText = land;
+
+    document.getElementById("recentList").innerHTML = html || "No properties yet.";
+
+  } catch (err) {
+    console.error(err);
+    document.getElementById("recentList").innerHTML = "Error loading data.";
+  }
 
 }
 
