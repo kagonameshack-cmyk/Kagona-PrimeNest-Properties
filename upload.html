@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Add Property | Kagona Admin</title>
+
+<style>
+
+/* ===== GLOBAL ===== */
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: #0b0b0b;
+  color: #fff;
+}
+
+/* ===== LAYOUT ===== */
+.container {
+  max-width: 700px;
+  margin: 40px auto;
+  padding: 20px;
+}
+
+/* ===== FORM ===== */
+.form-box {
+  background: rgba(255,255,255,0.05);
+  padding: 25px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+h1 {
+  margin-bottom: 20px;
+}
+
+input, select {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border-radius: 8px;
+  border: none;
+  outline: none;
+  background: #111;
+  color: #fff;
+}
+
+button {
+  width: 100%;
+  padding: 14px;
+  margin-top: 15px;
+  border: none;
+  border-radius: 8px;
+  background: gold;
+  color: black;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+/* STATUS */
+.status {
+  margin-top: 15px;
+  font-size: 14px;
+}
+
+.success {
+  color: #00ffae;
+}
+
+.error {
+  color: red;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <div class="form-box">
+
+    <h1>Add New Property</h1>
+
+    <form id="propertyForm">
+
+      <input type="text" id="title" placeholder="Property Title" required>
+
+      <select id="category" required>
+        <option value="">Select Category</option>
+        <option value="houses">Houses</option>
+        <option value="apartments">Apartments</option>
+        <option value="villas">Villas</option>
+        <option value="beachhomes">Beachhomes</option>
+        <option value="land">Land</option>
+      </select>
+
+      <input type="text" id="location" placeholder="Location (e.g. Nairobi)" required>
+
+      <input type="number" id="price" placeholder="Price (number only)" required>
+
+      <input type="number" id="beds" placeholder="Bedrooms">
+      <input type="number" id="baths" placeholder="Bathrooms">
+      <input type="number" id="size" placeholder="Size (sqm)">
+
+      <input type="text" id="badge" placeholder="Badge (Optional e.g. Featured)">
+
+      <input type="text" id="image" placeholder="Image URL (paste link)" required>
+
+      <input type="text" id="link" placeholder="Details Page Link (optional)">
+
+      <button type="submit">Upload Property</button>
+
+    </form>
+
+    <div id="status" class="status"></div>
+
+  </div>
+
+</div>
+
+<!-- 🔥 FIREBASE -->
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDZvAcMFt1n5RBfWmiCMvcZcAQvDs7rzhk",
+  authDomain: "kagona-primenest.firebaseapp.com",
+  projectId: "kagona-primenest",
+  storageBucket: "kagona-primenest.firebasestorage.app",
+  messagingSenderId: "246677583786",
+  appId: "1:246677583786:web:ceced78ad633539a8c1dd3",
+  measurementId: "G-GRSTNZKJVB"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+const form = document.getElementById("propertyForm");
+const status = document.getElementById("status");
+
+form.addEventListener("submit", async (e) => {
+
+  e.preventDefault();
+
+  status.innerHTML = "Uploading...";
+  status.className = "status";
+
+  try {
+
+    await addDoc(collection(db, "properties"), {
+
+      title: document.getElementById("title").value,
+      category: document.getElementById("category").value,
+      location: document.getElementById("location").value,
+      price: Number(document.getElementById("price").value),
+
+      beds: Number(document.getElementById("beds").value || 0),
+      baths: Number(document.getElementById("baths").value || 0),
+      size: Number(document.getElementById("size").value || 0),
+
+      badge: document.getElementById("badge").value || "",
+      image: document.getElementById("image").value,
+      link: document.getElementById("link").value || ""
+
+    });
+
+    status.innerHTML = "✅ Property uploaded successfully!";
+    status.className = "status success";
+
+    form.reset();
+
+  } catch (error) {
+
+    console.error(error);
+
+    status.innerHTML = "❌ Error uploading property.";
+    status.className = "status error";
+
+  }
+
+});
+
+</script>
+
+</body>
+        </html>
