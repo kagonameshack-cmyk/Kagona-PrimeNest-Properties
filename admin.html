@@ -173,16 +173,6 @@ body {
         <h3>Houses</h3>
         <p id="housesCount">--</p>
       </div>
-
-      <div class="card">
-        <h3>Beachhomes</h3>
-        <p id="beachhomesCount">--</p>
-       </div>
-
-<div class="card">
-        <h3>Lands/Plots</h3>
-        <p id="landsCount">--</p>
-</div>
       
       <div class="card">
         <h3>Apartments</h3>
@@ -193,6 +183,16 @@ body {
         <h3>Villas</h3>
         <p id="villasCount">--</p>
       </div>
+
+      <div class="card">
+        <h3>Beachhomes</h3>
+        <p id="beachhomesCount">--</p>
+      </div>
+
+<div class="card">
+        <h3>Lands/Plots</h3>
+        <p id="landsCount">--</p>
+</div>
     </div>
 
     <!-- ACTIONS -->
@@ -244,6 +244,8 @@ async function loadDashboard() {
   let houses = 0;
   let apartments = 0;
   let villas = 0;
+  let beachhomes = 0;
+  let lands = 0;
 
   let recentHTML = "";
 
@@ -255,6 +257,8 @@ async function loadDashboard() {
     if(p.category === "houses") houses++;
     if(p.category === "apartments") apartments++;
     if(p.category === "villas") villas++;
+    if(p.category === "beachhomes") beachhomes++;
+    if(p.category === "lands") lands++;
 
     recentHTML += `
       <div class="table-item">
@@ -268,6 +272,10 @@ async function loadDashboard() {
   document.getElementById("housesCount").innerText = houses;
   document.getElementById("apartmentsCount").innerText = apartments;
   document.getElementById("villasCount").innerText = villas;
+  document.getElementById("beachhomes Count").innerText = beachhomes;
+  document.getElementById("landsCount").innerText = lands;
+  
+  
 
   document.getElementById("recentList").innerHTML = recentHTML || "No data";
 
