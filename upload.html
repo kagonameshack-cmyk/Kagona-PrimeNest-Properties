@@ -48,12 +48,6 @@ button {
   background: #333;
 }
 
-.preview {
-  width: 100%;
-  margin-top: 10px;
-  border-radius: 10px;
-}
-
 .status {
   margin-top: 10px;
 }
@@ -85,7 +79,7 @@ button {
 
 <input id="location" placeholder="Location" required>
 
-<select id="currency" id="currency">
+<select id="currency">
 <option value="USD">USD ($)</option>
 <option value="KES">KES (KSh)</option>
 <option value="EUR">EUR (€)</option>
@@ -97,16 +91,13 @@ button {
 <input type="number" id="beds" placeholder="Beds">
 <input type="number" id="baths" placeholder="Baths">
 <input type="number" id="size" placeholder="Size">
-  
-<!-- MAIN IMAGE -->
-<h3>Main Image</h3>
-<input id="imageUrl" placeholder="Paste Image URL">
-<input type="file" id="imageFile">
 
-<img id="preview" class="preview">
-  
+<!-- MAIN IMAGE -->
+<h3>Main Image URL</h3>
+<input id="imageUrl" placeholder="Paste Image URL" required>
+
 <!-- GALLERY -->
-<h3>Gallery</h3>
+<h3>Gallery Images (URLs)</h3>
 <div id="galleryInputs"></div>
 <button type="button" class="small-btn" id="addImage">+ Add Image</button>
 
@@ -115,9 +106,8 @@ button {
 <textarea id="description"></textarea>
 
 <!-- VIDEO -->
-<h3>Video</h3>
-<input id="videoUrl" placeholder="Paste video URL">
-<input type="file" id="videoFile">
+<h3>Video (YouTube embed URL)</h3>
+<input id="videoUrl" placeholder="https://www.youtube.com/embed/...">
 
 <button type="submit">Upload Property</button>
 
@@ -131,20 +121,17 @@ button {
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
-import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-storage.js";
 
 const firebaseConfig = {
-  apiKey: "AIza...",
+  apiKey: "AIzaSyDZvAcMFt1n5RBfWmiCMvcZcAQvDs7rzhk",
   authDomain: "kagona-primenest.firebaseapp.com",
   projectId: "kagona-primenest",
-  storageBucket: "kagona-primenest.firebasestorage.app",
 };
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
-const storage = getStorage(app);
 
-/* ========= BADGE ========= */
+/* BADGES */
 const badgeOptions = {
   houses: ["Featured","Luxury","Smart Home"],
   apartments: ["City View","Modern","Affordable"],
@@ -163,81 +150,33 @@ category.addEventListener("change", () => {
   });
 });
 
-/* ========= IMAGE PREVIEW ========= */
-const imageFile = document.getElementById("imageFile");
-const preview = document.getElementById("preview");
-
-imageFile.addEventListener("change", () => {
-  const file = imageFile.files[0];
-  if(file){
-    preview.src = URL.createObjectURL(file);
-  }
-});
-  
-/* ========= GALLERY ========= */
+/* GALLERY */
 const galleryContainer = document.getElementById("galleryInputs");
 
 document.getElementById("addImage").onclick = () => {
-  const wrapper = document.createElement("div");
-
-  wrapper.innerHTML = `
-    <input placeholder="Image URL">
-    <input type="file">
-  `;
-
-  galleryContainer.appendChild(wrapper);
+  const input = document.createElement("input");
+  input.placeholder = "Image URL";
+  galleryContainer.appendChild(input);
 };
 
-/* ========= UPLOAD FUNCTION ========= */
-async function uploadFile(file, path){
-  const storageRef = ref(storage, path + Date.now());
-  await uploadBytes(storageRef, file);
-  return await getDownloadURL(storageRef);
-}
-
-/* ========= FORM ========= */
+/* SUBMIT */
 const form = document.getElementById("form");
 const status = document.getElementById("status");
 
 form.addEventListener("submit", async (e)=>{
   e.preventDefault();
 
-  try{
+  try {
 
     status.innerHTML = "Uploading...";
 
-    // MAIN IMAGE
-    let mainImage = document.getElementById("imageUrl").value;
-
-    if(imageFile.files[0]){
-      mainImage = await uploadFile(imageFile.files[0], "images/");
-    }
-
-    // GALLERY
-    const galleryItems = galleryContainer.children;
+    const galleryInputs = galleryContainer.querySelectorAll("input");
     const images = [];
 
-    for(let item of galleryItems){
-      const urlInput = item.querySelector("input[type=text]");
-      const fileInput = item.querySelector("input[type=file]");
+    galleryInputs.forEach(i => {
+      if(i.value) images.push(i.value);
+    });
 
-      if(fileInput.files[0]){
-        const uploaded = await uploadFile(fileInput.files[0], "gallery/");
-        images.push(uploaded);
-      } else if(urlInput.value){
-        images.push(urlInput.value);
-      }
-    }
-
-    // VIDEO
-    let video = document.getElementById("videoUrl").value;
-
-    const videoFile = document.getElementById("videoFile");
-    if(videoFile.files[0]){
-      video = await uploadFile(videoFile.files[0], "videos/");
-    }
-
-    // SAVE TO FIRESTORE
     await addDoc(collection(db,"properties"),{
 
       title: title.value,
@@ -252,11 +191,11 @@ form.addEventListener("submit", async (e)=>{
       baths: Number(baths.value || 0),
       size: Number(size.value || 0),
 
-      image: mainImage,
+      image: imageUrl.value,
       images: images,
 
       description: description.value,
-      video: video
+      video: videoUrl.value
 
     });
 
@@ -264,7 +203,7 @@ form.addEventListener("submit", async (e)=>{
     form.reset();
     galleryContainer.innerHTML = "";
 
-  }catch(err){
+  } catch(err){
     console.error(err);
     status.innerHTML = "❌ Upload failed";
   }
