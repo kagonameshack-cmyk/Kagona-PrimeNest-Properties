@@ -132,14 +132,27 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/fireba
 import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
 /* 🔥 REAL CONFIG */
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-app.js";
+import { getFirestore, collection, addDoc, getDocs } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-firestore.js";
+
 const firebaseConfig = {
-  apiKey: "AIzaSyDZvAcMFt1n5RBfWmiCMvcZcAQvDs7rzhk",
-  authDomain: "kagona-primenest.firebaseapp.com",
-  projectId: "kagona-primenest",
+  apiKey: "AIzaSyBSGDX7tw-5E3w39lypZVtpettkD7JjoL0",
+  authDomain: "kagona-primenest-9e85b.firebaseapp.com",
+  projectId: "kagona-primenest-9e85b",
+  storageBucket: "kagona-primenest-9e85b.firebasestorage.app",
+  messagingSenderId: "377224074751",
+  appId: "1:377224074751:web:11af4ec9134c3b146a83ca"
 };
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
+
+// 👉 Make db globally usable
+window.db = db;
+
+</script>
 
 /* ========= BADGE ========= */
 const badgeOptions = {
