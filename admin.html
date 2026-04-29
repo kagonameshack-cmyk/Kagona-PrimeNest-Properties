@@ -204,7 +204,7 @@ body {
 <script type="module">
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-app.js";
-import { getFirestore, collection, addDoc, getDocs } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-firestore.js";
+import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-firestore.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBSGDX7tw-5E3w39lypZVtpettkD7JjoL0",
@@ -218,19 +218,14 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-// 👉 Make db globally usable
-window.db = db;
-
-</script>
-
-  
+// 🔥 LOAD DASHBOARD
 async function loadDashboard() {
 
   try {
 
     const snapshot = await getDocs(collection(db, "properties"));
 
-    let total = 0, houses = 0, apartments = 0, villas = 0, beachhomes = 0, land = 0;
+    let total = 0, houses = 0, apartments = 0, villas = 0, beachhomes = 0, lands = 0;
 
     let html = "";
     let count = 0;
@@ -244,7 +239,7 @@ async function loadDashboard() {
       if(p.category === "apartments") apartments++;
       if(p.category === "villas") villas++;
       if(p.category === "beachhomes") beachhomes++;
-      if(p.category === "land") land++;
+      if(p.category === "lands") lands++;
 
       if(count < 5) {
         html += `
@@ -263,17 +258,18 @@ async function loadDashboard() {
     document.getElementById("apartmentsCount").innerText = apartments;
     document.getElementById("villasCount").innerText = villas;
     document.getElementById("beachhomesCount").innerText = beachhomes;
-    document.getElementById("landsCount").innerText = land;
+    document.getElementById("landsCount").innerText = lands;
 
     document.getElementById("recentList").innerHTML = html || "No properties yet.";
 
   } catch (err) {
     console.error(err);
-    document.getElementById("recentList").innerHTML = "Error loading data.";
+    document.getElementById("recentList").innerHTML = "❌ Error loading data.";
   }
 
 }
 
+// 🚀 RUN
 loadDashboard();
 
 </script>
