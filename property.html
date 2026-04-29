@@ -121,7 +121,7 @@ iframe{
 <script type="module">
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-app.js";
-import { getFirestore, collection, addDoc, getDocs } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-firestore.js";
+import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-firestore.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBSGDX7tw-5E3w39lypZVtpettkD7JjoL0",
@@ -135,16 +135,11 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-// 👉 Make db globally usable
-window.db = db;
-
-</script>
-  
-// GET URL PARAM
+/* GET URL */
 const params = new URLSearchParams(window.location.search);
 const name = params.get("name");
 
-// LOAD PROPERTY
+/* LOAD PROPERTY */
 async function loadProperty(){
 
   const snapshot = await getDocs(collection(db,"properties"));
@@ -152,22 +147,18 @@ async function loadProperty(){
   snapshot.forEach(doc => {
 
     const p = doc.data();
-
     const slug = p.title.toLowerCase().replace(/ /g,"-");
 
     if(slug === name){
 
-      // MAIN
       document.getElementById("title").innerText = p.title;
       document.getElementById("location").innerText = "📍 " + p.location;
       document.getElementById("mainImage").src = p.image;
 
-      // FEATURES
-      document.getElementById("beds").innerText = "🛏 " + (p.beds || 0) + " Beds";
-      document.getElementById("baths").innerText = "🛁 " + (p.baths || 0) + " Baths";
+      document.getElementById("beds").innerText = "🛏 " + (p.beds || 0);
+      document.getElementById("baths").innerText = "🛁 " + (p.baths || 0);
       document.getElementById("size").innerText = "📐 " + (p.size || 0) + " sqm";
 
-      // PRICE
       let symbol = "$";
       if(p.currency === "KES") symbol = "KSh ";
       if(p.currency === "EUR") symbol = "€";
@@ -176,21 +167,18 @@ async function loadProperty(){
       document.getElementById("price").innerText =
         symbol + Number(p.price).toLocaleString();
 
-      // DESCRIPTION
       document.getElementById("description").innerText =
         p.description || "No description available.";
 
-      // GALLERY
       const gallery = document.getElementById("gallery");
       gallery.innerHTML = "";
 
-      if(p.images && p.images.length){
+      if(p.images){
         p.images.forEach(img=>{
           gallery.innerHTML += `<img src="${img}">`;
         });
       }
 
-      // VIDEO
       if(p.video){
         document.getElementById("videoContainer").innerHTML = `
           <h2>Video Tour</h2>
@@ -206,7 +194,7 @@ async function loadProperty(){
 
 loadProperty();
 
-</script>
+  </script>
 
 </body>
 </html>
