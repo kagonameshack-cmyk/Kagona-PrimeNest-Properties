@@ -31,7 +31,7 @@ input, select, textarea {
 }
 
 textarea {
-  min-height: 100px;
+  min-height: 120px;
 }
 
 button {
@@ -41,6 +41,7 @@ button {
   border: none;
   border-radius: 8px;
   cursor: pointer;
+  font-weight: bold;
 }
 
 .small-btn {
@@ -48,8 +49,15 @@ button {
   background: #333;
 }
 
-.status {
+.preview {
+  width: 100%;
   margin-top: 10px;
+  border-radius: 10px;
+}
+
+.status {
+  margin-top: 15px;
+  font-weight: bold;
 }
 </style>
 </head>
@@ -93,8 +101,9 @@ button {
 <input type="number" id="size" placeholder="Size">
 
 <!-- MAIN IMAGE -->
-<h3>Main Image URL</h3>
-<input id="imageUrl" placeholder="Paste Image URL" required>
+<h3>Main Image (URL only)</h3>
+<input id="imageUrl" placeholder="Paste image URL (Unsplash recommended)">
+<img id="preview" class="preview">
 
 <!-- GALLERY -->
 <h3>Gallery Images (URLs)</h3>
@@ -103,11 +112,11 @@ button {
 
 <!-- DESCRIPTION -->
 <h3>Description</h3>
-<textarea id="description"></textarea>
+<textarea id="description" placeholder="Write full property details..."></textarea>
 
 <!-- VIDEO -->
-<h3>Video (YouTube embed URL)</h3>
-<input id="videoUrl" placeholder="https://www.youtube.com/embed/...">
+<h3>Video Tour (YouTube embed link)</h3>
+<input id="video" placeholder="https://www.youtube.com/embed/...">
 
 <button type="submit">Upload Property</button>
 
@@ -122,6 +131,7 @@ button {
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
+/* 🔥 REAL CONFIG */
 const firebaseConfig = {
   apiKey: "AIzaSyDZvAcMFt1n5RBfWmiCMvcZcAQvDs7rzhk",
   authDomain: "kagona-primenest.firebaseapp.com",
@@ -131,7 +141,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-/* BADGES */
+/* ========= BADGE ========= */
 const badgeOptions = {
   houses: ["Featured","Luxury","Smart Home"],
   apartments: ["City View","Modern","Affordable"],
@@ -150,30 +160,38 @@ category.addEventListener("change", () => {
   });
 });
 
-/* GALLERY */
+/* ========= IMAGE PREVIEW ========= */
+const imageUrl = document.getElementById("imageUrl");
+const preview = document.getElementById("preview");
+
+imageUrl.addEventListener("input", () => {
+  preview.src = imageUrl.value;
+});
+
+/* ========= GALLERY ========= */
 const galleryContainer = document.getElementById("galleryInputs");
 
 document.getElementById("addImage").onclick = () => {
   const input = document.createElement("input");
-  input.placeholder = "Image URL";
+  input.placeholder = "Paste image URL";
   galleryContainer.appendChild(input);
 };
 
-/* SUBMIT */
+/* ========= FORM ========= */
 const form = document.getElementById("form");
 const status = document.getElementById("status");
 
 form.addEventListener("submit", async (e)=>{
   e.preventDefault();
 
-  try {
+  try{
 
     status.innerHTML = "Uploading...";
 
-    const galleryInputs = galleryContainer.querySelectorAll("input");
     const images = [];
+    const inputs = galleryContainer.querySelectorAll("input");
 
-    galleryInputs.forEach(i => {
+    inputs.forEach(i => {
       if(i.value) images.push(i.value);
     });
 
@@ -195,17 +213,18 @@ form.addEventListener("submit", async (e)=>{
       images: images,
 
       description: description.value,
-      video: videoUrl.value
+      video: video.value
 
     });
 
-    status.innerHTML = "✅ Uploaded successfully!";
+    status.innerHTML = "✅ Property uploaded successfully!";
     form.reset();
     galleryContainer.innerHTML = "";
+    preview.src = "";
 
-  catch(err){
-  console.error("FULL ERROR:", err);
-  status.innerHTML = "❌ Upload failed: " + err.message;
+  }catch(err){
+    console.error(err);
+    status.innerHTML = "❌ Upload failed";
   }
 
 });
@@ -213,4 +232,4 @@ form.addEventListener("submit", async (e)=>{
 </script>
 
 </body>
-</html>
+  </html>
