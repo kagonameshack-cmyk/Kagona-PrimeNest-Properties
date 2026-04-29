@@ -128,15 +128,10 @@ button {
 
 <script type="module">
 
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
-
-/* 🔥 REAL CONFIG */
-<script type="module">
-
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-app.js";
-import { getFirestore, collection, addDoc, getDocs } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-firestore.js";
+import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-firestore.js";
 
+/* FIREBASE CONFIG */
 const firebaseConfig = {
   apiKey: "AIzaSyBSGDX7tw-5E3w39lypZVtpettkD7JjoL0",
   authDomain: "kagona-primenest-9e85b.firebaseapp.com",
@@ -149,12 +144,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-// 👉 Make db globally usable
-window.db = db;
-
-</script>
-
-/* ========= BADGE ========= */
+/* BADGES */
 const badgeOptions = {
   houses: ["Featured","Luxury","Smart Home"],
   apartments: ["City View","Modern","Affordable"],
@@ -173,7 +163,7 @@ category.addEventListener("change", () => {
   });
 });
 
-/* ========= IMAGE PREVIEW ========= */
+/* PREVIEW */
 const imageUrl = document.getElementById("imageUrl");
 const preview = document.getElementById("preview");
 
@@ -181,7 +171,7 @@ imageUrl.addEventListener("input", () => {
   preview.src = imageUrl.value;
 });
 
-/* ========= GALLERY ========= */
+/* GALLERY */
 const galleryContainer = document.getElementById("galleryInputs");
 
 document.getElementById("addImage").onclick = () => {
@@ -190,7 +180,7 @@ document.getElementById("addImage").onclick = () => {
   galleryContainer.appendChild(input);
 };
 
-/* ========= FORM ========= */
+/* SUBMIT */
 const form = document.getElementById("form");
 const status = document.getElementById("status");
 
@@ -202,9 +192,7 @@ form.addEventListener("submit", async (e)=>{
     status.innerHTML = "Uploading...";
 
     const images = [];
-    const inputs = galleryContainer.querySelectorAll("input");
-
-    inputs.forEach(i => {
+    document.querySelectorAll("#galleryInputs input").forEach(i=>{
       if(i.value) images.push(i.value);
     });
 
@@ -230,7 +218,7 @@ form.addEventListener("submit", async (e)=>{
 
     });
 
-    status.innerHTML = "✅ Property uploaded successfully!";
+    status.innerHTML = "✅ Uploaded!";
     form.reset();
     galleryContainer.innerHTML = "";
     preview.src = "";
@@ -243,6 +231,6 @@ form.addEventListener("submit", async (e)=>{
 });
 
 </script>
-
+  
 </body>
   </html>
