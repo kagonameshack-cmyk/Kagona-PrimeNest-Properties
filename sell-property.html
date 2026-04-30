@@ -106,10 +106,6 @@ button:hover{
 <input type="number" id="baths" placeholder="Bathrooms">
 <input type="number" id="size" placeholder="Size (sqm)">
 
-<!-- IMAGE -->
-<h3>Main Image</h3>
-<input id="imageUrl" placeholder="Paste Image URL">
-
 <!-- DESCRIPTION -->
 <h3>Description</h3>
 <textarea id="description"></textarea>
@@ -164,9 +160,6 @@ form.addEventListener("submit", async (e)=>{
       beds: Number(beds.value || 0),
       baths: Number(baths.value || 0),
       size: Number(size.value || 0),
-
-      image: imageUrl.value,
-      description: description.value,
 
       status: "pending",
       createdAt: new Date()
