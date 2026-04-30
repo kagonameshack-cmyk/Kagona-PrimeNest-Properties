@@ -1,1 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<title>Sell Property | Kagona PrimeNest</title>
+
+<style>
+body{
+  margin:0;
+  font-family:'Segoe UI',sans-serif;
+  background:#0b0b0b;
+  color:#fff;
+}
+
+.container{
+  max-width:700px;
+  margin:40px auto;
+  padding:20px;
+}
+
+h1{
+  color:gold;
+  text-align:center;
+}
+
+.form{
+  background:rgba(255,255,255,0.05);
+  padding:25px;
+  border-radius:12px;
+}
+
+input, select, textarea{
+  width:100%;
+  padding:12px;
+  margin:10px 0;
+  border:none;
+  border-radius:8px;
+  background:#111;
+  color:#fff;
+}
+
+textarea{
+  min-height:120px;
+}
+
+button{
+  width:100%;
+  padding:14px;
+  background:gold;
+  border:none;
+  border-radius:8px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+button:hover{
+  opacity:0.8;
+}
+
+.status{
+  margin-top:10px;
+  text-align:center;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Sell Your Property</h1>
+
+<div class="form">
+
+<form id="form">
+
+<!-- OWNER -->
+<input id="name" placeholder="Your Name" required>
+<input id="phone" placeholder="Phone Number" required>
+
+<!-- PROPERTY -->
+<input id="title" placeholder="Property Title" required>
+
+<select id="category" required>
+<option value="">Category</option>
+<option value="houses">Houses</option>
+<option value="apartments">Apartments</option>
+<option value="villas">Villas</option>
+<option value="beachhomes">Beachhomes</option>
+<option value="lands">Lands</option>
+</select>
+
+<input id="location" placeholder="Location" required>
+
+<select id="currency">
+<option value="KES">KES (KSh)</option>
+<option value="USD">USD ($)</option>
+<option value="EUR">EUR (€)</option>
+</select>
+
+<input type="number" id="price" placeholder="Price" required>
+
+<input type="number" id="beds" placeholder="Bedrooms">
+<input type="number" id="baths" placeholder="Bathrooms">
+<input type="number" id="size" placeholder="Size (sqm)">
+
+<!-- IMAGE -->
+<h3>Main Image</h3>
+<input id="imageUrl" placeholder="Paste Image URL">
+
+<!-- DESCRIPTION -->
+<h3>Description</h3>
+<textarea id="description"></textarea>
+
+<button type="submit">Submit Property</button>
+
+</form>
+
+<div id="status" class="status"></div>
+
+</div>
+
+</div>
+
+<!-- 🔥 FIREBASE -->
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-app.js";
+import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBSGDX7tw-5E3w39lypZVtpettkD7JjoL0",
+  authDomain: "kagona-primenest-9e85b.firebaseapp.com",
+  projectId: "kagona-primenest-9e85b",
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+const form = document.getElementById("form");
+const status = document.getElementById("status");
+
+form.addEventListener("submit", async (e)=>{
+  e.preventDefault();
+
+  try{
+
+    status.innerHTML = "Submitting...";
+
+    await addDoc(collection(db,"submissions"),{
+
+      ownerName: name.value,
+      phone: phone.value,
+
+      title: title.value,
+      category: category.value,
+      location: location.value,
+
+      price: Number(price.value),
+      currency: currency.value,
+
+      beds: Number(beds.value || 0),
+      baths: Number(baths.value || 0),
+      size: Number(size.value || 0),
+
+      image: imageUrl.value,
+      description: description.value,
+
+      status: "pending",
+      createdAt: new Date()
+
+    });
+
+    status.innerHTML = "✅ Submitted successfully! We’ll review it.";
+
+    form.reset();
+
+  }catch(err){
+    console.error(err);
+    status.innerHTML = "❌ Submission failed";
+  }
+
+});
+
+</script>
+
+</body>
+  </html>
