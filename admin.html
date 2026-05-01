@@ -163,6 +163,9 @@ body {
     <a href="manage.html">Manage Properties</a>
     <a href="#">Gallery</a>
     <a href="#">Settings</a>
+
+    <!-- ✅ NEW -->
+<a href="#" onclick="showSection('requests')">Sell Requests</a>
   </div>
 
   <!-- MAIN -->
@@ -196,6 +199,16 @@ body {
       <div id="recentList" class="loading">Loading...</div>
     </div>
 
+    <!-- SELL REQUESTS -->
+<div id="requestsSection" style="display:none; margin-top:40px;">
+
+  <div class="table">
+    <h3>Sell Requests</h3>
+
+    <div id="requestsList">
+      Loading...
+    </div>
+    
   </div>
 
 </div>
@@ -272,6 +285,48 @@ async function loadDashboard() {
 // 🚀 RUN
 loadDashboard();
 
+
+function showSection(section){
+
+  // Hide dashboard UI
+  document.querySelector(".cards").style.display = "none";
+  document.querySelector(".actions").style.display = "none";
+  document.querySelector(".table").style.display = "none";
+
+  // Hide requests
+  document.getElementById("requestsSection").style.display = "none";
+
+  // Show selected
+  if(section === "requests"){
+    document.getElementById("requestsSection").style.display = "block";
+  }
+  }  
+
+async function loadRequests(){
+
+  const snapshot = await getDocs(collection(db,"sellRequests"));
+
+  let html = "";
+
+  snapshot.forEach(doc => {
+
+    const p = doc.data();
+
+    html += `
+      <div class="table-item">
+        <span>${p.title}</span>
+        <span>${p.category}</span>
+        <span>${p.location}</span>
+      </div>
+    `;
+  });
+
+  document.getElementById("requestsList").innerHTML =
+    html || "No sell requests yet.";
+}
+
+loadRequests();  
+  
 </script>
 
 </body>
