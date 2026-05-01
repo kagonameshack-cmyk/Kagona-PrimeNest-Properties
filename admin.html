@@ -223,11 +223,13 @@ body {
 </div>
 
 <!-- 🔥 FIREBASE -->
+    
 <script type="module">
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-app.js";
 import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-firestore.js";
 
+/* 🔥 CONFIG */
 const firebaseConfig = {
   apiKey: "AIzaSyBSGDX7tw-5E3w39lypZVtpettkD7JjoL0",
   authDomain: "kagona-primenest-9e85b.firebaseapp.com",
@@ -240,7 +242,9 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-// 🔥 LOAD DASHBOARD
+/* =========================
+   LOAD DASHBOARD
+========================= */
 async function loadDashboard() {
 
   try {
@@ -248,7 +252,6 @@ async function loadDashboard() {
     const snapshot = await getDocs(collection(db, "properties"));
 
     let total = 0, houses = 0, apartments = 0, villas = 0, beachhomes = 0, lands = 0;
-
     let html = "";
     let count = 0;
 
@@ -263,11 +266,11 @@ async function loadDashboard() {
       if(p.category === "beachhomes") beachhomes++;
       if(p.category === "lands") lands++;
 
-      if(count < 5) {
+      if(count < 5){
         html += `
           <div class="table-item">
-            <span>${p.title}</span>
-            <span>${p.category}</span>
+            <span>${p.title || "No title"}</span>
+            <span>${p.category || "-"}</span>
           </div>
         `;
         count++;
@@ -282,7 +285,8 @@ async function loadDashboard() {
     document.getElementById("beachhomesCount").innerText = beachhomes;
     document.getElementById("landsCount").innerText = lands;
 
-    document.getElementById("recentList").innerHTML = html || "No properties yet.";
+    document.getElementById("recentList").innerHTML =
+      html || "No properties yet.";
 
   } catch (err) {
     console.error(err);
@@ -291,52 +295,80 @@ async function loadDashboard() {
 
 }
 
-// 🚀 RUN
-loadDashboard();
+/* =========================
+   LOAD SELL REQUESTS
+========================= */
+async function loadRequests(){
 
+  try {
 
-function showSection(section){
+    const snapshot = await getDocs(collection(db,"sellRequests"));
 
-  // Hide dashboard UI
-  document.querySelector(".cards").style.display = "none";
-  document.querySelector(".actions").style.display = "none";
-  document.querySelector(".table").style.display = "none";
+    let html = "";
 
-  // Hide requests
-  document.getElementById("requestsSection").style.display = "none";
+    snapshot.forEach(doc => {
+
+      const p = doc.data();
+
+      html += `
+        <div class="table-item">
+          <span>${p.title || "No title"}</span>
+          <span>${p.category || "-"}</span>
+          <span>${p.location || "-"}</span>
+        </div>
+      `;
+    });
+
+    document.getElementById("requestsList").innerHTML =
+      html || "No sell requests yet.";
+
+  } catch (err) {
+    console.error(err);
+    document.getElementById("requestsList").innerHTML = "❌ Error loading requests.";
+  }
+
+}
+
+/* =========================
+   SECTION SWITCH
+========================= */
+window.showSection = function(section){
+
+  // Dashboard elements
+  const cards = document.querySelector(".cards");
+  const actions = document.querySelector(".actions");
+  const table = document.querySelector(".table");
+
+  // Requests section
+  const requests = document.getElementById("requestsSection");
+
+  // Reset
+  if(cards) cards.style.display = "none";
+  if(actions) actions.style.display = "none";
+  if(table) table.style.display = "none";
+  if(requests) requests.style.display = "none";
 
   // Show selected
   if(section === "requests"){
-    document.getElementById("requestsSection").style.display = "block";
+    if(requests) requests.style.display = "block";
   }
-  }  
 
-async function loadRequests(){
+  if(section === "dashboard"){
+    if(cards) cards.style.display = "grid";
+    if(actions) actions.style.display = "block";
+    if(table) table.style.display = "block";
+  }
 
-  const snapshot = await getDocs(collection(db,"sellRequests"));
+};
 
-  let html = "";
+/* =========================
+   INIT
+========================= */
+loadDashboard();
+loadRequests();
 
-  snapshot.forEach(doc => {
-
-    const p = doc.data();
-
-    html += `
-      <div class="table-item">
-        <span>${p.title}</span>
-        <span>${p.category}</span>
-        <span>${p.location}</span>
-      </div>
-    `;
-  });
-
-  document.getElementById("requestsList").innerHTML =
-    html || "No sell requests yet.";
-}
-
-loadRequests();  
-  
 </script>
+
 
 </body>
   </html>
