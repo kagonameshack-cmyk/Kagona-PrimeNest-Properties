@@ -95,3 +95,30 @@
 .agent-card button:hover {
   opacity: 0.8;
     }
+
+.agents {
+  min-height: 100vh; /* 🔥 FULL SCREEN */
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* vertical center */
+  align-items: center; /* horizontal center */
+  padding: 60px 20px;
+  background: #0b0b0b;
+}
+
+.agent-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 300px));
+  gap: 30px;
+  justify-content: center; /* centers grid */
+  width: 100%;
+  max-width: 1100px;
+}
+
+.agents h2 {
+  margin-bottom: 10px;
+}
+
+.agents p {
+  margin-bottom: 40px;
+}
