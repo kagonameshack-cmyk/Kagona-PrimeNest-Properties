@@ -1,56 +1,79 @@
 /* ===== SECTION ===== */
 .agents {
-  min-height: 100vh; /* 🔥 FULL SCREEN */
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: center; /* vertical center */
-  align-items: center; /* horizontal center */
-  padding: 60px 20px;
-  background: #0b0b0b;
+  justify-content: center;
+  align-items: center;
+  padding: 80px 20px;
+  background: radial-gradient(circle at top, #111 0%, #050505 100%);
+  text-align: center;
 }
 
+/* ===== TITLES ===== */
 .section-title {
-  font-size: 34px;
+  font-size: 38px;
   color: gold;
-  margin-bottom: 10px;
+  letter-spacing: 1px;
+  margin-bottom: 12px;
 }
 
 .section-sub {
-  color: #aaa;
-  margin-bottom: 50px;
+  color: #999;
+  max-width: 600px;
+  margin-bottom: 60px;
+  line-height: 1.6;
 }
 
 /* ===== GRID ===== */
 .agent-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 300px));
-  gap: 30px;
-  justify-content: center; /* centers grid */
+  gap: 35px;
+  justify-content: center;
   width: 100%;
   max-width: 1100px;
 }
 
 /* ===== CARD ===== */
 .agent-card {
-  background: rgba(255,255,255,0.05);
-  backdrop-filter: blur(12px);
-  border-radius: 18px;
-  padding: 25px;
+  background: rgba(255,255,255,0.04);
+  backdrop-filter: blur(14px);
+  border-radius: 20px;
+  padding: 30px 25px;
   border: 1px solid rgba(255,255,255,0.08);
-  transition: 0.4s;
+  transition: all 0.4s ease;
   position: relative;
+  overflow: hidden;
 }
 
+/* GOLD GLOW EFFECT */
+.agent-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 20px;
+  background: linear-gradient(120deg, transparent, rgba(255,215,0,0.2), transparent);
+  opacity: 0;
+  transition: 0.4s;
+}
+
+.agent-card:hover::before {
+  opacity: 1;
+}
+
+/* HOVER */
 .agent-card:hover {
-  transform: translateY(-10px) scale(1.02);
+  transform: translateY(-12px) scale(1.03);
   border-color: gold;
+  box-shadow: 0 20px 50px rgba(255, 215, 0, 0.15);
 }
 
 /* ===== IMAGE ===== */
 .agent-img {
   position: relative;
-  width: 110px;
-  height: 110px;
+  width: 120px;
+  height: 120px;
   margin: auto;
 }
 
@@ -60,53 +83,71 @@
   border-radius: 50%;
   object-fit: cover;
   border: 3px solid gold;
+  transition: 0.4s;
+}
+
+.agent-card:hover .agent-img img {
+  transform: scale(1.05);
 }
 
 /* ===== VERIFIED BADGE ===== */
 .verified {
   position: absolute;
-  bottom: 5px;
-  right: 5px;
+  bottom: 8px;
+  right: 8px;
   background: #1da1f2;
   color: white;
-  font-size: 12px;
+  font-size: 11px;
   border-radius: 50%;
-  padding: 4px 6px;
+  padding: 5px 7px;
   border: 2px solid #0b0b0b;
+  box-shadow: 0 0 10px rgba(29,161,242,0.6);
 }
 
 /* ===== TEXT ===== */
 .agent-card h3 {
-  margin-top: 15px;
+  margin-top: 18px;
+  font-size: 20px;
   color: #fff;
 }
 
 .role {
   font-size: 14px;
-  color: #bbb;
-  margin: 10px 0 20px;
-  line-height: 1.4;
+  color: #aaa;
+  margin: 8px 0 15px;
+}
+
+/* OPTIONAL STATS (adds premium feel) */
+.agent-stats {
+  font-size: 13px;
+  color: #777;
+  margin-bottom: 20px;
 }
 
 /* ===== BUTTON ===== */
 .agent-card button {
-  padding: 10px 20px;
-  background: gold;
+  padding: 12px 22px;
+  background: linear-gradient(135deg, gold, #d4af37);
   border: none;
-  border-radius: 8px;
+  border-radius: 10px;
   cursor: pointer;
   font-weight: bold;
-  transition: 0.3s;
+  color: black;
+  transition: all 0.3s ease;
 }
 
 .agent-card button:hover {
-  opacity: 0.8;
-    }
-
-.agents h2 {
-  margin-bottom: 10px;
+  transform: scale(1.05);
+  box-shadow: 0 10px 25px rgba(255,215,0,0.3);
 }
 
-.agents p {
-  margin-bottom: 40px;
-}
+/* ===== RESPONSIVE ===== */
+@media (max-width: 600px) {
+  .section-title {
+    font-size: 28px;
+  }
+
+  .agent-card {
+    padding: 25px 20px;
+  }
+  }
