@@ -1,153 +1,127 @@
-/* ===== SECTION ===== */
-.agents {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 80px 20px;
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
   background: radial-gradient(circle at top, #111 0%, #050505 100%);
+  color: #fff;
+}
+
+/* SECTION */
+.section {
   text-align: center;
+  padding: 80px 20px;
 }
 
-/* ===== TITLES ===== */
-.section-title {
-  font-size: 38px;
+.section h2 {
+  font-size: 32px;
   color: gold;
+  margin-bottom: 10px;
   letter-spacing: 1px;
-  margin-bottom: 12px;
 }
 
-.section-sub {
-  color: #999;
-  max-width: 600px;
-  margin-bottom: 60px;
-  line-height: 1.6;
+.section p {
+  color: #aaa;
+  margin-bottom: 50px;
+  font-size: 15px;
 }
 
-/* ===== GRID ===== */
-.agent-grid {
+/* GRID */
+.cards {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 300px));
-  gap: 35px;
-  justify-content: center;
-  width: 100%;
-  max-width: 1100px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 30px;
+  max-width: 900px;
+  margin: auto;
 }
 
-/* ===== CARD ===== */
-.agent-card {
-  background: rgba(255,255,255,0.04);
-  backdrop-filter: blur(14px);
-  border-radius: 20px;
-  padding: 30px 25px;
-  border: 1px solid rgba(255,255,255,0.08);
+/* CARD */
+.card {
+  background: linear-gradient(145deg, rgba(255,255,255,0.05), rgba(0,0,0,0.4));
+  border-radius: 18px;
+  padding: 30px 20px;
+  text-align: center;
+  border: 1px solid rgba(255,215,0,0.15);
+  backdrop-filter: blur(12px);
   transition: all 0.4s ease;
   position: relative;
   overflow: hidden;
 }
 
-/* GOLD GLOW EFFECT */
-.agent-card::before {
+/* subtle glow effect */
+.card::before {
   content: "";
   position: absolute;
   inset: 0;
-  border-radius: 20px;
-  background: linear-gradient(120deg, transparent, rgba(255,215,0,0.2), transparent);
+  background: radial-gradient(circle at top, rgba(255,215,0,0.15), transparent 70%);
   opacity: 0;
   transition: 0.4s;
 }
 
-.agent-card:hover::before {
+.card:hover::before {
   opacity: 1;
 }
 
-/* HOVER */
-.agent-card:hover {
-  transform: translateY(-12px) scale(1.03);
-  border-color: gold;
-  box-shadow: 0 20px 50px rgba(255, 215, 0, 0.15);
+.card:hover {
+  transform: translateY(-10px) scale(1.02);
+  border: 1px solid gold;
+  box-shadow: 0 20px 40px rgba(255,215,0,0.15);
 }
 
-/* ===== IMAGE ===== */
-.agent-img {
-  position: relative;
-  width: 120px;
-  height: 120px;
-  margin: auto;
-}
-
-.agent-img img {
-  width: 100%;
-  height: 100%;
+/* IMAGE */
+.card img {
+  width: 95px;
+  height: 95px;
   border-radius: 50%;
   object-fit: cover;
   border: 3px solid gold;
-  transition: 0.4s;
+  margin-bottom: 15px;
+  box-shadow: 0 0 15px rgba(255,215,0,0.4);
 }
 
-.agent-card:hover .agent-img img {
-  transform: scale(1.05);
-}
-
-/* ===== VERIFIED BADGE ===== */
-.verified {
-  position: absolute;
-  bottom: 8px;
-  right: 8px;
-  background: #1da1f2;
-  color: white;
-  font-size: 11px;
-  border-radius: 50%;
-  padding: 5px 7px;
-  border: 2px solid #0b0b0b;
-  box-shadow: 0 0 10px rgba(29,161,242,0.6);
-}
-
-/* ===== TEXT ===== */
-.agent-card h3 {
-  margin-top: 18px;
-  font-size: 20px;
+/* NAME */
+.card h3 {
+  margin: 10px 0 5px;
+  font-size: 18px;
   color: #fff;
 }
 
-.role {
-  font-size: 14px;
-  color: #aaa;
-  margin: 8px 0 15px;
-}
-
-/* OPTIONAL STATS (adds premium feel) */
-.agent-stats {
+/* ROLE */
+.card p {
   font-size: 13px;
-  color: #777;
+  color: #bbb;
   margin-bottom: 20px;
+  line-height: 1.5;
 }
 
-/* ===== BUTTON ===== */
-.agent-card button {
-  padding: 12px 22px;
-  background: linear-gradient(135deg, gold, #d4af37);
+/* BUTTON */
+.card button {
+  padding: 10px 18px;
   border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  font-weight: bold;
+  border-radius: 8px;
+  background: linear-gradient(135deg, gold, #d4af37);
   color: black;
-  transition: all 0.3s ease;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
 }
 
-.agent-card button:hover {
+.card button:hover {
   transform: scale(1.05);
-  box-shadow: 0 10px 25px rgba(255,215,0,0.3);
+  box-shadow: 0 5px 15px rgba(255,215,0,0.4);
 }
 
-/* ===== RESPONSIVE ===== */
-@media (max-width: 600px) {
-  .section-title {
-    font-size: 28px;
-  }
-
-  .agent-card {
-    padding: 25px 20px;
-  }
-  }
+/* VERIFIED ICON (optional) */
+.verified {
+  position: absolute;
+  right: 35%;
+  top: 70px;
+  background: #0af;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  color: white;
+  border: 2px solid #0b0b0b;
+}
