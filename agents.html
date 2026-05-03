@@ -1,98 +1,269 @@
-<!-- ===== AGENTS SECTION ===== -->
-<section id="agents" class="agents">
-  <!-- Google Fonts for Luxury Aesthetic -->
-  <link rel="stylesheet" href="https://cloudflare.com">
-  <link rel="stylesheet" href="agent.css">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<title>Kagona Agents</title>
+
+<!-- GOOGLE FONTS -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Playfair+Display:wght@600;800&display=swap" rel="stylesheet">
+
+<!-- ICONS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+
+/* ===== BASE ===== */
+body{
+  margin:0;
+  background:#050505;
+  font-family:'Poppins',sans-serif;
+  color:#fff;
+}
+
+/* ===== SECTION ===== */
+.agents{
+  padding:140px 20px;
+  background: radial-gradient(circle at top, #1a150a 0%, #050505 70%);
+  text-align:center;
+}
+
+.container{
+  max-width:1400px;
+  margin:auto;
+}
+
+/* ===== TITLE ===== */
+.section-title{
+  font-family:'Playfair Display',serif;
+  font-size:4rem;
+  font-weight:800;
+  background:linear-gradient(#fff,#aaa);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  margin-bottom:10px;
+}
+
+.section-sub{
+  color:#d4af37;
+  letter-spacing:6px;
+  font-size:1rem;
+  margin-bottom:80px;
+}
+
+/* ===== GRID ===== */
+.agent-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+  gap:50px;
+}
+
+/* ===== CARD ===== */
+.agent-card{
+  position:relative;
+  padding:60px 30px;
+  border-radius:10px;
+  background:rgba(255,255,255,0.03);
+  backdrop-filter:blur(20px);
+  border:1px solid rgba(255,255,255,0.08);
+  transition:0.5s ease;
+  overflow:hidden;
+}
+
+.agent-card:hover{
+  transform:translateY(-15px);
+  border-color:#d4af37;
+  box-shadow:0 0 40px rgba(212,175,55,0.15);
+}
+
+/* ===== IMAGE ===== */
+.agent-img{
+  width:160px;
+  height:160px;
+  margin:auto;
+  position:relative;
+}
+
+.agent-img img{
+  width:100%;
+  height:100%;
+  border-radius:50%;
+  object-fit:cover;
+  border:3px solid #d4af37;
+  padding:6px;
+}
+
+/* ===== VERIFIED BADGE ===== */
+.verified{
+  position:absolute;
+  bottom:10px;
+  right:10px;
+  width:36px;
+  height:36px;
+  background:#d4af37;
+  color:#000;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:14px;
+  border:3px solid #050505;
+}
+
+/* ===== SOCIAL FLOAT ===== */
+.social{
+  margin-top:20px;
+}
+
+.social a{
+  margin:0 8px;
+  color:#aaa;
+  transition:0.3s;
+}
+
+.social a:hover{
+  color:#d4af37;
+}
+
+/* ===== TEXT ===== */
+.agent-card h3{
+  font-family:'Playfair Display',serif;
+  font-size:1.8rem;
+  margin:20px 0 10px;
+}
+
+.role{
+  font-size:0.95rem;
+  color:#ccc;
+  line-height:1.6;
+  margin-bottom:25px;
+}
+
+/* ===== BUTTON ===== */
+.btn{
+  padding:12px 28px;
+  border:none;
+  background:#d4af37;
+  color:#000;
+  font-weight:600;
+  letter-spacing:2px;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+.btn:hover{
+  background:#fff;
+  transform:scale(1.05);
+}
+
+/* ===== HOVER GLOW LINE ===== */
+.agent-card::before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:2px;
+  background:linear-gradient(90deg,transparent,#d4af37,transparent);
+  opacity:0;
+  transition:0.5s;
+}
+
+.agent-card:hover::before{
+  opacity:1;
+}
+
+/* ===== MOBILE ===== */
+@media(max-width:768px){
+  .section-title{
+    font-size:2.5rem;
+  }
+}
+
+</style>
+</head>
+
+<body>
+
+<section class="agents">
   <div class="container">
+
     <h2 class="section-title">Our Elite Advisors</h2>
-    <p class="section-sub">Trusted professionals guiding every premium transaction</p>
+    <p class="section-sub">TRUST • EXPERTISE • LUXURY</p>
 
     <div class="agent-grid">
 
-      <!-- SARAH -->
+      <!-- AGENT -->
       <div class="agent-card">
-        <div class="agent-img-container">
-          <div class="agent-img">
-            <img src="https://randomuser.me" alt="Sarah Mitchell">
-            <span class="verified" title="Verified Professional">
-              <i class="fas fa-check"></i>
-            </span>
-          </div>
-          <!-- Social Icons Overlay -->
-          <div class="social-overlay">
-            <a href="#"><i class="fab fa-linkedin-in"></i></a>
-            <a href="#"><i class="fab fa-instagram"></i></a>
-            <a href="#"><i class="far fa-envelope"></i></a>
-          </div>
+        <div class="agent-img">
+          <img src="https://randomuser.me/api/portraits/women/44.jpg">
+          <div class="verified"><i class="fas fa-check"></i></div>
         </div>
 
-        <div class="agent-info">
-          <h3>Sarah Mitchell</h3>
-          <p class="role">
-            Property Consultant • Market Analyst <br> Valuation Specialist
-          </p>
-          <button class="btn-premium" onclick="location.href='agent-sarah.html'">
-            View Profile
-          </button>
+        <h3>Sarah Mitchell</h3>
+        <p class="role">Luxury Property Consultant <br> Market Analyst</p>
+
+        <div class="social">
+          <a href="#"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fas fa-envelope"></i></a>
         </div>
+
+        <br>
+        <button class="btn" onclick="location.href='agent-sarah.html'">
+          View Profile
+        </button>
       </div>
 
-      <!-- DANIEL -->
+      <!-- AGENT -->
       <div class="agent-card">
-        <div class="agent-img-container">
-          <div class="agent-img">
-            <img src="https://randomuser.me" alt="Daniel Carter">
-            <span class="verified" title="Verified Professional">
-              <i class="fas fa-check"></i>
-            </span>
-          </div>
-          <div class="social-overlay">
-            <a href="#"><i class="fab fa-linkedin-in"></i></a>
-            <a href="#"><i class="fab fa-twitter"></i></a>
-            <a href="#"><i class="far fa-envelope"></i></a>
-          </div>
+        <div class="agent-img">
+          <img src="https://randomuser.me/api/portraits/men/32.jpg">
+          <div class="verified"><i class="fas fa-check"></i></div>
         </div>
 
-        <div class="agent-info">
-          <h3>Daniel Carter</h3>
-          <p class="role">
-            Legal Due Diligence Advisor <br> Real Estate Lawyer
-          </p>
-          <button class="btn-premium" onclick="location.href='agent-daniel.html'">
-            View Profile
-          </button>
+        <h3>Daniel Carter</h3>
+        <p class="role">Real Estate Lawyer <br> Legal Advisor</p>
+
+        <div class="social">
+          <a href="#"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fas fa-envelope"></i></a>
         </div>
+
+        <br>
+        <button class="btn" onclick="location.href='agent-daniel.html'">
+          View Profile
+        </button>
       </div>
 
-      <!-- EMILY -->
+      <!-- AGENT -->
       <div class="agent-card">
-        <div class="agent-img-container">
-          <div class="agent-img">
-            <img src="https://randomuser.me" alt="Emily Watson">
-            <span class="verified" title="Verified Professional">
-              <i class="fas fa-check"></i>
-            </span>
-          </div>
-          <div class="social-overlay">
-            <a href="#"><i class="fab fa-linkedin-in"></i></a>
-            <a href="#"><i class="fab fa-instagram"></i></a>
-            <a href="#"><i class="far fa-envelope"></i></a>
-          </div>
+        <div class="agent-img">
+          <img src="https://randomuser.me/api/portraits/women/68.jpg">
+          <div class="verified"><i class="fas fa-check"></i></div>
         </div>
 
-        <div class="agent-info">
-          <h3>Emily Watson</h3>
-          <p class="role">
-            Senior Property Advisor <br> Real Estate Specialist
-          </p>
-          <button class="btn-premium" onclick="location.href='agent-emily.html'">
-            View Profile
-          </button>
+        <h3>Emily Watson</h3>
+        <p class="role">Senior Property Advisor <br> Investment Specialist</p>
+
+        <div class="social">
+          <a href="#"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fas fa-envelope"></i></a>
         </div>
+
+        <br>
+        <button class="btn" onclick="location.href='agent-emily.html'">
+          View Profile
+        </button>
       </div>
 
     </div>
+
   </div>
-          </section>
-                                                          
+</section>
+
+</body>
+        </html>
