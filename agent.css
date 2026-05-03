@@ -1,72 +1,84 @@
-/* --- Base Styles & Typography --- */
+/* --- Base Setup --- */
 @import url('https://googleapis.com');
 
 .agents {
-    padding: 120px 20px;
-    background-color: #0a0a0a; /* Deep black background */
+    padding: 150px 20px;
+    background-color: #050505; /* Pure Obsidian Black */
     text-align: center;
     font-family: 'Poppins', sans-serif;
     color: #ffffff;
-    background-image: radial-gradient(circle at center, #1a1a1a 0%, #0a0a0a 100%);
+    /* Subtle radial light source from the top */
+    background: radial-gradient(circle at top, #1a150a 0%, #050505 70%);
 }
 
 .container {
-    max-width: 1400px;
+    max-width: 1600px; /* Maximum width for ultra-wide screens */
     margin: 0 auto;
 }
 
 .section-title {
     font-family: 'Playfair Display', serif;
-    font-size: 3.5rem;
-    letter-spacing: 2px;
-    margin-bottom: 15px;
-    color: #fff;
+    font-size: 4.5rem; /* Massive, bold title */
+    font-weight: 900;
+    letter-spacing: -1px;
+    margin-bottom: 20px;
+    background: linear-gradient(to bottom, #ffffff, #a1a1a1);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 .section-sub {
-    font-size: 1.1rem;
-    color: #d4af37; /* Gold subtext */
-    margin-bottom: 100px;
+    font-size: 1.4rem;
+    color: #d4af37; 
+    margin-bottom: 120px;
     text-transform: uppercase;
-    letter-spacing: 5px;
+    letter-spacing: 8px;
+    font-weight: 400;
 }
 
-/* --- Grid Layout --- */
+/* --- The Grid --- */
 .agent-grid {
     display: flex;
-    flex-direction: column; /* Stacked by default for mobile breathing room */
-    align-items: center;
-    gap: 80px; /* Massive breathing room between cards */
-    padding: 0 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 80px; /* Enormous spacing between cards */
 }
 
-/* --- Glassmorphism Card --- */
+/* --- High-End Glassmorphism Card --- */
 .agent-card {
-    background: rgba(255, 255, 255, 0.03); /* Ultra-thin white for glass effect */
-    backdrop-filter: blur(15px); /* The "Glass" blur */
-    -webkit-backdrop-filter: blur(15px);
-    padding: 80px 40px; /* Large internal spacing */
-    border-radius: 2px;
-    border: 1px solid rgba(255, 255, 255, 0.1); /* Soft glass edge */
-    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    
     width: 100%;
-    max-width: 500px; /* Keeps cards from stretching too wide on desktop */
-    transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+    max-width: 480px; /* Large card width */
+    padding: 100px 50px; /* Expansive internal breathing room */
+    
+    border-radius: 4px;
+    border: 1px solid rgba(255, 255, 255, 0.15); /* Crisper glass edge */
     position: relative;
+    transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+    
+    /* Elegant Shadow */
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8);
 }
 
+/* --- The Luxury Glow Animation --- */
 .agent-card:hover {
-    background: rgba(255, 255, 255, 0.07);
-    transform: translateY(-20px);
-    border: 1px solid rgba(212, 175, 55, 0.4); /* Glow gold on hover */
+    transform: translateY(-25px) scale(1.02);
+    border: 1px solid rgba(212, 175, 55, 0.6);
+    background: rgba(255, 255, 255, 0.08);
+    /* Golden Outer Glow */
+    box-shadow: 0 0 50px rgba(212, 175, 55, 0.2), 
+                0 0 100px rgba(0, 0, 0, 0.9);
 }
 
-/* --- Profile Image Container --- */
+/* --- Enhanced Image & Verified Badge --- */
 .agent-img-container {
     position: relative;
-    width: 200px; /* Larger image */
-    height: 200px;
-    margin: 0 auto 50px;
+    width: 240px; /* Significantly larger photo */
+    height: 240px;
+    margin: 0 auto 60px;
 }
 
 .agent-img img {
@@ -74,110 +86,92 @@
     height: 100%;
     object-fit: cover;
     border-radius: 50%;
-    border: 2px solid #d4af37;
-    padding: 10px;
+    border: 4px solid #d4af37;
+    padding: 12px;
+    filter: brightness(1.1) contrast(1.05);
 }
 
+/* Large, Pulsing Verified Badge */
 .verified {
     position: absolute;
-    bottom: 15px;
-    right: 15px;
-    background: #d4af37;
+    bottom: 20px;
+    right: 20px;
+    background: linear-gradient(135deg, #d4af37, #f3d47a);
     color: #000;
-    width: 35px;
-    height: 35px;
+    width: 45px;
+    height: 45px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 3px solid #1a1a1a;
-    font-size: 14px;
-    z-index: 5;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border: 4px solid #0a0a0a;
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.8);
+    z-index: 10;
 }
 
-/* --- Social Overlay (Integrated into Glass) --- */
-.social-overlay {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    right: 10px;
-    bottom: 10px;
-    background: rgba(212, 175, 55, 0.1);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 15px;
-    opacity: 0;
-    transition: 0.4s ease;
-}
-
-.agent-img-container:hover .social-overlay {
-    opacity: 1;
-}
-
-.social-overlay a {
-    color: #fff;
-    font-size: 1.3rem;
-    transition: 0.3s;
-}
-
-.social-overlay a:hover {
-    color: #d4af37;
-    transform: scale(1.2);
-}
-
-/* --- Text Styling --- */
+/* --- High-Visibility Text --- */
 .agent-card h3 {
     font-family: 'Playfair Display', serif;
-    font-size: 2.2rem;
-    margin-bottom: 20px;
+    font-size: 2.8rem; /* Large, readable names */
+    margin-bottom: 15px;
     color: #ffffff;
-}
-
-.role {
-    font-size: 1rem;
-    line-height: 1.8;
-    color: #b0b0b0;
-    margin-bottom: 50px;
     letter-spacing: 1px;
 }
 
-/* --- Premium Button --- */
+.role {
+    font-size: 1.2rem; /* Increased size */
+    font-weight: 300;
+    line-height: 1.8;
+    color: #ffffff; /* Brightened from grey to white */
+    opacity: 0.85;
+    margin-bottom: 60px;
+    letter-spacing: 1px;
+    text-transform: capitalize;
+}
+
+/* --- Premium CTA Button --- */
 .btn-premium {
-    background: transparent;
-    border: 1px solid #d4af37; /* Gold border */
-    padding: 18px 50px;
+    background: #d4af37; /* Solid gold for visibility */
+    color: #000;
+    border: none;
+    padding: 22px 60px;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 3px;
     text-transform: uppercase;
-    font-size: 0.85rem;
-    font-weight: 600;
-    letter-spacing: 4px;
     cursor: pointer;
     transition: all 0.4s ease;
-    color: #d4af37;
+    box-shadow: 0 10px 20px rgba(212, 175, 55, 0.3);
 }
 
 .btn-premium:hover {
-    background: #d4af37;
+    background: #ffffff;
     color: #000;
-    box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+    transform: scale(1.05);
+    box-shadow: 0 15px 30px rgba(255, 255, 255, 0.2);
 }
 
-/* --- Responsive Adjustments --- */
-@media (min-width: 992px) {
-    .agent-grid {
-        flex-direction: row; /* Switch to side-by-side on desktop */
-        justify-content: center;
-        gap: 50px;
-    }
-}
-
+/* --- Mobile Fixes: High Breathing Room --- */
 @media (max-width: 768px) {
     .section-title {
-        font-size: 2.5rem;
+        font-size: 3rem;
     }
+    
+    .agent-grid {
+        gap: 120px; /* Even more space on mobile to prevent clutter */
+        padding: 40px 15px;
+    }
+
     .agent-card {
-        padding: 60px 30px;
-        width: 90%; /* Let mobile cards breathe on the sides */
+        padding: 80px 30px;
+        max-width: 95%;
+    }
+    
+    .agent-img-container {
+        width: 180px;
+        height: 180px;
     }
     }
+    
