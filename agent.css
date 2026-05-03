@@ -2,140 +2,178 @@
 @import url('https://googleapis.com');
 
 .agents {
-    padding: 80px 20px;
-    background-color: #faf9f6; /* Soft off-white */
+    padding: 120px 20px; /* Increased top/bottom padding */
+    background-color: #faf9f6; 
     text-align: center;
     font-family: 'Poppins', sans-serif;
     color: #1a1a1a;
 }
 
+.container {
+    max-width: 1400px; /* Wider container for more "breathing room" */
+    margin: 0 auto;
+}
+
 .section-title {
     font-family: 'Playfair Display', serif;
-    font-size: 2.8rem;
-    letter-spacing: 1px;
-    margin-bottom: 10px;
-    color: #1a1a1a;
+    font-size: 3.2rem; /* Larger title */
+    letter-spacing: 2px;
+    margin-bottom: 15px;
 }
 
 .section-sub {
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     color: #757575;
-    margin-bottom: 50px;
+    margin-bottom: 80px; /* More space before the grid starts */
     text-transform: uppercase;
-    letter-spacing: 2px;
-    font-weight: 300;
+    letter-spacing: 4px;
 }
 
 /* --- Grid Layout --- */
 .agent-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 40px;
-    max-width: 1200px;
-    margin: 0 auto;
+    grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); /* Larger minimum width per card */
+    gap: 60px; /* Huge gap between cards for a premium, airy feel */
+    padding: 0 40px;
 }
 
 /* --- Agent Card --- */
 .agent-card {
     background: #ffffff;
-    padding: 40px 30px;
-    border-radius: 0px; /* Sharp edges for a high-end architectural feel */
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-    transition: transform 0.4s ease, box-shadow 0.4s ease;
-    border: 1px solid #eee;
+    padding: 60px 40px; /* Increased internal padding for a "large" look */
+    border-radius: 0px; 
+    box-shadow: 0 15px 45px rgba(0, 0, 0, 0.03);
+    transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    border: 1px solid #f0f0f0;
     position: relative;
-    overflow: hidden;
 }
 
 .agent-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    transform: translateY(-15px);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.08);
 }
 
-/* --- Profile Image & Verified Badge --- */
-.agent-img {
+/* --- Profile Image & Social Overlay --- */
+.agent-img-container {
     position: relative;
-    width: 140px;
-    height: 140px;
-    margin: 0 auto 25px;
+    width: 180px; /* Larger images */
+    height: 180px;
+    margin: 0 auto 40px;
+    overflow: hidden;
+    border-radius: 50%;
 }
 
 .agent-img img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    border: 2px solid #d4af37;
+    padding: 8px;
     border-radius: 50%;
-    filter: grayscale(20%); /* Sophisticated subtle desaturation */
-    border: 3px solid #d4af37; /* Luxury Gold border */
-    padding: 5px;
+    transition: transform 0.5s ease;
+}
+
+.agent-card:hover .agent-img img {
+    transform: scale(1.1);
 }
 
 .verified {
     position: absolute;
-    bottom: 5px;
-    right: 5px;
+    bottom: 15px;
+    right: 15px;
     background: #d4af37;
     color: white;
-    font-size: 12px;
-    width: 24px;
-    height: 24px;
+    width: 30px;
+    height: 30px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 2px solid white;
+    border: 3px solid white;
+    z-index: 10;
+}
+
+.social-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(26, 26, 26, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    border-radius: 50%;
+}
+
+.agent-img-container:hover .social-overlay {
+    opacity: 1;
+}
+
+.social-overlay a {
+    color: #d4af37;
+    font-size: 1.2rem;
+    transition: transform 0.3s ease;
+}
+
+.social-overlay a:hover {
+    transform: translateY(-3px);
+    color: #fff;
 }
 
 /* --- Text Content --- */
 .agent-card h3 {
     font-family: 'Playfair Display', serif;
-    font-size: 1.6rem;
-    margin-bottom: 12px;
+    font-size: 2rem; /* Larger name */
+    margin-bottom: 15px;
     color: #1a1a1a;
 }
 
 .role {
-    font-size: 0.9rem;
-    line-height: 1.6;
+    font-size: 1rem;
+    line-height: 1.8;
     color: #888;
-    margin-bottom: 30px;
-    min-height: 50px;
-    padding: 0 10px;
+    margin-bottom: 40px;
+    letter-spacing: 0.5px;
 }
 
 /* --- Premium Button --- */
-.agent-card button {
+.btn-premium {
     background: transparent;
     border: 1px solid #1a1a1a;
-    padding: 12px 30px;
+    padding: 15px 45px; /* Larger button */
     text-transform: uppercase;
-    font-size: 0.8rem;
+    font-size: 0.9rem;
     font-weight: 500;
-    letter-spacing: 2px;
+    letter-spacing: 3px;
     cursor: pointer;
     transition: all 0.3s ease;
     color: #1a1a1a;
-    position: relative;
 }
 
-.agent-card button:hover {
+.btn-premium:hover {
     background: #1a1a1a;
-    color: #d4af37; /* Gold text on black background */
+    color: #d4af37;
+    padding: 15px 55px; /* Subtle width expansion on hover */
 }
 
-/* Optional: Add a gold accent line to the card top */
+/* Decorative Gold Top Border */
 .agent-card::before {
     content: "";
     position: absolute;
     top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 0;
-    height: 3px;
+    left: 0;
+    width: 100%;
+    height: 4px;
     background: #d4af37;
-    transition: width 0.4s ease;
+    transform: scaleX(0);
+    transition: transform 0.5s ease;
 }
 
 .agent-card:hover::before {
-    width: 100%;
-}
+    transform: scaleX(1);
+    }
+    
